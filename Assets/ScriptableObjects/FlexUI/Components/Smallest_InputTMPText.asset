@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c929f025d5f6f1148b8b29bbe52488c1, type: 3}
+  m_Name: Smallest_InputTMPText
+  m_EditorClassIdentifier: 
+  DataSource: {fileID: 0}
+  dataTypes:
+  - {fileID: 11400000, guid: 43861626d38ea4b44a6d0e24968f7f41, type: 2}
+  - {fileID: 11400000, guid: af4b13f482698af42bd0029b00acb1ca, type: 2}
+  - {fileID: 11400000, guid: f09e7f45d1c2a4442a644cf1fa36e50b, type: 2}

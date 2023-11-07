@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d4fd883e466504692b67d30c04d531, type: 3}
+  m_Name: DefaultSkin
+  m_EditorClassIdentifier: 
+  path: ScriptableObjects/FlexUI/DataTypes
+  fontAssets:
+  - FontAssetSO: {fileID: 11400000, guid: f09e7f45d1c2a4442a644cf1fa36e50b, type: 2}
+    FontAsset: {fileID: 11400000, guid: 4f8f896caa772ab459a08e54a36c5397, type: 2}
+  fontSizes:
+  - FontSizeSO: {fileID: 11400000, guid: 43861626d38ea4b44a6d0e24968f7f41, type: 2}
+    TextSize: 12
+  - FontSizeSO: {fileID: 11400000, guid: 9c36b36a43791b54e8fd5688d897ea6f, type: 2}
+    TextSize: 16
+  - FontSizeSO: {fileID: 11400000, guid: 8bd79f97ac4323947924187327cb56d1, type: 2}
+    TextSize: 24
+  - FontSizeSO: {fileID: 11400000, guid: c3627c07d052e5a43b2ef4588036cafc, type: 2}
+    TextSize: 32
+  - FontSizeSO: {fileID: 11400000, guid: 5ebe3c6f8a20d09419768f27cda71bc3, type: 2}
+    TextSize: 48
+  - FontSizeSO: {fileID: 11400000, guid: 8e091b570d5767c44990e1b919f71c27, type: 2}
+    TextSize: 60
+  - FontSizeSO: {fileID: 11400000, guid: 1ff3394cd7640db47a58cea1f9b301b9, type: 2}
+    TextSize: 70
+  - FontSizeSO: {fileID: 11400000, guid: e131afb54b5b3484aa67fea4a2303390, type: 2}
+    TextSize: 0.5
+  colors:
+  - ColorSO: {fileID: 11400000, guid: 493672f77c8918e44a63a1c6565adc5e, type: 2}
+    Color: {r: 0.8392157, g: 0.30588236, b: 0.30588236, a: 1}
+  - ColorSO: {fileID: 11400000, guid: 73386a6c379ff9040b1cffff692e0fdc, type: 2}
+    Color: {r: 0.2627451, g: 0.8, b: 0.40392157, a: 1}
+  - ColorSO: {fileID: 11400000, guid: fc235a5db1e32ff4485a183e72a8ee48, type: 2}
+    Color: {r: 0.83137256, g: 0.5411765, b: 0.16862746, a: 1}
+  - ColorSO: {fileID: 11400000, guid: af4b13f482698af42bd0029b00acb1ca, type: 2}
+    Color: {r: 0.4509804, g: 0.4509804, b: 0.4509804, a: 1}
+  - ColorSO: {fileID: 11400000, guid: 8ad59da0c14110e479397f90d09b6e02, type: 2}
+    Color: {r: 0.6862745, g: 0.6313726, b: 0.6313726, a: 1}
+  - ColorSO: {fileID: 11400000, guid: 49c17b1c0f04aff4f844367e34c4ceb3, type: 2}
+    Color: {r: 0.2784314, g: 0.2784314, b: 0.2784314, a: 1}
+  - ColorSO: {fileID: 11400000, guid: fd07b552cc7c9ee4d9b2a165487563a8, type: 2}
+    Color: {r: 0.19607843, g: 0.18039216, b: 0.18039216, a: 1}
+  - ColorSO: {fileID: 11400000, guid: d368adcc034fded40a72571a168f2e8b, type: 2}
+    Color: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 1}
+  - ColorSO: {fileID: 11400000, guid: b79efc378122cd74a9a01d023354aed3, type: 2}
+    Color: {r: 0.19607845, g: 0.18039216, b: 0.18039216, a: 1}
+  - ColorSO: {fileID: 11400000, guid: db5641f777ceb244baebfd3c4be96ffc, type: 2}
+    Color: {r: 0.043137256, g: 0.043137256, b: 0.30980393, a: 1}
+  sprites:
+  - SpriteSO: {fileID: 11400000, guid: 6bc515052cb1443478659ca2e9d43afe, type: 2}
+    Sprite: {fileID: 21300000, guid: 960d5f600ad0aa54ab24cc52a1621047, type: 3}
+  spriteStates:
+  - SpriteStateSO: {fileID: 11400000, guid: fc7f8a94c96a2344db8b8af1493ae68a, type: 2}
+    SpriteState:
+      m_HighlightedSprite: {fileID: 21300000, guid: 003fcf25ade323449a2503ed46384f14, type: 3}
+      m_PressedSprite: {fileID: 21300000, guid: df9f8b07edf536545af4a797e49a3628, type: 3}
+      m_SelectedSprite: {fileID: 21300000, guid: 003fcf25ade323449a2503ed46384f14, type: 3}
+      m_DisabledSprite: {fileID: 21300000, guid: 3bcc8390cac89064e9dde0b94ed0fa2c, type: 3}
+  - SpriteStateSO: {fileID: 11400000, guid: 60ec7b63524d4c641b8e2419099d5e5b, type: 2}
+    SpriteState:
+      m_HighlightedSprite: {fileID: 21300000, guid: 003fcf25ade323449a2503ed46384f14, type: 3}
+      m_PressedSprite: {fileID: 21300000, guid: df9f8b07edf536545af4a797e49a3628, type: 3}
+      m_SelectedSprite: {fileID: 21300000, guid: df9f8b07edf536545af4a797e49a3628, type: 3}
+      m_DisabledSprite: {fileID: 21300000, guid: 3bcc8390cac89064e9dde0b94ed0fa2c, type: 3}
