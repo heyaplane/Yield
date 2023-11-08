@@ -321,8 +321,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   spriteMask: {fileID: 1677894972}
-  testSprite: {fileID: 21300000, guid: 6a53659dc726724438a4debc9e55a79a, type: 3}
-  currentMapSO: {fileID: 11400000, guid: 7c4e443ac8a610942b9c63d9cfdbaa78, type: 2}
+  currentMapSO: {fileID: 11400000, guid: c753b9d5cc0ecbe439f7f3fe143087f4, type: 2}
   coordinateParent: {fileID: 84648285}
 --- !u!4 &422307615
 Transform:
@@ -1251,7 +1250,7 @@ MonoBehaviour:
   measurementButton: {fileID: 2099812118}
   threshold: 0.02
   focusSlider: {fileID: 1611634364}
-  moveMultiplier: 0.1
+  moveMultiplier: 0.5
   measurementLinePrefab: {fileID: 220669056000234567, guid: a73fa0f4e8c4173439d5889264057bec, type: 3}
 --- !u!1 &1677894971
 GameObject:

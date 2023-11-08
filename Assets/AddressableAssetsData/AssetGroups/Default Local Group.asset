@@ -1,0 +1,385 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3ff776988463f6b459dd744e25796255
+  m_SerializeEntries:
+  - m_GUID: e7e09c5fb2c418e49988b2b7ebb19bbb
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-32.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cf7cd456308ccd459d79b8a99665ff4
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-18.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a60434959103b7641ab71d68201b7fe2
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-34.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68906cd2bbe65314c9fa0827e7baca48
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ac37c07323cb0f4c8dd5dd55c00adf0
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-09.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4271b45034bc584bbf403b5af42dd04
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-30.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0f3ee2e0cea23c449b10533bd69292a
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-17.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4628e1bc6dddf8a4886849c8aa1898ee
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-31.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d78dbeac029a7a45b134e6bc8d78891
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-11.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7974ea1624880ef4a9cdd520d61e2650
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-01.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac070141aa402da4aa0e53852d557a4a
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-20.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e78d3f7401f374a40bb5065026b6418f
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-33.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 30705de1794f12140bb3c903ab3e4017
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-13.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce89ea928c786214aa5deab8ba561373
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-27.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49a4ed243ca4b8b4b9810340f6cabadb
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-25.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a5aa3b33a625984ea82fb7096e8b95d
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-14.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a574480d8fff9d149b95c314a999741d
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-15.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 660a0a51e2fc4f648b213bed0243cdf9
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-26.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24b215510f885584fa81df0b871e4742
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-03.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6eb9a8bce2ea02c4bb8fbb7bc5d68bab
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-05.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed8131d76f46bb94199d00ec6e344fcf
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-04.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ade5c2f334f5864f85de7e4db90c522
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-35.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1029dfdc4bfa89b4499f49d80a80bed3
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-22.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ba354c8eef4aa34db629e8cbb2986ac
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-10.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3d53fbd5d8e49740b10297358ee9060
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-24.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9efe84dabcf39a844b9cea2f73273635
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-23.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 317b56201abe74f4a8165808de94ca38
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-19.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25d2450328c1ee24fac43a65b4690729
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-02.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f7e8aba5e6ced14da7a6ff7c74c346d
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-21.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc16b27de624cb842a8dca27ee76567c
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-29.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 012b002cbb1d37141a632724b28b588d
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-08.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac55be7b5675e964a81cb16386b70b12
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-06.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e676b01782594da4183ac0ce1c3d9c58
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-12.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c08cbf38a6384554faa05e2dd749140a
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-28.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12b1fba77e19aa249b222569c280ae42
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-07.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0103b3e8325dc4a418ea05a9f82996b4
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk2/0-00.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1bdee5e2a79d2441a802ae2c20389d7
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-26.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f62b0f21cc16ea74386e274d76f48e56
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-07.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fda724afa2cc63f44b4ce02d63b616e9
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-04.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6654f82e165fe774383cfc95a50135bf
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-23.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5fff85a406d8fba40879a02f4c4289a8
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-19.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cfa88364463842a4a854927da8c76f38
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-32.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 233ffd44e4f5fbe45a25277ba86d165e
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-20.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eecf0c2f84b8e644781c8022f688accc
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-09.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d44e5499fff2a9498e490ff5035c5ea
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-35.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fa9c4d320aea474cba1c4b12e68ee0c
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-01.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 570d04f987201ef4ebd2a9c89ad7ddc0
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-33.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27e7a9a9b8040814b88ce11f67a443bd
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-29.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 00c85dcc8e511734aa207d7122848ab9
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-21.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b15bd14130e7ad14f909b49bf5e3865b
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-28.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 672106b1efb481a418880965e2d3b22a
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-13.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d6b3e1682e74a246b05a0a9ae6e6fdb
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-15.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 875e6f2ff4ccafc4aa8cf557c49975a6
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-10.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba0b207589630004680745e96f7c7eff
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-18.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2347b52ac960ee74ea34e844a889124b
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-34.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f125bcd20ad6914287ccf6644304e96
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63f05cc3b2f78864aa6ed66d2a195da4
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-14.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4382d1ccc4dbd9042ac6c5858431d7a3
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-17.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce4467d855a6b25459e01cfab8d96351
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-22.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c551e02ece142d948ab64fd37ff7abcd
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-27.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa0bfa2933e970145b862a35f033ff71
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-02.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91491b34f3128dd468cb67b22ca1fefa
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-05.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ffeeed3df4d018d479df58ddecd2445b
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-25.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 853c7a4a3d786c64fae2eb86d1049c46
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-31.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fef87662e7907a14fbface85179032e8
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-12.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6cda62c196ecd474bbb1c77554dc967b
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-11.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81fe8cb84f06d6c4ca80a5e40e357bf7
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-24.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8704e598ea20434b9154c43121b3bb9
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-03.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 000c9fb21f166b041bfc153e19083844
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-08.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c33a285ff2c6ee46a1b980eb1cd5456
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-06.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7b74a91157770e4cb8e7a669da63d0e
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-30.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 628d6013f7ac8cd43958562b8c10337e
+    m_Address: Assets/Art/SpecimenSprites/Test/256x256/Chunk3/0-00.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6b1dcc01619583945b047432fa28d21c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8d1adfcf60cb1d94a95bf23fd93b02b1, type: 2}
+    - {fileID: 11400000, guid: 1edef0896d068fd4e9773e54422df022, type: 2}

@@ -16,6 +16,9 @@ public class MapSO : ScriptableObject
     [SerializeField] ChunkAssignment[] chunkCoordinates;
     public ChunkAssignment[] ChunkCoordinates => chunkCoordinates;
 
+    [SerializeField] ChunkSO[] randomChunkPool;
+    public ChunkSO[] RandomChunkPool => randomChunkPool;
+
     [SerializeField] int spriteSize;
     public int SpriteSize => spriteSize;
 
@@ -30,5 +33,5 @@ public struct ChunkAssignment
 {
     public int rowNum;
     public int colNum;
-    public int chunkNum;
+    public ChunkSO chunkData;
 }

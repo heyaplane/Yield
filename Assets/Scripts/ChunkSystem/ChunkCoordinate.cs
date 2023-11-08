@@ -28,7 +28,27 @@ public struct ChunkCoordinate : IComparable<ChunkCoordinate>
         startingWorldSpacePos = coordinateToCopy.startingWorldSpacePos;
     }
 
-    public ChunkCoordinate[] GetSurroundingCoordinates(MapSO currentMap, Vector2 worldSpacePos)
+    public (int, int)[] GetNeighboringChunks(MapSO currentMap)
+    {
+        var neighborChunks = new List<(int, int)>();
+        for (int rowOffset = -1; rowOffset <= 1; rowOffset++)
+        {
+            int neighborChunkRow = chunkRow + rowOffset;
+            if (neighborChunkRow < 0 || neighborChunkRow == currentMap.NumRows) continue;
+
+            for (int colOffset = -1; colOffset <= 1; colOffset++)
+            {
+                int neighborChunkCol = chunkCol + colOffset;
+                if (neighborChunkCol < 0 || neighborChunkCol == currentMap.NumCols) continue;
+                
+                neighborChunks.Add((neighborChunkRow, neighborChunkCol));
+            }
+        }
+
+        return neighborChunks.ToArray();
+    }
+
+    public ChunkCoordinate[] GetNeighboringCoordinates(MapSO currentMap, Vector2 worldSpacePos)
     {
         var neighbors = new List<ChunkCoordinate>();
 
