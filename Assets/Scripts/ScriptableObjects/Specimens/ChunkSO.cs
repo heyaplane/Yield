@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -10,45 +12,70 @@ public class ChunkSO : ScriptableObject
     [SerializeField] AssetReferenceSprite[] spriteRefs;
 
     [SerializeField] int chunkSize;
+    public int ChunkSize => chunkSize;
+
+    [SerializeField] int spriteSize;
+    public int SpriteSize => spriteSize;
+
+    [SerializeField] int pixelsPerUnit;
+    public int PixelsPerUnit => pixelsPerUnit;
+
+    public int CoordinateWorldSize => spriteSize / pixelsPerUnit;
 
     Sprite[,] spriteArray;
-    object lockObject = new object();
+    object lockObject;
+    object loadUnloadLockObject = new object();
     int loadedCount;
     List<AsyncOperationHandle> handles;
 
-    public void LoadSprites(Action<Sprite[,]> onSpritesLoaded)
+    public IEnumerator LoadSprites(Action<Sprite[,]> onSpritesLoaded)
     {
-        spriteArray = new Sprite[chunkSize, chunkSize];
-        handles = new List<AsyncOperationHandle>();
-        
-        for (int i = 0; i < spriteRefs.Length; i++)
+        lock (loadUnloadLockObject)
         {
-            var spriteRef = spriteRefs[i];
-            if (spriteRef == null)
+            if (handles != null && handles.Any(x => x.IsValid()))
             {
-                Debug.LogError("One of the sprite references was null!");
-                loadedCount++;
-                continue;
+                Debug.LogWarning("Tried Loading when handles were still valid.");
+                while (handles.Any(x => x.IsValid()))
+                {
+                    yield return null;
+                }
+                Debug.LogWarning("Resolved.");
             }
             
-            int index = i;
-            var handle = spriteRef.LoadAssetAsync<Sprite>();
-            handles.Add(handle);
-            handle.Completed += _handle =>
+            loadedCount = 0;
+            lockObject = new object();
+            spriteArray = new Sprite[chunkSize, chunkSize];
+            handles = new List<AsyncOperationHandle>();
+
+            for (int i = 0; i < spriteRefs.Length; i++)
             {
-                if (_handle.Status == AsyncOperationStatus.Succeeded)
+                var spriteRef = spriteRefs[i];
+                if (spriteRef == null)
                 {
-                    int row = index / chunkSize;
-                    int col = index % chunkSize;
-                    spriteArray[row, col] = _handle.Result;
-                    CheckIfAllSpritesLoaded(onSpritesLoaded);
+                    Debug.LogError("One of the sprite references was null!");
+                    loadedCount++;
+                    continue;
                 }
 
-                else
+                int index = i;
+                var handle = spriteRef.LoadAssetAsync<Sprite>();
+                handles.Add(handle);
+                handle.Completed += _handle =>
                 {
-                    Debug.LogError($"Failed to load sprite at position {index}.");
-                }
-            };
+                    if (_handle.Status == AsyncOperationStatus.Succeeded)
+                    {
+                        int row = index / chunkSize;
+                        int col = index % chunkSize;
+                        spriteArray[row, col] = _handle.Result;
+                        CheckIfAllSpritesLoaded(onSpritesLoaded);
+                    }
+
+                    else
+                    {
+                        Debug.LogError($"Failed to load sprite at position {index}.");
+                    }
+                };
+            }
         }
     }
 
@@ -64,9 +91,12 @@ public class ChunkSO : ScriptableObject
 
     public void UnloadSprites()
     {
-        foreach (var sprite in handles)
+        lock (loadUnloadLockObject)
         {
-            Addressables.Release(sprite);
+            foreach (var handle in handles)
+            {
+                Addressables.Release(handle);
+            }
         }
     }
 }

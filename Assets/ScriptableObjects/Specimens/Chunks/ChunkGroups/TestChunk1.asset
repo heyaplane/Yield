@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e8d5b0d72a42e49b6b574948bbc2cc, type: 3}
+  m_Name: TestChunk1
+  m_EditorClassIdentifier: 
+  lowResChunk: {fileID: 11400000, guid: 0ba24063867bbc7479c0e2d8d63f96cb, type: 2}
+  medResChunk: {fileID: 11400000, guid: efd486c242d247d43881dd61317d96b4, type: 2}
+  highResChunk: {fileID: 11400000, guid: c71525d6ed6f5064babbe6769e2d90b6, type: 2}

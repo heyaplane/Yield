@@ -10,22 +10,31 @@ public class MapSO : ScriptableObject
     [SerializeField] int numCols;
     public int NumCols => numCols;
 
-    [SerializeField] int chunkDim;
-    public int ChunkDim => chunkDim;
-    
-    [SerializeField] ChunkAssignment[] chunkCoordinates;
-    public ChunkAssignment[] ChunkCoordinates => chunkCoordinates;
+    [SerializeField] ChunkAssignment[] chunkGroupAssignments;
+    public ChunkAssignment[] ChunkGroupAssignments => chunkGroupAssignments;
 
-    [SerializeField] ChunkSO[] randomChunkPool;
-    public ChunkSO[] RandomChunkPool => randomChunkPool;
+    [SerializeField] ChunkGroupSO[] randomChunkPool;
+    public ChunkGroupSO[] RandomChunkPool => randomChunkPool;
 
-    [SerializeField] int spriteSize;
-    public int SpriteSize => spriteSize;
+    [SerializeField] int lowResSpriteSize;
+    public int LowResSpriteSize => lowResSpriteSize;
 
-    [SerializeField] int pixelsPerUnit;
-    public int PixelsPerUnit => pixelsPerUnit;
+    [SerializeField] int medResSpriteSize;
+    public int MedResSpriteSize => medResSpriteSize;
 
-    public int CoordinateWorldSize => spriteSize / pixelsPerUnit;
+    [SerializeField] int highResSpriteSize;
+    public int HighResSpriteSize => highResSpriteSize;
+
+    public int GetGroupSpriteSize(ChunkResolution res)
+    {
+        return res switch
+        {
+            ChunkResolution.Low => lowResSpriteSize,
+            ChunkResolution.Med => medResSpriteSize,
+            ChunkResolution.High => highResSpriteSize,
+            _ => throw new ArgumentOutOfRangeException(nameof(res), res, null)
+        };
+    }
 }
 
 [Serializable]
@@ -33,5 +42,5 @@ public struct ChunkAssignment
 {
     public int rowNum;
     public int colNum;
-    public ChunkSO chunkData;
+    public ChunkGroupSO chunkData;
 }

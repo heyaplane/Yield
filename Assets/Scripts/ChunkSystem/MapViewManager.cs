@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Codice.Client.Commands.WkTree;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -22,12 +23,13 @@ public class MapViewManager : MonoBehaviour
 
     HashSet<ChunkCoordinate> previousFringeCoordinates;
     HashSet<ChunkCoordinate> currentFringeCoordinates;
-    HashSet<(int, int)> chunksToLoad;
 
     [SerializeField] MapSO currentMapSO;
     [SerializeField] Transform coordinateParent;
 
     Dictionary<ChunkCoordinate, CoordinateRenderer> rendererLookup;
+
+    [SerializeField] ChunkResolution startingChunkResolution;
     
     void Awake()
     {
@@ -48,17 +50,16 @@ public class MapViewManager : MonoBehaviour
         rendererLookup = new Dictionary<ChunkCoordinate, CoordinateRenderer>();
         previousFringeCoordinates = new HashSet<ChunkCoordinate>();
         currentFringeCoordinates = new HashSet<ChunkCoordinate>();
-        chunksToLoad = new HashSet<(int, int)>();
     }
 
     IEnumerator Start()
     {
         mapDataManager.InitializeMap(currentMapSO);
-        var startingCoord = new ChunkCoordinate(2, 2, 1, 1, spriteMask.transform.position);
+        var startingCoord = new ChunkCoordinate(1, 1, 1, 1, spriteMask.transform.position);
         
-        mapDataManager.ActivateChunks(new HashSet<(int, int)>{(2, 2)});
+        mapDataManager.SwitchToNewResolution(startingChunkResolution, startingCoord, currentMapSO);
 
-        var waitCondition = new WaitUntil(() => mapDataManager.HasLoadedSprites(startingCoord));
+        var waitCondition = new WaitUntil(() => mapDataManager.HasLoadedAllSprites());
 
         yield return waitCondition;
         
@@ -110,7 +111,7 @@ public class MapViewManager : MonoBehaviour
         if (previousVisibleCoordinates.SequenceEqual(currentVisibleCoordinates))
             return (null, null);
 
-        UpdateChunkData(currentVisibleCoordinates);
+        mapDataManager.UpdateChunkData(currentVisibleCoordinates, currentMapSO);
         
         previousFringeCoordinates.Clear();
         currentFringeCoordinates.Clear();
@@ -118,13 +119,15 @@ public class MapViewManager : MonoBehaviour
         foreach (var coordinate in previousVisibleCoordinates)
         {
             var currentLocation = rendererLookup[coordinate].transform.position;
-            previousFringeCoordinates.UnionWith(coordinate.GetNeighboringCoordinates(currentMapSO, currentLocation));
+            previousFringeCoordinates.UnionWith(coordinate.GetNeighboringCoordinates(currentMapSO, 
+                mapDataManager.GetChunkFromCoordinate(coordinate), currentLocation));
         }
 
         foreach (var coordinate in currentVisibleCoordinates)
         {
             var currentLocation = rendererLookup[coordinate].transform.position;
-            currentFringeCoordinates.UnionWith(coordinate.GetNeighboringCoordinates(currentMapSO, currentLocation));
+            currentFringeCoordinates.UnionWith(coordinate.GetNeighboringCoordinates(currentMapSO, 
+                mapDataManager.GetChunkFromCoordinate(coordinate), currentLocation));
         }
 
         var coordinatesToRemove = previousFringeCoordinates.Except(currentFringeCoordinates);
@@ -145,14 +148,41 @@ public class MapViewManager : MonoBehaviour
         coordinateList.Sort();
     }
 
-    void UpdateChunkData(List<ChunkCoordinate> currentlyVisibleCoordinates)
+    public IEnumerator SwitchToNewResolution(ChunkResolution newResolution)
     {
-        chunksToLoad.Clear();
-        foreach (var coordinate in currentlyVisibleCoordinates)
+        if (newResolution == mapDataManager.CurrentChunkResolution) yield break;
+        
+        var results = new Collider2D[1]; 
+        Physics2D.OverlapPoint(spriteMask.transform.position, coordinateFilter, results);
+
+        if (!results[0].TryGetComponent(out CoordinateRenderer coordinateRenderer))
         {
-            chunksToLoad.UnionWith(coordinate.GetNeighboringChunks(currentMapSO));
+            Debug.LogError("Error getting coordinate renderer at center of sprite mask.");
+            yield break;
         }
         
-        mapDataManager.ActivateChunks(chunksToLoad);
+        Vector2 currentOffset = coordinateRenderer.transform.position - spriteMask.transform.position;
+        float scaleFactor = (float) currentMapSO.GetGroupSpriteSize(newResolution) / currentMapSO.GetGroupSpriteSize(mapDataManager.CurrentChunkResolution);
+        var newOffset = new Vector2(currentOffset.x * scaleFactor, currentOffset.y * scaleFactor);
+        var centerCoordinate = coordinateRenderer.CurrentCoordinate;
+        centerCoordinate.startingWorldSpacePos = (Vector2) spriteMask.transform.position + newOffset;
+        
+        foreach (var coordRenderer in rendererLookup.Values)
+        {
+            coordRenderer.gameObject.SetActive(false);
+        }
+
+        mapDataManager.SwitchToNewResolution(newResolution, centerCoordinate, currentMapSO);
+        
+        var waitCondition = new WaitUntil(() => mapDataManager.HasLoadedAllSprites());
+        yield return waitCondition;
+        
+        var initRenderer = coordinateRendererPool.Get();
+        rendererLookup[centerCoordinate] = initRenderer;
+        var sprite = mapDataManager.GetCoordinateSprite(centerCoordinate);
+        rendererLookup[centerCoordinate].Initialize(centerCoordinate, sprite);
+        
+        Update();
+        coordinateRendererPool.Release(initRenderer);
     }
 }

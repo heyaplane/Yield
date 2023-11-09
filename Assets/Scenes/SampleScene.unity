@@ -323,6 +323,7 @@ MonoBehaviour:
   spriteMask: {fileID: 1677894972}
   currentMapSO: {fileID: 11400000, guid: c753b9d5cc0ecbe439f7f3fe143087f4, type: 2}
   coordinateParent: {fileID: 84648285}
+  startingChunkResolution: 0
 --- !u!4 &422307615
 Transform:
   m_ObjectHideFlags: 0
@@ -790,6 +791,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &957558519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 957558521}
+  - component: {fileID: 957558520}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &957558520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957558519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa8235306134566967adf7d73752dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &957558521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957558519}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &972446311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,8 +1286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34a0fbd981a49728cbb6382b601f664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testSpecimen: {fileID: 11400000, guid: 935787aec16522647a20882cd2613152, type: 2}
-  spriteMask: {fileID: 1677894972}
+  mapViewManager: {fileID: 422307614}
   map: {fileID: 84648285}
   lowResButton: {fileID: 32780759}
   medResButton: {fileID: 2012456150}
@@ -1250,6 +1294,7 @@ MonoBehaviour:
   measurementButton: {fileID: 2099812118}
   threshold: 0.02
   focusSlider: {fileID: 1611634364}
+  blurMaterial: {fileID: 2100000, guid: 69ae9090bb7e8e54c95e5849a86d236f, type: 2}
   moveMultiplier: 0.5
   measurementLinePrefab: {fileID: 220669056000234567, guid: a73fa0f4e8c4173439d5889264057bec, type: 3}
 --- !u!1 &1677894971
@@ -1925,3 +1970,4 @@ SceneRoots:
   - {fileID: 1497945833}
   - {fileID: 1458805194}
   - {fileID: 422307615}
+  - {fileID: 957558521}

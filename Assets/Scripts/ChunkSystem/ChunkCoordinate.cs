@@ -48,7 +48,7 @@ public struct ChunkCoordinate : IComparable<ChunkCoordinate>
         return neighborChunks.ToArray();
     }
 
-    public ChunkCoordinate[] GetNeighboringCoordinates(MapSO currentMap, Vector2 worldSpacePos)
+    public ChunkCoordinate[] GetNeighboringCoordinates(MapSO currentMap, ChunkSO currentChunk, Vector2 worldSpacePos)
     {
         var neighbors = new List<ChunkCoordinate>();
 
@@ -58,12 +58,12 @@ public struct ChunkCoordinate : IComparable<ChunkCoordinate>
             int neighborRow = imageRow + rowOffset;
             if (neighborRow < 0)
             {
-                neighborRow = currentMap.ChunkDim - 1;
+                neighborRow = currentChunk.ChunkSize - 1;
                 neighborChunkRow--;
                 if (neighborChunkRow < 0) continue;
             }
             
-            else if (neighborRow == currentMap.ChunkDim)
+            else if (neighborRow == currentChunk.ChunkSize)
             {
                 neighborRow = 0;
                 neighborChunkRow++;
@@ -77,12 +77,12 @@ public struct ChunkCoordinate : IComparable<ChunkCoordinate>
                 
                 if (neighborCol < 0)
                 {
-                    neighborCol = currentMap.ChunkDim - 1;
+                    neighborCol = currentChunk.ChunkSize - 1;
                     neighborChunkCol--;
                     if (neighborChunkCol < 0) continue;
                 }
                 
-                else if (neighborCol == currentMap.ChunkDim)
+                else if (neighborCol == currentChunk.ChunkSize)
                 {
                     neighborCol = 0;
                     neighborChunkCol++;
@@ -90,8 +90,8 @@ public struct ChunkCoordinate : IComparable<ChunkCoordinate>
                 }
 
                 var startingPos = new Vector2(
-                    worldSpacePos.x + colOffset * currentMap.CoordinateWorldSize, 
-                    worldSpacePos.y - rowOffset * currentMap.CoordinateWorldSize);
+                    worldSpacePos.x + colOffset * currentChunk.CoordinateWorldSize, 
+                    worldSpacePos.y - rowOffset * currentChunk.CoordinateWorldSize);
                 
                 neighbors.Add(new ChunkCoordinate(
                     neighborChunkRow, neighborChunkCol, 

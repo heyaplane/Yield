@@ -4,9 +4,8 @@ using UnityEngine.UI;
 
 public class MicroscopeUI : MonoBehaviour
 {
-    [SerializeField] MapGroupSO testSpecimen;
-    [SerializeField] SpriteMask spriteMask;
-    Vector2 maskLocation;
+    [SerializeField] MapViewManager mapViewManager;
+    
     [SerializeField] Transform map;
 
     [SerializeField] Button lowResButton;
@@ -16,7 +15,7 @@ public class MicroscopeUI : MonoBehaviour
 
     [SerializeField] float threshold;
     [SerializeField] Slider focusSlider;
-    Material blurMaterial;
+    [SerializeField] Material blurMaterial;
     static readonly int BlurAmount = Shader.PropertyToID("_BlurAmount");
 
     [SerializeField] float moveMultiplier;
@@ -26,13 +25,10 @@ public class MicroscopeUI : MonoBehaviour
     
     void OnEnable()
     {
-        // lowResButton.onClick.AddListener(() => HandleButtonPress(0));
-        // medResButton.onClick.AddListener(() => HandleButtonPress(1));
-        // highResButton.onClick.AddListener(() => HandleButtonPress(2));
-        // measurementButton.onClick.AddListener(HandleMeasurement);
-
-        maskLocation = spriteMask.transform.position;
-        // blurMaterial = spriteRenderer.material;
+        lowResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.Low)));
+        medResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.Med)));
+        highResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.High)));
+        measurementButton.onClick.AddListener(HandleMeasurement);
     }
 
     void OnDisable()
@@ -50,29 +46,11 @@ public class MicroscopeUI : MonoBehaviour
             currentFocus = threshold;
         if (currentFocus > -threshold && currentFocus < 0)
             currentFocus = -threshold;
-        //blurMaterial.SetFloat(BlurAmount, currentFocus);
+        blurMaterial.SetFloat(BlurAmount, currentFocus);
 
         var sampleMove = ControlsManager.Instance.SampleMoveVector * moveMultiplier;
         map.position -= (Vector3) sampleMove;
     }
-
-    // void HandleButtonPress(int res)
-    // {
-    //     switch (res)
-    //     {
-    //         case 0:
-    //             SwitchSprite(testSpecimen.LowResSprite);    
-    //             break;
-    //         
-    //         case 1:
-    //             SwitchSprite(testSpecimen.MedResSprite);    
-    //             break;
-    //         
-    //         case 2:
-    //             SwitchSprite(testSpecimen.HighResSprite);    
-    //             break;
-    //     }
-    // }
 
     // void SwitchSprite(Sprite newSprite)
     // {
@@ -86,11 +64,11 @@ public class MicroscopeUI : MonoBehaviour
     //     spriteRenderer.transform.position = new Vector2(maskLocation.x + newOffset.x, maskLocation.y + newOffset.y);
     // }
 
-    // void HandleMeasurement()
-    // {
-    //     if (currentMeasurement != null)
-    //         Destroy(currentMeasurement.gameObject);
-    //     currentMeasurement = Instantiate(measurementLinePrefab);
-    //     currentMeasurement.Initialize(spriteRenderer.sprite);
-    // }
+    void HandleMeasurement()
+    {
+        if (currentMeasurement != null)
+            Destroy(currentMeasurement.gameObject);
+        currentMeasurement = Instantiate(measurementLinePrefab);
+        // currentMeasurement.Initialize(spriteRenderer.sprite);
+    }
 }
