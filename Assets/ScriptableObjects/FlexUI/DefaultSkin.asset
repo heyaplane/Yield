@@ -57,6 +57,8 @@ MonoBehaviour:
   sprites:
   - SpriteSO: {fileID: 11400000, guid: 6bc515052cb1443478659ca2e9d43afe, type: 2}
     Sprite: {fileID: 21300000, guid: 960d5f600ad0aa54ab24cc52a1621047, type: 3}
+  - SpriteSO: {fileID: 11400000, guid: ae0455beda92fc649bc7b739cea09a16, type: 2}
+    Sprite: {fileID: 21300000, guid: ba153ec9bd4bd3c4bb8943f91c155350, type: 3}
   spriteStates:
   - SpriteStateSO: {fileID: 11400000, guid: fc7f8a94c96a2344db8b8af1493ae68a, type: 2}
     SpriteState:
@@ -70,3 +72,9 @@ MonoBehaviour:
       m_PressedSprite: {fileID: 21300000, guid: df9f8b07edf536545af4a797e49a3628, type: 3}
       m_SelectedSprite: {fileID: 21300000, guid: df9f8b07edf536545af4a797e49a3628, type: 3}
       m_DisabledSprite: {fileID: 21300000, guid: 3bcc8390cac89064e9dde0b94ed0fa2c, type: 3}
+  - SpriteStateSO: {fileID: 11400000, guid: efb82c1419a9d2c49bcc6f13dccdc1da, type: 2}
+    SpriteState:
+      m_HighlightedSprite: {fileID: 21300000, guid: c065d5ae7f5205e4bb42f6e8b49dda7b, type: 3}
+      m_PressedSprite: {fileID: 21300000, guid: 54a6ccc3749c9c242a1b2ec519e32db2, type: 3}
+      m_SelectedSprite: {fileID: 21300000, guid: c065d5ae7f5205e4bb42f6e8b49dda7b, type: 3}
+      m_DisabledSprite: {fileID: 21300000, guid: ba153ec9bd4bd3c4bb8943f91c155350, type: 3}

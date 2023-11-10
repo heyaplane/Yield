@@ -26,3 +26,4 @@ MonoBehaviour:
   lowResSpriteSize: 16
   medResSpriteSize: 64
   highResSpriteSize: 256
+  pixelsPerUnit: 4

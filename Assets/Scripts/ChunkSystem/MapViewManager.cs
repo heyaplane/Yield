@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Codice.Client.Commands.WkTree;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -30,6 +29,8 @@ public class MapViewManager : MonoBehaviour
     Dictionary<ChunkCoordinate, CoordinateRenderer> rendererLookup;
 
     [SerializeField] ChunkResolution startingChunkResolution;
+
+    public float CurrentScaleFactor => currentMapSO.GetCurrentScaleFactor(mapDataManager.CurrentChunkResolution);
     
     void Awake()
     {

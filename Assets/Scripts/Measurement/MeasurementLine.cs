@@ -1,66 +1,71 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MeasurementLine : MonoBehaviour
 {
     [SerializeField] LineRenderer lineRenderer;
     [SerializeField] TextMeshProUGUI measurementText;
+    [SerializeField] BoxCollider2D boxCollider;
+    [SerializeField] Vector3 colliderOffset;
 
-    bool isMeasuring;
+    bool isSelected;
     bool isDeadLine;
-    Vector2 startPoint;
-    Vector2 endPoint;
+    float scaleFactor;
 
-    Sprite currentSprite;
-
-    public void Initialize(Sprite currentSprite)
+    public void Initialize(float scaleFactor)
     {
-        this.currentSprite = currentSprite;
+        this.scaleFactor = scaleFactor;
+        EventManager.OnDeleteKeyPressedEvent += HandleDeleteKeyPressed;
     }
 
-    void Update()
-    {
-        if (isDeadLine) return;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (!isMeasuring)
-            {
-                startPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                endPoint = startPoint;
-                measurementText.gameObject.SetActive(true);
-                UpdateMeasurement();
-                isMeasuring = true;
-            }
-
-            else
-            {
-                isMeasuring = false;
-                isDeadLine = true;
-            }
-        }
-
-        else if (isMeasuring)
-        {
-            endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            DrawLine(startPoint, endPoint);
-            UpdateMeasurement();
-        }
-    }
-
-    void DrawLine(Vector2 start, Vector2 end)
+    public void DrawLine(Vector2 start, Vector2 end)
     {
         lineRenderer.SetPosition(0, start);
         lineRenderer.SetPosition(1, end);
+        
+        UpdateMeasurement(start, end);
     }
 
-    void UpdateMeasurement()
+    public void FinishLine(Vector2 start, Vector2 end)
+    {
+        DrawLine(start, end);
+        FitColliderToLine(start, end);
+    }
+    
+    void UpdateMeasurement(Vector2 start, Vector2 end)
     {
         measurementText.rectTransform.pivot = new Vector2(0.5f, 0);
-        measurementText.rectTransform.position = (startPoint + endPoint) / 2;
+        measurementText.rectTransform.position = (start + end) / 2;
 
-        float distance = Vector2.Distance(startPoint, endPoint) / Vector2.Distance(Vector2.zero, currentSprite.bounds.size);
+        float distance = Vector2.Distance(start, end) * scaleFactor;
         measurementText.text = $"{distance:F4}";
+    }
+
+    void OnMouseDown()
+    {
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.red;
+        measurementText.color = Color.red;
+        isSelected = true;
+    }
+
+    void HandleDeleteKeyPressed(InputAction.CallbackContext context)
+    {
+        if (!isSelected) return;
+        EventManager.OnDeleteKeyPressedEvent -= HandleDeleteKeyPressed;
+        Destroy(gameObject);
+    }
+
+    void FitColliderToLine(Vector2 start, Vector2 end)
+    {
+        Bounds bounds = new Bounds((start + end) / 2, Vector3.zero);
+        var positions = new Vector3[lineRenderer.positionCount];
+        lineRenderer.GetPositions(positions);
+        Array.ForEach(positions, x => bounds.Encapsulate(x));
+
+        boxCollider.offset = bounds.center;
+        boxCollider.size = bounds.size + colliderOffset;
     }
 }

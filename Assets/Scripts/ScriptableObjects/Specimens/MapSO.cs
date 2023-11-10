@@ -25,6 +25,9 @@ public class MapSO : ScriptableObject
     [SerializeField] int highResSpriteSize;
     public int HighResSpriteSize => highResSpriteSize;
 
+    [SerializeField] int pixelsPerUnit;
+    public int PixelsPerUnit => pixelsPerUnit;
+
     public int GetGroupSpriteSize(ChunkResolution res)
     {
         return res switch
@@ -35,6 +38,8 @@ public class MapSO : ScriptableObject
             _ => throw new ArgumentOutOfRangeException(nameof(res), res, null)
         };
     }
+
+    public float GetCurrentScaleFactor(ChunkResolution chunkResolution) => 0.008f * (8192.0f / GetGroupSpriteSize(chunkResolution) * pixelsPerUnit);
 }
 
 [Serializable]
