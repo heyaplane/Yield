@@ -13,4 +13,16 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         Application.Quit();
     }
+
+    public void RequestPauseState(InputActionReference uiToggleAction)
+    {
+    }
+
+    public void RequestUnpause()
+    {
+    }
+
+    public void RequestGamePause()
+    {
+    }
 }

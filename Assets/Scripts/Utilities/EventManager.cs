@@ -16,6 +16,13 @@ public class EventManager
     {
         OnDeleteKeyPressedEvent?.Invoke(context);
     }
+    
+    public static event Action<InputAction.CallbackContext> OnUIToggleRequestedEvent;
+    public static void OnUIToggleRequested(InputAction.CallbackContext context)
+    {
+        OnUIToggleRequestedEvent?.Invoke(context);
+    }
 
     #endregion
+
 }

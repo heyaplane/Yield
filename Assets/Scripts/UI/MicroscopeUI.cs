@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,12 +22,34 @@ public class MicroscopeUI : MonoBehaviour
 
     [SerializeField] float moveMultiplier;
 
+    [SerializeField] ChooseDirectoryUI chooseDirectoryUI;
+    [SerializeField] Button chooseDirectoryButton;
+    [SerializeField] Button saveFileButton;
+    [SerializeField] TMP_InputField sampleIDInput;
+    [SerializeField] TMP_InputField imageNameInput;
+    [SerializeField] TMP_InputField nextSuffixInput;
+    [SerializeField] TextMeshProUGUI exampleText;
+
+    string currentSampleID, currentImageName, currentSuffix;
+
     void OnEnable()
     {
         lowResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.Low)));
         medResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.Med)));
         highResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.High)));
         measurementButton.onClick.AddListener(HandleMeasurement);
+        
+        chooseDirectoryButton.onClick.AddListener(HandleOpenFile);
+        saveFileButton.onClick.AddListener(HandleSaveFile);
+        sampleIDInput.onValueChanged.AddListener(HandleSampleIDChanged);
+        imageNameInput.onValueChanged.AddListener(HandleImageNameChanged);
+        nextSuffixInput.onValueChanged.AddListener(HandleSuffixChanged);
+
+        currentSampleID = (sampleIDInput.placeholder as TextMeshProUGUI)?.text;
+        currentImageName = (imageNameInput.placeholder as TextMeshProUGUI)?.text;
+        currentSuffix = (nextSuffixInput.placeholder as TextMeshProUGUI)?.text;
+
+        UpdateExampleName();
     }
 
     void OnDisable()
@@ -35,6 +58,12 @@ public class MicroscopeUI : MonoBehaviour
         medResButton.onClick.RemoveAllListeners();
         highResButton.onClick.RemoveAllListeners();
         measurementButton.onClick.RemoveAllListeners();
+        
+        chooseDirectoryButton.onClick.RemoveAllListeners();
+        saveFileButton.onClick.RemoveAllListeners();
+        sampleIDInput.onValueChanged.RemoveAllListeners();
+        imageNameInput.onValueChanged.RemoveAllListeners();
+        nextSuffixInput.onValueChanged.RemoveAllListeners();
     }
 
     void Update()
@@ -51,4 +80,41 @@ public class MicroscopeUI : MonoBehaviour
     }
 
     void HandleMeasurement() => mapViewClickListener.HandleMeasurementToggle();
+    void HandleOpenFile() => chooseDirectoryUI.EnableWindow();
+
+    void HandleSaveFile()
+    {
+        var newFile = new VirtualImage($"{currentImageName}_{currentSuffix}.png", null);
+        if (!FileSystemManager.Instance.TrySaveFile(currentSampleID, newFile))
+            Debug.LogError("Couldn't save file, duplicate name!");
+    }
+
+    public void HandleSampleIDChanged(string sampleID)
+    {
+        currentSampleID = sampleID;
+        if (sampleIDInput.text != sampleID)
+            sampleIDInput.text = sampleID;
+        UpdateExampleName(sampleID: sampleID);
+    }
+
+    void HandleImageNameChanged(string imageName)
+    {
+        currentImageName = imageName;
+        UpdateExampleName(imageName: imageName);
+    }
+
+    void HandleSuffixChanged(string suffix)
+    {
+        currentSuffix = suffix;
+        UpdateExampleName(suffix: suffix);
+    }
+
+    void UpdateExampleName(string sampleID = null, string imageName = null, string suffix = null)
+    {
+        sampleID ??= currentSampleID;
+        imageName ??= currentImageName;
+        suffix ??= currentSuffix;
+        
+        exampleText.text = $"{sampleID}/{imageName}_{suffix}.png";
+    }
 }
