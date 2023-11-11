@@ -75,7 +75,7 @@ public class MicroscopeUI : MonoBehaviour
             currentFocus = -threshold;
         blurMaterial.SetFloat(BlurAmount, currentFocus);
 
-        var sampleMove = ControlsManager.Instance.SampleMoveVector * moveMultiplier;
+        var sampleMove = ControlsManager.Instance.MapMoveVector * moveMultiplier;
         map.position -= (Vector3) sampleMove;
     }
 

@@ -4,21 +4,18 @@ using UnityEngine.InputSystem;
 
 public class ControlsManager : SingletonMonobehaviour<ControlsManager>
 {
-    PlayerInputActions playerInputActions;
+    InputSystemProvider inputSystemProvider;
 
     protected override void Awake()
     {
         base.Awake();
-        playerInputActions = new PlayerInputActions();
-        
-        playerInputActions.Player.Enable();
-
-        playerInputActions.Player.Quit.performed += OnPlayerQuitKeyPressed;
-        playerInputActions.Player.Delete.performed += OnPlayerDeleteKeyPressed;
+        inputSystemProvider = new InputSystemProvider();
     }
 
-    public Vector2 SampleMoveVector => playerInputActions.Player.MoveSample.ReadValue<Vector2>();
+    public Vector2 MapMoveVector => inputSystemProvider.MapMoveVector;
 
-    void OnPlayerQuitKeyPressed(InputAction.CallbackContext context) => EventManager.OnQuitKeyPressed(context);
-    void OnPlayerDeleteKeyPressed(InputAction.CallbackContext context) => EventManager.OnDeleteKeyPressed(context);
+    void OnDestroy()
+    {
+        inputSystemProvider.Dispose();
+    }
 }
