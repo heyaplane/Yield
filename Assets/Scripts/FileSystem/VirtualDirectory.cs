@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class VirtualDirectory : IVirtualFile
 {
@@ -8,9 +9,9 @@ public class VirtualDirectory : IVirtualFile
     public DateTime CreationDateTime { get; }
     public DateTime LastModifiedDateTime { get; set; }
     public int FileSize { get; private set; }
-    public byte[] PreviewImage => null;
+    public Texture2D Image => null;
     
-    public List<IVirtualFile> DirectoryFiles;
+    public List<IVirtualFile> DirectoryFiles { get; private set; }
     public string[] DirectoryFileNames => DirectoryFiles.Select(x => x.FileName).ToArray();
 
     public VirtualDirectory(string directoryName)
@@ -37,4 +38,8 @@ public class VirtualDirectory : IVirtualFile
             LastModifiedDateTime = DateTime.Now;
         }
     }
+
+    public IVirtualFile FindFile(string fileName) => DirectoryFiles.FirstOrDefault(x => x.FileName == fileName);
+    
+    public void SavePersistentFile() {}
 }

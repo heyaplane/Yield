@@ -19,11 +19,17 @@ public class MaskFitter : MonoBehaviour
 
         // Scale the mask
         Vector3 scale;
-        scale.y = sizeInPixels.y / canvasScaler.referenceResolution.y * frustumHeight;
         scale.x = sizeInPixels.x / canvasScaler.referenceResolution.x * frustumWidth;
+        scale.y = sizeInPixels.y / canvasScaler.referenceResolution.y * frustumHeight;
         scale.z = 1; // Assuming the mask only needs scaling in x and y
 
         transform.localScale = scale;
         transform.position = new Vector3(microscopeViewTransform.position.x, microscopeViewTransform.position.y, -1);
+
+
+        Vector2 renderTextureScale;
+        renderTextureScale.x = sizeInPixels.x / canvasScaler.referenceResolution.x * Screen.width;
+        renderTextureScale.y = sizeInPixels.y / canvasScaler.referenceResolution.y * Screen.height;
+        RenderCameraManager.Instance.SetCameraAndTextureBounds(new Bounds(transform.position, renderTextureScale), transform.localScale.y);
     }
 }

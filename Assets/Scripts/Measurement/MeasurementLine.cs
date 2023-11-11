@@ -13,6 +13,8 @@ public class MeasurementLine : MonoBehaviour
     bool isSelected;
     bool isDeadLine;
     float scaleFactor;
+    
+    public float MeasurementValue { get; private set; } 
 
     public void Initialize(float scaleFactor)
     {
@@ -41,6 +43,7 @@ public class MeasurementLine : MonoBehaviour
 
         float distance = Vector2.Distance(start, end) * scaleFactor;
         measurementText.text = $"{distance:F4}";
+        MeasurementValue = distance;
     }
 
     void OnMouseDown()

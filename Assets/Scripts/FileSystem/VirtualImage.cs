@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UnityEngine;
 
 public class VirtualImage : IVirtualFile
@@ -7,20 +8,19 @@ public class VirtualImage : IVirtualFile
     public DateTime CreationDateTime { get; }
     public DateTime LastModifiedDateTime { get; set; }
     public int FileSize { get; }
-    public byte[] PreviewImage => Img.GetRawTextureData();
-    
-    public Texture2D Img { get; }
+
+    public Texture2D Image { get; }
     public float MeasurementValue { get; }
 
     const int bytesPerPixel = 4;
 
-    public VirtualImage(string fileName, Texture2D img, float measurementValue = -1f)
+    public VirtualImage(string fileName, Texture2D image, float measurementValue = -1f)
     {
         FileName = fileName;
-        Img = img;
+        Image = image;
         CreationDateTime = DateTime.Now;
         LastModifiedDateTime = DateTime.Now;
-        FileSize = EstimateImageFileSize(img);
+        FileSize = EstimateImageFileSize(image);
         MeasurementValue = measurementValue;
     }
 
@@ -40,5 +40,14 @@ public class VirtualImage : IVirtualFile
         }
 
         return totalSize;
+    }
+
+    public void SavePersistentFile()
+    {
+        if (Image == null)
+            Debug.LogError("Tried to save a null texture!");
+
+        var bytes = Image.EncodeToPNG();
+        File.WriteAllBytes(Path.Combine(Application.persistentDataPath, $"{FileName}"), bytes);
     }
 }

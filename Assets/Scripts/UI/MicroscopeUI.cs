@@ -84,7 +84,8 @@ public class MicroscopeUI : MonoBehaviour
 
     void HandleSaveFile()
     {
-        var newFile = new VirtualImage($"{currentImageName}_{currentSuffix}.png", null);
+        var texture = RenderCameraManager.Instance.RenderNewTexture();
+        var newFile = new VirtualImage($"{currentImageName}_{currentSuffix}.png", texture, mapViewClickListener.CurrentMeasurementValue);
         if (!FileSystemManager.Instance.TrySaveFile(currentSampleID, newFile))
             Debug.LogError("Couldn't save file, duplicate name!");
     }

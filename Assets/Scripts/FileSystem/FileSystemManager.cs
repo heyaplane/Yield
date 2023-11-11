@@ -16,15 +16,11 @@ public class FileSystemManager : SingletonMonobehaviour<FileSystemManager>
         testDirectory2.AddFile(new VirtualImage("testfile2.png", null));
     }
 
-    public VirtualDirectory FindDirectoryInRoot(string directoryName)
-    {
-        return RootDirectory.DirectoryFiles.FirstOrDefault(x => x.FileName == directoryName) as VirtualDirectory;
-    }
+    public VirtualDirectory FindDirectoryInRoot(string directoryName) => RootDirectory.FindFile(directoryName) as VirtualDirectory;
 
     public bool TrySaveFile(string sampleID, IVirtualFile newFile)
     {
-        var rootFiles = RootDirectory.DirectoryFiles;
-        if (rootFiles.FirstOrDefault(x => x.FileName == sampleID) is not VirtualDirectory sampleDirectory)
+        if (RootDirectory.FindFile(sampleID) is not VirtualDirectory sampleDirectory)
         {
             sampleDirectory = new VirtualDirectory(sampleID);
             RootDirectory.AddFile(sampleDirectory);
@@ -34,6 +30,7 @@ public class FileSystemManager : SingletonMonobehaviour<FileSystemManager>
             return false;
         
         sampleDirectory.AddFile(newFile);
+        newFile.SavePersistentFile();
         return true;
     }
 }

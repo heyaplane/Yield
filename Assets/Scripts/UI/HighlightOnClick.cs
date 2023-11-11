@@ -9,6 +9,7 @@ public class HighlightOnClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] Image backgroundImage;
     [SerializeField] TextMeshProUGUI text;
     public TextMeshProUGUI Text => text;
+    public string ItemString => text.text;
 
     public event Action<HighlightOnClick> OnClickedAction;
 

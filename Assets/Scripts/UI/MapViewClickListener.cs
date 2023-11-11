@@ -9,6 +9,7 @@ public class MapViewClickListener : MonoBehaviour
     
     [SerializeField] MeasurementLine measurementLinePrefab;
     MeasurementLine currentMeasurement;
+    public float CurrentMeasurementValue => currentMeasurement != null ? currentMeasurement.MeasurementValue : -1f;
 
     bool isDrawingMeasurement;
     Vector2 startPoint;

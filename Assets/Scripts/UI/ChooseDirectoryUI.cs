@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,11 @@ public class ChooseDirectoryUI : BaseUI
     [SerializeField] Button cancelButton;
 
     [SerializeField] MicroscopeUI microscopeUI;
+
+    [SerializeField] TextMeshProUGUI sizeText;
+    [SerializeField] TextMeshProUGUI dateText;
+    [SerializeField] TextMeshProUGUI typeText;
+    [SerializeField] RawImage previewImage;
 
     void OnEnable()
     {
@@ -36,15 +42,15 @@ public class ChooseDirectoryUI : BaseUI
     {
         fileNameScrollView.ClearView();
         
-        var highlightedDirectory = FileSystemManager.Instance.FindDirectoryInRoot(highlight.Text.text);
+        var highlightedDirectory = FileSystemManager.Instance.FindDirectoryInRoot(highlight.ItemString);
         if (highlightedDirectory == null) return;
         
-        fileNameScrollView.PopulateView(highlightedDirectory.DirectoryFileNames, null);
+        fileNameScrollView.PopulateView(highlightedDirectory.DirectoryFileNames, UpdateFileDataUI);
     }
 
     void HandleSelectSampleIDButton()
     {
-        microscopeUI.HandleSampleIDChanged(sampleIDScrollView.CurrentlyHighlightedItem.Text.text);
+        microscopeUI.HandleSampleIDChanged(sampleIDScrollView.CurrentlyHighlightedItem.ItemString);
         HandleCancelButton();
     }
 
@@ -52,5 +58,23 @@ public class ChooseDirectoryUI : BaseUI
     {
         CloseWindow();
         OnCancelAction?.Invoke();
+    }
+
+    void UpdateFileDataUI(HighlightOnClick highlight)
+    {
+        var highlightedDirectory = FileSystemManager.Instance.FindDirectoryInRoot(sampleIDScrollView.CurrentlyHighlightedItem.ItemString);
+        if (highlightedDirectory == null) return;
+
+        var highlightedFile = highlightedDirectory.FindFile(highlight.ItemString);
+        if (highlightedFile == null)
+        {
+            Debug.LogError("Couldn't find highlighted file!");
+            return;
+        }
+
+        sizeText.text = $"Size: {highlightedFile.FileSize}";
+        dateText.text = $"Date: {highlightedFile.CreationDateTime.ToShortDateString()}";
+        typeText.text = $"Type: {highlightedFile.GetType()}";
+        previewImage.texture = highlightedFile.Image;
     }
 }
