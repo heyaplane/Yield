@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class VirtualImage : IGeneratePreview
@@ -24,6 +26,15 @@ public class VirtualImage : IGeneratePreview
         LastModifiedDateTime = DateTime.Now;
         FileSize = EstimateImageFileSize(image);
         MeasurementValue = measurementValue;
+    }
+
+    public VirtualImage(SerializedFile file)
+    {
+        FileName = file.FileName;
+        CreationDateTime = file.CreationDateTime;
+        LastModifiedDateTime = file.LastModifiedDateTime;
+        FileSize = file.FileSize;
+        MeasurementValue = (float) (double)file.AdditionalData;
     }
 
     int EstimateImageFileSize(Texture2D img)
@@ -73,4 +84,14 @@ public class VirtualImage : IGeneratePreview
             FileSystemManager.Instance.AddTextureToCache(filePath, image);
         }
     }
+
+    public SerializedFile GetSerializableFile() => new SerializedFile
+    {
+        FileName = FileName,
+        CreationDateTime = CreationDateTime,
+        LastModifiedDateTime = LastModifiedDateTime,
+        FileSize = FileSize,
+        FileType = TypeOfFile.Image,
+        AdditionalData = MeasurementValue
+    };
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public class VirtualDirectory : IVirtualFile
@@ -23,6 +25,34 @@ public class VirtualDirectory : IVirtualFile
         DirectoryFiles = new List<IVirtualFile>();
     }
 
+    public VirtualDirectory(SerializedFile serializedFile)
+    {
+        FileName = serializedFile.FileName;
+        CreationDateTime = serializedFile.CreationDateTime;
+        LastModifiedDateTime = serializedFile.LastModifiedDateTime;
+        FileSize = serializedFile.FileSize;
+        DirectoryFiles = new List<IVirtualFile>();
+
+        //if (serializedFile.AdditionalData is not List<SerializedFile> directoryFiles) return;
+        var directoryFiles = (serializedFile.AdditionalData as JArray)?.ToObject<List<SerializedFile>>();
+        if (directoryFiles == null) return;
+        
+        foreach (var file in directoryFiles)
+        {
+            switch (file.FileType)
+            {
+                case TypeOfFile.Directory:
+                    DirectoryFiles.Add(new VirtualDirectory(file));
+                    break;
+                case TypeOfFile.Image:
+                    DirectoryFiles.Add(new VirtualImage(file));
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+    }
+
     public void AddFile(IVirtualFile file)
     {
         DirectoryFiles.Add(file);
@@ -42,4 +72,31 @@ public class VirtualDirectory : IVirtualFile
     public IVirtualFile FindFile(string fileName) => DirectoryFiles.FirstOrDefault(x => x.FileName == fileName);
     
     public void SavePersistentFile() {}
+
+    public SerializedFile GetSerializableFile() => 
+        new SerializedFile
+        {
+            FileName   = FileName,
+            CreationDateTime = CreationDateTime,
+            LastModifiedDateTime = LastModifiedDateTime,
+            FileSize = FileSize,
+            FileType = TypeOfFile.Directory,
+            AdditionalData = DirectoryFiles.Select(x => x.GetSerializableFile()).ToList()
+        };
+}
+
+[Serializable]
+public class SerializedFile
+{
+    public string FileName;
+    public DateTime CreationDateTime;
+    public DateTime LastModifiedDateTime;
+    public int FileSize;
+    public TypeOfFile FileType;
+    public object AdditionalData;
+}
+
+public enum TypeOfFile
+{
+    Directory, Image
 }

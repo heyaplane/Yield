@@ -186,4 +186,9 @@ public class MapViewManager : MonoBehaviour
         Update();
         coordinateRendererPool.Release(initRenderer);
     }
+
+    void OnDestroy()
+    {
+        mapDataManager.UnloadAllChunks();
+    }
 }

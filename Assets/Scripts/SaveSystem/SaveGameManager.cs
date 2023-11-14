@@ -38,7 +38,7 @@ public class SaveGameManager
         fileHandler.TrySaveFile(filePath, newGameData);
     }
 
-    public void SaveGameData(string currentPlayerProfile, string gameName)
+    public void SaveSceneData(string currentPlayerProfile, string gameName)
     {
         string filePath = SaveSystemHelpers.GetGameFilePath(currentPlayerProfile, gameName);
         if (currentSaveData == null || (string) currentSaveData[gameNameKey] != gameName)
@@ -49,10 +49,15 @@ public class SaveGameManager
             Debug.LogError("Unable to save game.");
     }
 
-    public void LoadGameData(string currentPlayerProfile, string gameName)
+    public void LoadInitialGameData(string currentPlayerProfile, string gameName)
     {
         string filePath = SaveSystemHelpers.GetGameFilePath(currentPlayerProfile, gameName);
         currentSaveData = fileHandler.LoadFile(filePath);
+    }
+
+    public void LoadSceneData(string currentPlayerProfile, string gameName)
+    {
+        LoadInitialGameData(currentPlayerProfile, gameName);
         RestoreGameData(currentSaveData);
     }
 

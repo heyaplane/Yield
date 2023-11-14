@@ -117,6 +117,14 @@ public class MapDataManager
         }
     }
 
+    public void UnloadAllChunks()
+    {
+        foreach (var chunkSO in activatedChunkSO)
+        {
+            chunkSO.UnloadSprites();
+        }
+    }
+
     void UnloadChunk(ChunkSO chunkSO)
     {
         spriteLookup[chunkSO] = null;

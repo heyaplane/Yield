@@ -4,10 +4,12 @@ public class GlobalDataManager : SingletonMonobehaviour<GlobalDataManager>
 {
     public object CaptureGlobalData()
     {
-        return new SaveData();
+        var filesaveData = FileSystemManager.Instance.CaptureSaveData();
+        return filesaveData;
     }
 
-    public void RestoreGlobalData(object o)
+    public void RestoreGlobalData(object saveData)
     {
+        FileSystemManager.Instance.RestoreSaveData(saveData);
     }
 }

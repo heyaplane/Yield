@@ -59,13 +59,13 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
 
     public string[] GetSaveGameNames() => saveGameManager.GetSaveGameNames(SaveSystemHelpers.GetPlayerGamesDirectory(CurrentPlayerProfile));
     public void CreateNewGame(string gameName) => saveGameManager.CreateNewGame(CurrentPlayerProfile, gameName);
-    public void SaveGameData() => saveGameManager.SaveGameData(CurrentPlayerProfile, CurrentSaveGame);
-    public void LoadGameData() => saveGameManager.LoadGameData(CurrentPlayerProfile, CurrentSaveGame);
+    public void SaveGameData() => saveGameManager.SaveSceneData(CurrentPlayerProfile, CurrentSaveGame);
+    public void LoadGameData() => saveGameManager.LoadSceneData(CurrentPlayerProfile, CurrentSaveGame);
 
     public void SaveGameInitiated(string gameName)
     {
         CurrentSaveGame = gameName;
-        saveGameManager.LoadGameData(CurrentPlayerProfile, CurrentSaveGame);
+        saveGameManager.LoadInitialGameData(CurrentPlayerProfile, CurrentSaveGame);
         var nextScene = SceneController.Instance.GetSceneFromBuildIndex(saveGameManager.GetLastSavedScene());
         GameManager.Instance.RequestSceneTransition(nextScene);
     }

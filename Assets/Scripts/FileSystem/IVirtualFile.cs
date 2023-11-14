@@ -8,4 +8,5 @@ public interface IVirtualFile
     DateTime LastModifiedDateTime { get; set; }
     int FileSize { get; }
     void SavePersistentFile();
+    SerializedFile GetSerializableFile();
 }

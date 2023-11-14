@@ -73,4 +73,12 @@ public class FileSystemManager : SingletonMonobehaviour<FileSystemManager>
             }
         }
     }
+
+    public object CaptureSaveData() => RootDirectory.GetSerializableFile();
+
+    public void RestoreSaveData(object saveData)
+    {
+        if (saveData is SerializedFile file)
+            RootDirectory = new VirtualDirectory(file);
+    }
 }
