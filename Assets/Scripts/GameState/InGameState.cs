@@ -17,10 +17,6 @@ public class InGameState : BaseGameState
 
     public override void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Tab))
-        // {
-        //     GameManager.Instance.RequestSceneTransition();
-        // }
     }
 
     public override void Exit()

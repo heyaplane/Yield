@@ -121,8 +121,12 @@ public class MapDataManager
     {
         foreach (var chunkSO in activatedChunkSO)
         {
+            if (spriteLookup.TryGetValue(chunkSO, out var value))
+                spriteLookup[chunkSO] = null;
             chunkSO.UnloadSprites();
         }
+
+        activatedChunkSO.Clear();
     }
 
     void UnloadChunk(ChunkSO chunkSO)
@@ -141,12 +145,12 @@ public class MapDataManager
             lock (lockObject)
             {
                 numChunksToLoad--;
-                activatedChunkSO.Add(chunkSO);
             }
             
             Debug.Log("Asset(s) loaded.");
         }
         
         GameManager.Instance.StartCoroutine(chunkSO.LoadSprites(SpritesLoaded));
+        activatedChunkSO.Add(chunkSO);
     }
 }

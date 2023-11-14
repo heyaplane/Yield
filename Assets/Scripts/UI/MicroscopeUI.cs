@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MicroscopeUI : MonoBehaviour
+public class MicroscopeUI : BaseUI
 {
     [SerializeField] MapViewManager mapViewManager;
     [SerializeField] MapViewClickListener mapViewClickListener;
@@ -30,6 +30,8 @@ public class MicroscopeUI : MonoBehaviour
     [SerializeField] TMP_InputField nextSuffixInput;
     [SerializeField] TextMeshProUGUI exampleText;
 
+    [SerializeField] Button closeUIButton;
+
     string currentSampleID, currentImageName, currentSuffix;
 
     void OnEnable()
@@ -38,6 +40,7 @@ public class MicroscopeUI : MonoBehaviour
         medResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.Med)));
         highResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.High)));
         measurementButton.onClick.AddListener(HandleMeasurement);
+        closeUIButton.onClick.AddListener(HandleCloseUIButton);
         
         chooseDirectoryButton.onClick.AddListener(HandleOpenFile);
         saveFileButton.onClick.AddListener(HandleSaveFile);
@@ -58,12 +61,20 @@ public class MicroscopeUI : MonoBehaviour
         medResButton.onClick.RemoveAllListeners();
         highResButton.onClick.RemoveAllListeners();
         measurementButton.onClick.RemoveAllListeners();
+        closeUIButton.onClick.RemoveAllListeners();
         
         chooseDirectoryButton.onClick.RemoveAllListeners();
         saveFileButton.onClick.RemoveAllListeners();
         sampleIDInput.onValueChanged.RemoveAllListeners();
         imageNameInput.onValueChanged.RemoveAllListeners();
         nextSuffixInput.onValueChanged.RemoveAllListeners();
+    }
+
+    public override void EnableWindow()
+    {
+        base.EnableWindow();
+        mapViewManager.gameObject.SetActive(true);
+        mapViewClickListener.gameObject.SetActive(true);
     }
 
     void Update()
@@ -117,5 +128,13 @@ public class MicroscopeUI : MonoBehaviour
         suffix ??= currentSuffix;
         
         exampleText.text = $"{sampleID}/{imageName}_{suffix}.png";
+    }
+
+    void HandleCloseUIButton()
+    {
+        mapViewManager.gameObject.SetActive(false);
+        mapViewClickListener.gameObject.SetActive(false);
+        OnCancelAction?.Invoke();
+        CloseWindow();
     }
 }

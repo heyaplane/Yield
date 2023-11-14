@@ -6,7 +6,13 @@ public class PausedGameState : BaseGameState
     public override GameState Name => GameState.Paused;
     
     InputSystemProvider inputSystem;
-    
+
+    public override void Enter()
+    {
+        base.Enter();
+        inputSystem.EnableAllPlayerControls();
+    }
+
     public override void Update()
     {
     }
@@ -14,6 +20,7 @@ public class PausedGameState : BaseGameState
     public override void Exit()
     {
         inputSystem.DisableUIToggleControls(sm.PauseToggleAction, EventManager.OnUIToggleRequested);
+        inputSystem.DisableAllPlayerControls();
         
         if (sm.NextState == sm.GetStateFromName(GameState.Loading))
             SaveManager.Instance.SaveGameData();

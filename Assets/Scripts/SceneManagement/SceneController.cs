@@ -44,7 +44,6 @@ public class SceneController : SingletonMonobehaviour<SceneController>
     public void SetProfileSelectStartingScene() => nextScene = profileCreate;
     public void SetStartingScene() => nextScene = useStartingScene ? startingScene : MainMenu;
     
-
     protected override void Awake()
     {
         base.Awake();
@@ -59,6 +58,8 @@ public class SceneController : SingletonMonobehaviour<SceneController>
             Debug.LogError("Next scene is null.");
             return;
         }
+
+        CheckForSceneLocks();
         
         StartCoroutine(SwitchScenes());
     }
@@ -69,6 +70,11 @@ public class SceneController : SingletonMonobehaviour<SceneController>
             nextScene = GetDefaultNextSceneSO();
         else
             nextScene = scene;
+    }
+
+    void CheckForSceneLocks()
+    {
+        
     }
 
    IEnumerator SwitchScenes()

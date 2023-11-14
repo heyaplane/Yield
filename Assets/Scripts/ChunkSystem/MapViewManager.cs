@@ -31,6 +31,8 @@ public class MapViewManager : MonoBehaviour
     [SerializeField] ChunkResolution startingChunkResolution;
 
     public float CurrentScaleFactor => currentMapSO.GetCurrentScaleFactor(mapDataManager.CurrentChunkResolution);
+
+    bool isSwitchingResolution;
     
     void Awake()
     {
@@ -75,6 +77,8 @@ public class MapViewManager : MonoBehaviour
 
     void Update()
     {
+        if (isSwitchingResolution) return;
+        
         IEnumerable<ChunkCoordinate> expiredCoordinates, newCoordinates;
         (expiredCoordinates, newCoordinates) = GetCoordinateDiff();
         if (expiredCoordinates == null && newCoordinates == null) return;
@@ -152,7 +156,7 @@ public class MapViewManager : MonoBehaviour
     public IEnumerator SwitchToNewResolution(ChunkResolution newResolution)
     {
         if (newResolution == mapDataManager.CurrentChunkResolution) yield break;
-        
+
         var results = new Collider2D[1]; 
         Physics2D.OverlapPoint(spriteMask.transform.position, coordinateFilter, results);
 
@@ -173,7 +177,12 @@ public class MapViewManager : MonoBehaviour
             coordRenderer.gameObject.SetActive(false);
         }
 
+        Update();
+
         mapDataManager.SwitchToNewResolution(newResolution, centerCoordinate, currentMapSO);
+        
+        // We dont want update to run while we are loading assets for the new resolution
+        isSwitchingResolution = true;
         
         var waitCondition = new WaitUntil(() => mapDataManager.HasLoadedAllSprites());
         yield return waitCondition;
@@ -182,6 +191,8 @@ public class MapViewManager : MonoBehaviour
         rendererLookup[centerCoordinate] = initRenderer;
         var sprite = mapDataManager.GetCoordinateSprite(centerCoordinate);
         rendererLookup[centerCoordinate].Initialize(centerCoordinate, sprite);
+
+        isSwitchingResolution = false;
         
         Update();
         coordinateRendererPool.Release(initRenderer);
