@@ -9,4 +9,5 @@ public interface IVirtualFile
     int FileSize { get; }
     void SavePersistentFile();
     SerializedFile GetSerializableFile();
+    void DestroyUnsavedPersistentFiles();
 }

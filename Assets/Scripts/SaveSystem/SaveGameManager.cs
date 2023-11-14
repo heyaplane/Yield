@@ -40,6 +40,8 @@ public class SaveGameManager
 
     public void SaveSceneData(string currentPlayerProfile, string gameName)
     {
+        if (!SaveManager.Instance.ShouldSaveOnSceneChange) return;
+        
         string filePath = SaveSystemHelpers.GetGameFilePath(currentPlayerProfile, gameName);
         if (currentSaveData == null || (string) currentSaveData[gameNameKey] != gameName)
             currentSaveData = fileHandler.LoadFile(filePath);

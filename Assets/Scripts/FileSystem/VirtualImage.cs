@@ -11,10 +11,10 @@ public class VirtualImage : IGeneratePreview
     public DateTime CreationDateTime { get; }
     public DateTime LastModifiedDateTime { get; set; }
     public int FileSize { get; }
-    public bool CanGeneratePreview => true;
-
     public float MeasurementValue { get; }
+    
     Texture2D image;
+    bool deletePersistentFileOnDestroy = true;
 
     const int bytesPerPixel = 4;
 
@@ -35,6 +35,7 @@ public class VirtualImage : IGeneratePreview
         LastModifiedDateTime = file.LastModifiedDateTime;
         FileSize = file.FileSize;
         MeasurementValue = (float) (double)file.AdditionalData;
+        deletePersistentFileOnDestroy = false;
     }
 
     int EstimateImageFileSize(Texture2D img)
@@ -85,13 +86,25 @@ public class VirtualImage : IGeneratePreview
         }
     }
 
-    public SerializedFile GetSerializableFile() => new SerializedFile
+    public void DestroyUnsavedPersistentFiles()
     {
-        FileName = FileName,
-        CreationDateTime = CreationDateTime,
-        LastModifiedDateTime = LastModifiedDateTime,
-        FileSize = FileSize,
-        FileType = TypeOfFile.Image,
-        AdditionalData = MeasurementValue
-    };
+        if (!deletePersistentFileOnDestroy) return;
+        
+        if (File.Exists(filePath))
+            File.Delete(filePath);
+    }
+
+    public SerializedFile GetSerializableFile()
+    {
+        deletePersistentFileOnDestroy = false;
+        return new SerializedFile
+        {
+            FileName = FileName,
+            CreationDateTime = CreationDateTime,
+            LastModifiedDateTime = LastModifiedDateTime,
+            FileSize = FileSize,
+            FileType = TypeOfFile.Image,
+            AdditionalData = MeasurementValue
+        };
+    }
 }

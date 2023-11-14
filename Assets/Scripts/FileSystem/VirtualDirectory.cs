@@ -73,6 +73,8 @@ public class VirtualDirectory : IVirtualFile
     
     public void SavePersistentFile() {}
 
+    public void DestroyUnsavedPersistentFiles() => DirectoryFiles.ForEach(x => x.DestroyUnsavedPersistentFiles());
+
     public SerializedFile GetSerializableFile() => 
         new SerializedFile
         {

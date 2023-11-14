@@ -17,6 +17,11 @@ public class FileSystemManager : SingletonMonobehaviour<FileSystemManager>
         cache = new LRUCache(1);
     }
 
+    void OnDestroy()
+    {
+        RootDirectory.DestroyUnsavedPersistentFiles();
+    }
+
     public VirtualDirectory FindDirectoryInRoot(string directoryName) => RootDirectory.FindFile(directoryName) as VirtualDirectory;
 
     public bool TrySaveFile(string sampleID, IVirtualFile newFile)
