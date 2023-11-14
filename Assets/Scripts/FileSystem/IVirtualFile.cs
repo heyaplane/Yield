@@ -7,6 +7,5 @@ public interface IVirtualFile
     DateTime CreationDateTime { get; }
     DateTime LastModifiedDateTime { get; set; }
     int FileSize { get; }
-    Texture2D Image { get; }
     void SavePersistentFile();
 }

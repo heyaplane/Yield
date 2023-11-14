@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce001550cca4aadbc038775c3fa0821, type: 3}
+  m_Name: ProfileCreate
+  m_EditorClassIdentifier: 
+  sceneName: ProfileCreate
+  sceneIndex: 3
+  scenePath: Assets/Scenes/ProfileCreate.unity
+  loadingImage: {fileID: 1251038485571770385, guid: 66e9708c0ed21364fa61cc72d68d6404, type: 3}
+  gameStateOnLoading: 1
+  defaultNextScene: {fileID: 11400000, guid: 887b7680b5c26f842a4e8144011cf38b, type: 2}
+  scene: {fileID: 102900000, guid: 2570e38806cf26b4d83e44ecfe0efa97, type: 3}

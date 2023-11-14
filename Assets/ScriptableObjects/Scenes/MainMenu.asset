@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce001550cca4aadbc038775c3fa0821, type: 3}
+  m_Name: MainMenu
+  m_EditorClassIdentifier: 
+  sceneName: MainMenu
+  sceneIndex: 2
+  scenePath: Assets/Scenes/MainMenu.unity
+  loadingImage: {fileID: 1251038485571770385, guid: 66e9708c0ed21364fa61cc72d68d6404, type: 3}
+  gameStateOnLoading: 1
+  defaultNextScene: {fileID: 11400000, guid: 1065f39583232f648b848ffa5cec9e58, type: 2}
+  scene: {fileID: 102900000, guid: 35bff9541f462bb48b754f3aa2ec14e5, type: 3}

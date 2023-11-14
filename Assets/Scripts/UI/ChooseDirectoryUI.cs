@@ -22,6 +22,8 @@ public class ChooseDirectoryUI : BaseUI
     {
         selectSampleIDButton.onClick.AddListener(HandleSelectSampleIDButton);
         cancelButton.onClick.AddListener(HandleCancelButton);
+        
+        previewImage.gameObject.SetActive(false);
     }
 
     void OnDisable()
@@ -56,7 +58,7 @@ public class ChooseDirectoryUI : BaseUI
 
     void HandleCancelButton()
     {
-        CloseWindow();
+        EventManager.OnUIToggleRequested(default);
         OnCancelAction?.Invoke();
     }
 
@@ -75,6 +77,15 @@ public class ChooseDirectoryUI : BaseUI
         sizeText.text = $"Size: {highlightedFile.FileSize}";
         dateText.text = $"Date: {highlightedFile.CreationDateTime.ToShortDateString()}";
         typeText.text = $"Type: {highlightedFile.GetType()}";
-        previewImage.texture = highlightedFile.Image;
+        previewImage.gameObject.SetActive(false);
+
+        void OnTextureFound(Texture2D texture)
+        {
+            previewImage.gameObject.SetActive(true);
+            previewImage.texture = texture;
+        }
+
+        if (highlightedFile is IGeneratePreview previewGenerator)
+            previewGenerator.GetPreviewImage(OnTextureFound);
     }
 }

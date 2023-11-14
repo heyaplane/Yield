@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -85,7 +85,7 @@ public class MicroscopeUI : MonoBehaviour
     void HandleSaveFile()
     {
         var texture = RenderCameraManager.Instance.RenderNewTexture();
-        var newFile = new VirtualImage($"{currentImageName}_{currentSuffix}.png", texture, mapViewClickListener.CurrentMeasurementValue);
+        var newFile = new VirtualImage(Path.Combine($"{currentSampleID}", $"{currentImageName}_{currentSuffix}.png"), texture, mapViewClickListener.CurrentMeasurementValue);
         if (!FileSystemManager.Instance.TrySaveFile(currentSampleID, newFile))
             Debug.LogError("Couldn't save file, duplicate name!");
     }

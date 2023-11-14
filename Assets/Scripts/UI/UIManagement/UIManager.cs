@@ -22,13 +22,13 @@ public class UIManager : SingletonMonobehaviour<UIManager>
     void OnEnable()
     {
         EventManager.OnUIToggleRequestedEvent += CloseUIAtStackTop;
-        //EventManager.CallBeforeSceneUnloadEvent += ClearUIStack;
+        EventManager.CallBeforeSceneUnloadEvent += ClearUIStack;
     }
 
     void OnDisable()
     {
         EventManager.OnUIToggleRequestedEvent -= CloseUIAtStackTop;
-        //EventManager.CallBeforeSceneUnloadEvent -= ClearUIStack;
+        EventManager.CallBeforeSceneUnloadEvent -= ClearUIStack;
     }
 
     void Update()
