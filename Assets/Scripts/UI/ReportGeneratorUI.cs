@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//TODO: Add ability to view and modify previous reports, add distributions to plots for comparison
+
 public class ReportGeneratorUI : BaseUI
 {
     [SerializeField] ChooseFilesUI chooseFilesUI;
@@ -15,6 +17,7 @@ public class ReportGeneratorUI : BaseUI
     [SerializeField] CanvasScaler canvasScaler;
     
     [SerializeField] SingleSelectFileSystemScrollView fileScrollView;
+    [SerializeField] SingleSelectFileSystemScrollView reportScrollView;
     
     [SerializeField] Button browseFilesButton;
     [SerializeField] Button closeUIButton;
@@ -25,6 +28,8 @@ public class ReportGeneratorUI : BaseUI
     [SerializeField] TextMeshProUGUI numSamplesText;
     [SerializeField] TextMeshProUGUI meanText;
     [SerializeField] TextMeshProUGUI stDevText;
+
+    VirtualReport currentReport;
 
     void OnEnable()
     {
@@ -44,7 +49,14 @@ public class ReportGeneratorUI : BaseUI
         generateReportButton.onClick.RemoveAllListeners();
         saveReportButton.onClick.RemoveAllListeners();
     }
-    
+
+    public override void EnableWindow()
+    {
+        base.EnableWindow();
+        
+        UpdateReportScrollView();
+    }
+
     void HandleBrowseFilesButton()
     {
         chooseFilesUI.EnableWindow();
@@ -77,11 +89,23 @@ public class ReportGeneratorUI : BaseUI
         stDevText.text = $"St. Dev: {stDev:F2} µm";
         
         reportPlotUI.AddHistogramToPlot(measurements, 0.75f);
+
+        currentReport = new VirtualReport(titleText.text, new ReportData(measurements, mean, stDev));
     }
 
     void HandleSaveReportButton()
     {
+        FileSystemManager.Instance.TrySaveFile("Reports", currentReport);
+        UpdateReportScrollView();    
+    }
+
+    void UpdateReportScrollView()
+    {
+        var reportDirectory = FileSystemManager.Instance.FindDirectoryInRoot("Reports");
+        if (reportDirectory == null) return;
         
+        reportScrollView.ClearView();
+        reportScrollView.AddItemsToView(reportDirectory.DirectoryFileNames, null);
     }
 
     void SetupRenderCamera()
@@ -93,5 +117,20 @@ public class ReportGeneratorUI : BaseUI
         renderTextureScale.x = sizeInPixels.x / canvasScaler.referenceResolution.x * Screen.width;
         renderTextureScale.y = sizeInPixels.y / canvasScaler.referenceResolution.y * Screen.height;
         RenderCameraManager.Instance.SetCameraAndTextureBounds(new Bounds(reportBorders.position, renderTextureScale), orthographicSize);
+    }
+}
+
+[Serializable]
+public class ReportData
+{
+    public double[] Measurements { get; } 
+    public float Mean { get; }
+    public float StDev { get; }
+
+    public ReportData(double[] measurements, float mean, float stDev)
+    {
+        Measurements = measurements;
+        Mean = mean;
+        StDev = stDev;
     }
 }

@@ -47,6 +47,9 @@ public class VirtualDirectory : IVirtualFile
                 case TypeOfFile.Image:
                     DirectoryFiles.Add(new VirtualImage(file));
                     break;
+                case TypeOfFile.Report:
+                    DirectoryFiles.Add(new VirtualReport(file));
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -100,5 +103,5 @@ public class SerializedFile
 
 public enum TypeOfFile
 {
-    Directory, Image
+    Directory, Image, Report
 }
