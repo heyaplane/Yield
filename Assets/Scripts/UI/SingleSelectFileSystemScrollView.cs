@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class FileSystemScrollView : MonoBehaviour
+public class SingleSelectFileSystemScrollView : MonoBehaviour
 {
     [SerializeField] HighlightOnClick scrollViewItemPrefab;
     [SerializeField] Transform content;
@@ -9,7 +10,7 @@ public class FileSystemScrollView : MonoBehaviour
 
     public HighlightOnClick CurrentlyHighlightedItem { get; private set; }
     
-    public void PopulateView(string[] itemNames, Action<HighlightOnClick> onItemClick)
+    public void AddItemsToView(string[] itemNames, Action<HighlightOnClick> onItemClick)
     {
         foreach (string itemName in itemNames)
         {
@@ -46,5 +47,17 @@ public class FileSystemScrollView : MonoBehaviour
     {
         if (CurrentlyHighlightedItem != null)
             CurrentlyHighlightedItem.Deselect();
+    }
+    
+    public List<string> GetAllItemNames()
+    {
+        var names = new List<string>();
+        foreach (Transform child in content)
+        {
+            var highlight = child.gameObject.GetComponent<HighlightOnClick>();
+            names.Add(highlight.ItemString);
+        }
+
+        return names;
     }
 }

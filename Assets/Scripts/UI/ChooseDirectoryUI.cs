@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ChooseDirectoryUI : BaseUI
 {
-    [SerializeField] FileSystemScrollView sampleIDScrollView;
-    [SerializeField] FileSystemScrollView fileNameScrollView;
+    [SerializeField] SingleSelectFileSystemScrollView sampleIDScrollView;
+    [SerializeField] SingleSelectFileSystemScrollView fileNameScrollView;
 
     [SerializeField] Button selectSampleIDButton;
     [SerializeField] Button cancelButton;
@@ -37,7 +37,7 @@ public class ChooseDirectoryUI : BaseUI
         base.EnableWindow();
         fileNameScrollView.ClearView();
         sampleIDScrollView.ClearView();
-        sampleIDScrollView.PopulateView(FileSystemManager.Instance.RootDirectory.DirectoryFileNames, PopulateFileNames);
+        sampleIDScrollView.AddItemsToView(FileSystemManager.Instance.RootDirectory.DirectoryFileNames, PopulateFileNames);
     }
 
     void PopulateFileNames(HighlightOnClick highlight)
@@ -47,7 +47,7 @@ public class ChooseDirectoryUI : BaseUI
         var highlightedDirectory = FileSystemManager.Instance.FindDirectoryInRoot(highlight.ItemString);
         if (highlightedDirectory == null) return;
         
-        fileNameScrollView.PopulateView(highlightedDirectory.DirectoryFileNames, UpdateFileDataUI);
+        fileNameScrollView.AddItemsToView(highlightedDirectory.DirectoryFileNames, UpdateFileDataUI);
     }
 
     void HandleSelectSampleIDButton()

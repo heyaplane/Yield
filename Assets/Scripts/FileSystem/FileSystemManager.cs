@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -38,6 +39,23 @@ public class FileSystemManager : SingletonMonobehaviour<FileSystemManager>
         sampleDirectory.AddFile(newFile);
         newFile.SavePersistentFile();
         return true;
+    }
+
+    public List<IVirtualFile> GetFilesFromNames(IEnumerable<string> fileNames)
+    {
+        var files = new List<IVirtualFile>();
+        foreach (string fileName in fileNames)
+        {
+            files.Add(GetFileFromName(fileName));
+        }
+
+        return files;
+    }
+
+    public IVirtualFile GetFileFromName(string fileName)
+    {
+        var fileParts = fileName.Split('\\');
+        return FindDirectoryInRoot(fileParts[0]).FindFile(fileName);
     }
 
     public void AddTextureToCache(string key, Texture2D texture)
