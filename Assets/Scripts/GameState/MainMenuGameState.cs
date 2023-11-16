@@ -1,4 +1,5 @@
-﻿using UnityEngine.InputSystem;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MainMenuGameState : BaseGameState
 {
@@ -8,6 +9,8 @@ public class MainMenuGameState : BaseGameState
 
     public override void Enter()
     {
+        TimeSystem.Instance.StopGameTime();
+        Debug.Log("Game time stopped.");
     }
 
     public override void Update()
@@ -16,6 +19,8 @@ public class MainMenuGameState : BaseGameState
 
     public override void Exit()
     {
+        TimeSystem.Instance.StartGameTime();
+        Debug.Log("Game time started.");
     }
 
     public override void OnPauseRequested(InputActionReference toggleAction)

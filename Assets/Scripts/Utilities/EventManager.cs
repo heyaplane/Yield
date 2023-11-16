@@ -95,4 +95,34 @@ public class EventManager
     }
 
     #endregion
+
+    #region TimeManagement
+
+    public static event Action<int> OnMinutesIncrementedEvent;
+    public static void OnMinutesIncremented(int currentMinute)
+    {
+        OnMinutesIncrementedEvent?.Invoke(currentMinute);   
+    }
+    
+    public static event Action<int> OnHoursIncrementedEvent;
+    public static void OnHoursIncremented(int currentMinute)
+    {
+        OnHoursIncrementedEvent?.Invoke(currentMinute);   
+    }
+
+    public static event Action<int> OnDaysIncrementedEvent;
+    public static void OnDaysIncremented(int currentMinute)
+    {
+        OnDaysIncrementedEvent?.Invoke(currentMinute);   
+    }
+    
+    #endregion
+
+    #region MessageSystem
+
+    public static event Action<ThreadData> OnNewThreadAddedEvent;
+    public static void OnNewThreadAdded(ThreadData threadData) => 
+        OnNewThreadAddedEvent?.Invoke(threadData);   
+
+    #endregion
 }

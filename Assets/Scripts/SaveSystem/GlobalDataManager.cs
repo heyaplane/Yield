@@ -4,12 +4,26 @@ public class GlobalDataManager : SingletonMonobehaviour<GlobalDataManager>
 {
     public object CaptureGlobalData()
     {
-        var filesaveData = FileSystemManager.Instance.CaptureSaveData();
-        return filesaveData;
+        var globalData = new SaveData
+        {
+            {"Time", null},
+            {"Files", null}
+        };
+
+        globalData["Time"] = TimeSystem.Instance.GetCurrentTimestamp;
+        globalData["Files"] = FileSystemManager.Instance.CaptureSaveData();
+        return globalData;
     }
 
-    public void RestoreGlobalData(object saveData)
+    public void RestoreGlobalData(object data)
     {
-        FileSystemManager.Instance.RestoreSaveData(saveData);
+        if (data is SaveData saveData)
+        {
+            if (saveData.TryGetValue("Files", out var fileData))
+                FileSystemManager.Instance.RestoreSaveData(fileData);
+            
+            if (saveData.TryGetValue("Time", out var timeData))
+                TimeSystem.Instance.RestoreCurrentTime(timeData);
+        }
     }
 }
