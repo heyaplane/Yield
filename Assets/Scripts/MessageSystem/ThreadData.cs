@@ -11,6 +11,7 @@ public class ThreadData : IChatData
     public string Name { get; }
     public Timestamp Timestamp { get; }
     public bool HasNewMessage { get; set; }
+    public HighlightOnClick MessaageUIPrefab => MessageSystemManager.Instance.GetMessageUIPrefab(this);
 
     public event Action<ThreadData, MessageData> OnMessageAdded;
 

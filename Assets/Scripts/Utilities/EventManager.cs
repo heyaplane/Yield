@@ -122,7 +122,15 @@ public class EventManager
 
     public static event Action<ThreadData> OnNewThreadAddedEvent;
     public static void OnNewThreadAdded(ThreadData threadData) => 
-        OnNewThreadAddedEvent?.Invoke(threadData);   
+        OnNewThreadAddedEvent?.Invoke(threadData);
+
+    public static event Action<MessageData> OnReplyButtonClickedEvent;
+    public static void OnReplyButtonClicked(MessageData respondentMessage) =>
+        OnReplyButtonClickedEvent?.Invoke(respondentMessage);
+
+    public static event Action<VirtualReport, MessageData> OnReportChosenEvent;
+    public static void OnReportChosen(VirtualReport chosenReport, MessageData respondentMessage) => 
+        OnReportChosenEvent?.Invoke(chosenReport, respondentMessage);
 
     #endregion
 }

@@ -20,13 +20,16 @@ public class MessageUI : MonoBehaviour, IShowChatData
     void OnEnable()
     {
         highlightOnClick.OnClickedAction += ActionOnHighlight;
+        if (replyButton != null)
+            replyButton.onClick.AddListener(HandleReplyButton);
     }
 
     void OnDisable()
     {
         highlightOnClick.OnClickedAction -= ActionOnHighlight;
         
-        replyButton.onClick.RemoveAllListeners();
+        if (replyButton != null)
+            replyButton.onClick.RemoveAllListeners();
     }
 
     public void InitializeMessageData(IChatData chatData)
@@ -37,7 +40,7 @@ public class MessageUI : MonoBehaviour, IShowChatData
             return;
         }
         
-        this.message = messageData;
+        message = messageData;
         senderIconSprite.sprite = messageData.MessageSender.IconSprite;
         sendTimeText.text = messageData.Timestamp.GetFormattedTimestampText();
         senderNameText.text = messageData.MessageSender.Name;
@@ -46,11 +49,27 @@ public class MessageUI : MonoBehaviour, IShowChatData
 
     public void ActionOnHighlight(HighlightOnClick obj)
     {
-        if (message.HasReply) return;
+        if (message == null || message.HasReply || replyButton == null) return;
         
         replyButton.GetComponent<Image>().enabled = true;
         replyButton.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
     }
 
     public void AddListenerToReplyButton(UnityAction onReplyButton) => replyButton.onClick.AddListener(onReplyButton);
+
+    void HandleReplyButton()
+    {
+        EventManager.OnReplyButtonClicked(message);
+        EventManager.OnReportChosenEvent += HandleReportChosen;
+    }
+
+    void HandleReportChosen(VirtualReport reportFile, MessageData messageData)
+    {
+        EventManager.OnReportChosenEvent -= HandleReportChosen;
+        if (reportFile == null) return;
+        
+        replyButton.GetComponent<Image>().enabled = false;
+        replyButton.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+        message.HasReply = true;
+    }
 }

@@ -10,6 +10,17 @@ public class MessageSystemManager : SingletonMonobehaviour<MessageSystemManager>
     Dictionary<string, Sprite> iconSpriteLookup;
     public Sprite GetIconSprite(string iconSpriteID) => iconSpriteLookup[iconSpriteID];
 
+    [SerializeField] HighlightOnClick threadSummaryPrefab;
+    [SerializeField] HighlightOnClick outsideMessagePrefab;
+    [SerializeField] HighlightOnClick playerMessagePrefab;
+
+
+    public HighlightOnClick GetMessageUIPrefab(IChatData chatData)
+    {
+        if (chatData is not MessageData messageData) return threadSummaryPrefab;
+        return messageData.MessageSender.Name == "Player" ? playerMessagePrefab : outsideMessagePrefab;
+    }
+
     public List<ThreadData> Threads { get; private set; }
     
     void OnEnable()

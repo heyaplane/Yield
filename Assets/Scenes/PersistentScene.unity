@@ -455,6 +455,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiIconSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   playerIconSprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  threadSummaryPrefab: {fileID: 4475722459544890572, guid: e5bb4de0b05f52b4597ce43e5879fe87, type: 3}
+  outsideMessagePrefab: {fileID: 510448158248440756, guid: d3f343cf4d331c04e93c2e8a5de5dc7a, type: 3}
+  playerMessagePrefab: {fileID: 9172007852173860658, guid: f5722044d7365aa499215b3ddecd7565, type: 3}
 --- !u!1001 &886236041
 PrefabInstance:
   m_ObjectHideFlags: 0

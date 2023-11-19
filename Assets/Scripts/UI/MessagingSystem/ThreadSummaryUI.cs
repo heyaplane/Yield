@@ -15,6 +15,16 @@ public class ThreadSummaryUI : MonoBehaviour, IShowChatData
 
     public ThreadData Thread { get; private set; }
 
+    void OnEnable()
+    {
+        highlightOnClick.OnClickedAction += ActionOnHighlight;
+    }
+    
+    void OnDisable()
+    {
+        highlightOnClick.OnClickedAction -= ActionOnHighlight;
+    }
+
     public void InitializeMessageData(IChatData chatData)
     {
         if (chatData is not ThreadData threadData)

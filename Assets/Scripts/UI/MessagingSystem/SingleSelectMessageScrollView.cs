@@ -1,32 +1,37 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SingleSelectMessageScrollView : MonoBehaviour
 {
-    [SerializeField] HighlightOnClick scrollViewItemPrefab;
     [SerializeField] Transform content;
     [SerializeField] Color itemHighlightColor;
 
     public HighlightOnClick CurrentlyHighlightedItem { get; private set; }
     
-    public void AddItemsToView(List<IChatData> messageDatas, Action<HighlightOnClick> onItemClick)
+    public void AddItemsToView(List<IChatData> chatDatas, Action<HighlightOnClick> onItemClick)
     {
-        foreach (var messageData in messageDatas)
+        foreach (var chatData in chatDatas)
         {
-            AddItemToView(messageData, onItemClick);
+            StartCoroutine(AddItemToView(chatData, onItemClick));
         }
     }
 
-    public void AddItemToView(IChatData messageData, Action<HighlightOnClick> onItemClick)
+    public IEnumerator AddItemToView(IChatData chatData, Action<HighlightOnClick> onItemClick)
     {
+        var scrollViewItemPrefab = chatData.MessaageUIPrefab;
         var highlight = Instantiate(scrollViewItemPrefab, content);
         var showData = highlight.GetComponent<IShowChatData>();
-        showData.InitializeMessageData(messageData);
+        showData.InitializeMessageData(chatData);
         if (onItemClick != null)
             highlight.OnClickedAction += onItemClick;
         highlight.OnClickedAction += UpdateHighlightedItem;
-        highlight.gameObject.SetActive(true);
+
+        yield return null;
+        yield return null;
+        
+        highlight.GetComponent<CanvasGroup>().alpha = 1;
     }
 
     public void ClearView()
