@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MapSO", menuName = "Scriptable Object/Specimen/Map")]
-public class MapSO : ScriptableObject
+[CreateAssetMenu(fileName = "MapSO", menuName = "Scriptable Object/Wafer/Wafer Map")]
+public class WaferMapSO : ScriptableObject
 {
-    [SerializeField] int numRows;
-    public int NumRows => numRows;
+    [Header("Section Data")] 
+    [SerializeField] int sectionDimSize;
+    public int SectionDimSize => sectionDimSize;
 
-    [SerializeField] int numCols;
-    public int NumCols => numCols;
+    [SerializeField] List<SectionAssignment> sectionAssignments;
+    public List<SectionAssignment> SectionAssignments => sectionAssignments;
+    public void SetSectionAssignments(List<SectionAssignment> sectionAssignments) => this.sectionAssignments = sectionAssignments;
+    
+    [Header("Chunk Data")]
+    [SerializeField] int chunkDimSize;
+    public int ChunkDimSize => chunkDimSize;
 
     [SerializeField] ChunkAssignment[] chunkGroupAssignments;
     public ChunkAssignment[] ChunkGroupAssignments => chunkGroupAssignments;
@@ -16,6 +23,7 @@ public class MapSO : ScriptableObject
     [SerializeField] ChunkGroupSO[] randomChunkPool;
     public ChunkGroupSO[] RandomChunkPool => randomChunkPool;
 
+    [Header("Sprite Data")]
     [SerializeField] int lowResSpriteSize;
     public int LowResSpriteSize => lowResSpriteSize;
 
@@ -48,4 +56,13 @@ public struct ChunkAssignment
     public int rowNum;
     public int colNum;
     public ChunkGroupSO chunkData;
+}
+
+[Serializable]
+public struct SectionAssignment
+{
+    public int rowNum;
+    public int colNum;
+    public SectionDataSO sectionData;
+    [DisabledInInspector] [TextArea(1,2)] public string chunkLimits;
 }

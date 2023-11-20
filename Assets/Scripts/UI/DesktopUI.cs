@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DesktopUI : BaseUI
 {
     [SerializeField] MicroscopeUI microscopeUI;
-    [SerializeField] ReportGeneratorUI reportGeneratorUI;
+    [SerializeField] ChooseReportUI chooseReportUI;
     [SerializeField] ChatUI chatUI;
 
     [SerializeField] Button microscopeUIButton;
@@ -22,7 +22,8 @@ public class DesktopUI : BaseUI
         messagesButton.onClick.AddListener(HandleMessagesButton);
         
         microscopeUI.OnCancelAction = EnableWindow;
-        reportGeneratorUI.OnCancelAction = EnableWindow;
+        chooseReportUI.OnCancelAction = EnableWindow;
+        chatUI.OnCancelAction = EnableWindow;
 
         EventManager.OnMinutesIncrementedEvent += UpdateCurrentTimeText;
         EventManager.OnHoursIncrementedEvent += UpdateCurrentTimeText;
@@ -53,8 +54,7 @@ public class DesktopUI : BaseUI
 
     void HandleReportGeneratorButton()
     {
-        CloseWindow();
-        reportGeneratorUI.EnableWindow();
+        chooseReportUI.EnableWindow();
     }
 
     void HandleMessagesButton()

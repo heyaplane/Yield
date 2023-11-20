@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "LMSpecimenSO", menuName = "Scriptable Object/Specimen/Map Group")]
-public class MapGroupSO : ScriptableObject
+[CreateAssetMenu(fileName = "LMWaferSO", menuName = "Scriptable Object/Wafer/Wafer Map Group")]
+public class WaferMapGroupSO : ScriptableObject
 {
     [SerializeField] Sprite lowResSprite;
     public Sprite LowResSprite => lowResSprite;

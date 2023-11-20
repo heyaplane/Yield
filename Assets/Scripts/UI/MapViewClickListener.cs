@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MapViewClickListener : MonoBehaviour
 {
-    [SerializeField] MapViewManager mapViewManager;
+    [SerializeField] WaferMapViewManager waferMapViewManager;
 
     bool isMeasurementToggled; 
     
@@ -34,7 +34,7 @@ public class MapViewClickListener : MonoBehaviour
             if (currentMeasurement != null)
                 Destroy(currentMeasurement.gameObject);
             currentMeasurement = Instantiate(measurementLinePrefab);
-            currentMeasurement.Initialize(mapViewManager.CurrentScaleFactor);
+            currentMeasurement.Initialize(waferMapViewManager.CurrentScaleFactor);
             
             startPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             endPoint = startPoint;

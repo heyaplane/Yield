@@ -2,22 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChatUI : BaseUI
 {
     [SerializeField] SingleSelectMessageScrollView inboxScrollView;
     [SerializeField] SingleSelectMessageScrollView messagesScrollView;
 
+    [SerializeField] Button closeUIButton;
+
     ThreadData currentMessagesThread;
 
     void OnEnable()
     {
         EventManager.OnNewThreadAddedEvent += HandleNewThreadAdded;
+        
+        closeUIButton.onClick.AddListener(HandleCloseUIButton);
     }
 
     void OnDisable()
     {
         EventManager.OnNewThreadAddedEvent -= HandleNewThreadAdded;
+        
+        closeUIButton.onClick.RemoveAllListeners();
     }
 
     void HandleNewThreadAdded(ThreadData newThread)
@@ -46,5 +53,11 @@ public class ChatUI : BaseUI
     {
         messagesScrollView.ClearView();
         messagesScrollView.AddItemsToView(thread.MessagesAsChatData, null);
+    }
+
+    void HandleCloseUIButton()
+    {
+        CloseWindow();
+        OnCancelAction?.Invoke();
     }
 }

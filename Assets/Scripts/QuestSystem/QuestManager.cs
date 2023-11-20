@@ -53,7 +53,7 @@ public class QuestManager : SingletonMonobehaviour<QuestManager>
 
     void HandleReportSubmitted(VirtualReport reportFile, MessageData messageData)
     {
-        if (reportFile == null) return;
+        if (reportFile == null || messageData == null) return;
         SendReportMessage(new MessageSender("Player", "Square"), reportFile);
     }
 }

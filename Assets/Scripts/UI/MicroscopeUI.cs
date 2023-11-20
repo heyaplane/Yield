@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MicroscopeUI : BaseUI
 {
-    [SerializeField] MapViewManager mapViewManager;
+    [SerializeField] WaferMapViewManager waferMapViewManager;
     [SerializeField] MapViewClickListener mapViewClickListener;
     
     [SerializeField] Transform map;
@@ -25,7 +25,7 @@ public class MicroscopeUI : BaseUI
     [SerializeField] ChooseDirectoryUI chooseDirectoryUI;
     [SerializeField] Button chooseDirectoryButton;
     [SerializeField] Button saveFileButton;
-    [SerializeField] TMP_InputField sampleIDInput;
+    [SerializeField] TMP_InputField waferIDInput;
     [SerializeField] TMP_InputField imageNameInput;
     [SerializeField] TMP_InputField nextSuffixInput;
     [SerializeField] TextMeshProUGUI exampleText;
@@ -36,19 +36,19 @@ public class MicroscopeUI : BaseUI
 
     void OnEnable()
     {
-        lowResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.Low)));
-        medResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.Med)));
-        highResButton.onClick.AddListener(() => StartCoroutine(mapViewManager.SwitchToNewResolution(ChunkResolution.High)));
+        lowResButton.onClick.AddListener(() => StartCoroutine(waferMapViewManager.SwitchToNewResolution(ChunkResolution.Low)));
+        medResButton.onClick.AddListener(() => StartCoroutine(waferMapViewManager.SwitchToNewResolution(ChunkResolution.Med)));
+        highResButton.onClick.AddListener(() => StartCoroutine(waferMapViewManager.SwitchToNewResolution(ChunkResolution.High)));
         measurementButton.onClick.AddListener(HandleMeasurement);
         closeUIButton.onClick.AddListener(HandleCloseUIButton);
         
         chooseDirectoryButton.onClick.AddListener(HandleOpenFile);
         saveFileButton.onClick.AddListener(HandleSaveFile);
-        sampleIDInput.onValueChanged.AddListener(HandleSampleIDChanged);
+        waferIDInput.onValueChanged.AddListener(HandleSampleIDChanged);
         imageNameInput.onValueChanged.AddListener(HandleImageNameChanged);
         nextSuffixInput.onValueChanged.AddListener(HandleSuffixChanged);
 
-        currentSampleID = (sampleIDInput.placeholder as TextMeshProUGUI)?.text;
+        currentSampleID = (waferIDInput.placeholder as TextMeshProUGUI)?.text;
         currentImageName = (imageNameInput.placeholder as TextMeshProUGUI)?.text;
         currentSuffix = (nextSuffixInput.placeholder as TextMeshProUGUI)?.text;
 
@@ -65,7 +65,7 @@ public class MicroscopeUI : BaseUI
         
         chooseDirectoryButton.onClick.RemoveAllListeners();
         saveFileButton.onClick.RemoveAllListeners();
-        sampleIDInput.onValueChanged.RemoveAllListeners();
+        waferIDInput.onValueChanged.RemoveAllListeners();
         imageNameInput.onValueChanged.RemoveAllListeners();
         nextSuffixInput.onValueChanged.RemoveAllListeners();
     }
@@ -73,7 +73,7 @@ public class MicroscopeUI : BaseUI
     public override void EnableWindow()
     {
         base.EnableWindow();
-        mapViewManager.gameObject.SetActive(true);
+        waferMapViewManager.gameObject.SetActive(true);
         mapViewClickListener.gameObject.SetActive(true);
     }
 
@@ -104,8 +104,8 @@ public class MicroscopeUI : BaseUI
     public void HandleSampleIDChanged(string sampleID)
     {
         currentSampleID = sampleID;
-        if (sampleIDInput.text != sampleID)
-            sampleIDInput.text = sampleID;
+        if (waferIDInput.text != sampleID)
+            waferIDInput.text = sampleID;
         UpdateExampleName(sampleID: sampleID);
     }
 
@@ -132,7 +132,7 @@ public class MicroscopeUI : BaseUI
 
     void HandleCloseUIButton()
     {
-        mapViewManager.gameObject.SetActive(false);
+        waferMapViewManager.gameObject.SetActive(false);
         mapViewClickListener.gameObject.SetActive(false);
         OnCancelAction?.Invoke();
         CloseWindow();

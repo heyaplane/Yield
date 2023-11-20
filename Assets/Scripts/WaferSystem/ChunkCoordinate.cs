@@ -28,18 +28,18 @@ public struct ChunkCoordinate : IComparable<ChunkCoordinate>
         startingWorldSpacePos = coordinateToCopy.startingWorldSpacePos;
     }
 
-    public (int, int)[] GetNeighboringChunks(MapSO currentMap)
+    public (int, int)[] GetNeighboringChunks(WaferMapSO currentWaferMap)
     {
         var neighborChunks = new List<(int, int)>();
         for (int rowOffset = -1; rowOffset <= 1; rowOffset++)
         {
             int neighborChunkRow = chunkRow + rowOffset;
-            if (neighborChunkRow < 0 || neighborChunkRow == currentMap.NumRows) continue;
+            if (neighborChunkRow < 0 || neighborChunkRow == currentWaferMap.ChunkDimSize) continue;
 
             for (int colOffset = -1; colOffset <= 1; colOffset++)
             {
                 int neighborChunkCol = chunkCol + colOffset;
-                if (neighborChunkCol < 0 || neighborChunkCol == currentMap.NumCols) continue;
+                if (neighborChunkCol < 0 || neighborChunkCol == currentWaferMap.ChunkDimSize) continue;
                 
                 neighborChunks.Add((neighborChunkRow, neighborChunkCol));
             }
@@ -48,7 +48,7 @@ public struct ChunkCoordinate : IComparable<ChunkCoordinate>
         return neighborChunks.ToArray();
     }
 
-    public ChunkCoordinate[] GetNeighboringCoordinates(MapSO currentMap, ChunkSO currentChunk, Vector2 worldSpacePos)
+    public ChunkCoordinate[] GetNeighboringCoordinates(WaferMapSO currentWaferMap, ChunkSO currentChunk, Vector2 worldSpacePos)
     {
         var neighbors = new List<ChunkCoordinate>();
 
@@ -67,7 +67,7 @@ public struct ChunkCoordinate : IComparable<ChunkCoordinate>
             {
                 neighborRow = 0;
                 neighborChunkRow++;
-                if (neighborChunkRow == currentMap.NumRows) continue;
+                if (neighborChunkRow == currentWaferMap.ChunkDimSize) continue;
             }
             
             for (int colOffset = -1; colOffset <= 1; colOffset++)
@@ -86,7 +86,7 @@ public struct ChunkCoordinate : IComparable<ChunkCoordinate>
                 {
                     neighborCol = 0;
                     neighborChunkCol++;
-                    if (neighborChunkCol == currentMap.NumCols) continue;
+                    if (neighborChunkCol == currentWaferMap.ChunkDimSize) continue;
                 }
 
                 var startingPos = new Vector2(

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MapDataManager
+public class WaferMapDataManager
 {
     Dictionary<ChunkSO, Sprite[,]> spriteLookup;
     Dictionary<(int, int), ChunkGroupSO> chunkGroupLookup;
@@ -28,7 +28,7 @@ public class MapDataManager
     object lockObject = new object();
     public bool HasLoadedAllSprites() => numChunksToLoad == 0;
 
-    public MapDataManager(int seed)
+    public WaferMapDataManager(int seed)
     {
         Random.InitState(seed);
 
@@ -39,34 +39,34 @@ public class MapDataManager
         chunksToLoad = new HashSet<(int, int)>();
     }
     
-    public void InitializeMap(MapSO mapSO)
+    public void InitializeMap(WaferMapSO waferMapSo)
     {
-        foreach (var coord in mapSO.ChunkGroupAssignments)
+        foreach (var coord in waferMapSo.ChunkGroupAssignments)
         {
             chunkGroupLookup[(coord.rowNum, coord.colNum)] = coord.chunkData;
         }
         
-        PopulateMapWithRandomChunks(mapSO);
+        PopulateMapWithRandomChunks(waferMapSo);
     }
     
-    public void PopulateMapWithRandomChunks(MapSO mapSO)
+    public void PopulateMapWithRandomChunks(WaferMapSO waferMapSo)
     {
-        for (int i = 0; i < mapSO.NumRows; i++)
+        for (int i = 0; i < waferMapSo.ChunkDimSize; i++)
         {
-            for (int j = 0; j < mapSO.NumCols; j++)
+            for (int j = 0; j < waferMapSo.ChunkDimSize; j++)
             {
                 if (chunkGroupLookup.TryGetValue((i,j), out var chunkData)) continue;
-                chunkGroupLookup[(i, j)] = mapSO.RandomChunkPool[Random.Range(0, mapSO.RandomChunkPool.Length)];
+                chunkGroupLookup[(i, j)] = waferMapSo.RandomChunkPool[Random.Range(0, waferMapSo.RandomChunkPool.Length)];
             }
         }
     }
 
-    public void SwitchToNewResolution(ChunkResolution newResolution, ChunkCoordinate startingChunk, MapSO currentMapSO)
+    public void SwitchToNewResolution(ChunkResolution newResolution, ChunkCoordinate startingChunk, WaferMapSO currentWaferMapSo)
     {
         CurrentChunkResolution = newResolution;
         
         // Activating a single new chunk at a new resolution will automatically unload other chunks and replace the current chunk sprites
-        UpdateChunkData(new List<ChunkCoordinate>{startingChunk}, currentMapSO);
+        UpdateChunkData(new List<ChunkCoordinate>{startingChunk}, currentWaferMapSo);
     }
 
     public Sprite GetCoordinateSprite(ChunkCoordinate coordinate)
@@ -79,12 +79,12 @@ public class MapDataManager
         return null;
     }
     
-    public void UpdateChunkData(List<ChunkCoordinate> currentlyVisibleCoordinates, MapSO currentMapSO)
+    public void UpdateChunkData(List<ChunkCoordinate> currentlyVisibleCoordinates, WaferMapSO currentWaferMapSo)
     {
         chunksToLoad.Clear();
         foreach (var coordinate in currentlyVisibleCoordinates)
         {
-            chunksToLoad.UnionWith(coordinate.GetNeighboringChunks(currentMapSO));
+            chunksToLoad.UnionWith(coordinate.GetNeighboringChunks(currentWaferMapSo));
         }
         
         ActivateChunks(chunksToLoad);

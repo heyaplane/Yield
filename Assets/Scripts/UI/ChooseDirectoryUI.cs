@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class ChooseDirectoryUI : BaseUI
 {
-    [SerializeField] SingleSelectFileSystemScrollView sampleIDScrollView;
+    [SerializeField] SingleSelectFileSystemScrollView waferIDScrollView;
     [SerializeField] SingleSelectFileSystemScrollView fileNameScrollView;
 
-    [SerializeField] Button selectSampleIDButton;
+    [SerializeField] Button selectWaferIDButton;
     [SerializeField] Button cancelButton;
 
     [SerializeField] MicroscopeUI microscopeUI;
@@ -20,7 +20,7 @@ public class ChooseDirectoryUI : BaseUI
 
     void OnEnable()
     {
-        selectSampleIDButton.onClick.AddListener(HandleSelectSampleIDButton);
+        selectWaferIDButton.onClick.AddListener(HandleSelectSampleIDButton);
         cancelButton.onClick.AddListener(HandleCancelButton);
         
         previewImage.gameObject.SetActive(false);
@@ -28,7 +28,7 @@ public class ChooseDirectoryUI : BaseUI
 
     void OnDisable()
     {
-        selectSampleIDButton.onClick.RemoveAllListeners();
+        selectWaferIDButton.onClick.RemoveAllListeners();
         cancelButton.onClick.RemoveAllListeners();
     }
 
@@ -36,8 +36,8 @@ public class ChooseDirectoryUI : BaseUI
     {
         base.EnableWindow();
         fileNameScrollView.ClearView();
-        sampleIDScrollView.ClearView();
-        sampleIDScrollView.AddItemsToView(FileSystemManager.Instance.RootDirectory.DirectoryFileNames, PopulateFileNames);
+        waferIDScrollView.ClearView();
+        waferIDScrollView.AddItemsToView(FileSystemManager.Instance.RootDirectory.DirectoryFileNames, PopulateFileNames);
     }
 
     void PopulateFileNames(HighlightOnClick highlight)
@@ -52,7 +52,7 @@ public class ChooseDirectoryUI : BaseUI
 
     void HandleSelectSampleIDButton()
     {
-        microscopeUI.HandleSampleIDChanged(sampleIDScrollView.CurrentlyHighlightedItem.ItemString);
+        microscopeUI.HandleSampleIDChanged(waferIDScrollView.CurrentlyHighlightedItem.ItemString);
         HandleCancelButton();
     }
 
@@ -64,7 +64,7 @@ public class ChooseDirectoryUI : BaseUI
 
     void UpdateFileDataUI(HighlightOnClick highlight)
     {
-        var highlightedDirectory = FileSystemManager.Instance.FindDirectoryInRoot(sampleIDScrollView.CurrentlyHighlightedItem.ItemString);
+        var highlightedDirectory = FileSystemManager.Instance.FindDirectoryInRoot(waferIDScrollView.CurrentlyHighlightedItem.ItemString);
         if (highlightedDirectory == null) return;
 
         var highlightedFile = highlightedDirectory.FindFile(highlight.ItemString);

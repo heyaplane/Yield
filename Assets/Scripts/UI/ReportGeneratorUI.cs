@@ -10,52 +10,68 @@ using UnityEngine.UI;
 public class ReportGeneratorUI : BaseUI
 {
     [SerializeField] ChooseFilesUI chooseFilesUI;
-    [SerializeField] NameNewReportUI nameNewReportUI;
     [SerializeField] ReportPlotUI reportPlotUI;
 
     [SerializeField] RectTransform reportBorders;
     [SerializeField] CanvasScaler canvasScaler;
     
-    [SerializeField] SingleSelectFileSystemScrollView fileScrollView;
-    [SerializeField] SingleSelectFileSystemScrollView reportScrollView;
+    [SerializeField] MultipleSelectFileSystemScrollView fileScrollView;
     
     [SerializeField] Button browseFilesButton;
     [SerializeField] Button closeUIButton;
-    [SerializeField] Button generateReportButton;
-    [SerializeField] Button saveReportButton;
+    [SerializeField] Button saveAnalysisButton;
+    [SerializeField] Button processDataButton;
 
     [SerializeField] TextMeshProUGUI titleText;
+    [SerializeField] TextMeshProUGUI sectionNameText;
+    [SerializeField] GameObject dataSummaryParent;
     [SerializeField] TextMeshProUGUI numSamplesText;
-    [SerializeField] TextMeshProUGUI meanText;
-    [SerializeField] TextMeshProUGUI stDevText;
+    [SerializeField] TextMeshProUGUI measuredMeanText;
+    [SerializeField] TextMeshProUGUI measuredStDevText;
+    [SerializeField] TextMeshProUGUI expectedMeanText;
+    [SerializeField] TextMeshProUGUI expectedStDevText;
+
+    [SerializeField] WaferSectionMapUI waferSectionMapUI;
 
     VirtualReport currentReport;
 
     void OnEnable()
     {
+        EventManager.OnReportChosenEvent += HandleReportChosen;
+        
         browseFilesButton.onClick.AddListener(HandleBrowseFilesButton);
         closeUIButton.onClick.AddListener(HandleCloseUIButton);
-        generateReportButton.onClick.AddListener(HandleGenerateReportButton);
-        saveReportButton.onClick.AddListener(HandleSaveReportButton);
+        saveAnalysisButton.onClick.AddListener(HandleSaveReportButton);
+        processDataButton.onClick.AddListener(FinishGeneratingReport);
 
-        nameNewReportUI.OnCancelAction = FinishGeneratingReport;
         SetupRenderCamera();
     }
 
     void OnDisable()
     {
+        EventManager.OnReportChosenEvent -= HandleReportChosen;
+        
         browseFilesButton.onClick.RemoveAllListeners();
         closeUIButton.onClick.RemoveAllListeners();
-        generateReportButton.onClick.RemoveAllListeners();
-        saveReportButton.onClick.RemoveAllListeners();
+        saveAnalysisButton.onClick.RemoveAllListeners();
+        processDataButton.onClick.RemoveAllListeners();
+    }
+
+    void HandleReportChosen(VirtualReport virtualReport, MessageData messageData)
+    {
+        if (messageData != null || virtualReport == null) return;
+        currentReport = virtualReport;
+        EnableWindow();
     }
 
     public override void EnableWindow()
     {
         base.EnableWindow();
         
-        UpdateReportScrollView();
+        UpdateWaferSectionMap();
     }
+
+    void UpdateWaferSectionMap() => waferSectionMapUI.Initialize(currentReport.WaferMap);
 
     void HandleBrowseFilesButton()
     {
@@ -75,37 +91,25 @@ public class ReportGeneratorUI : BaseUI
 
     public void UpdateTitleText(string newTitle) => titleText.text = newTitle;
 
-    void HandleGenerateReportButton() => nameNewReportUI.EnableWindow();
-
     void FinishGeneratingReport()
     {
-        var files = FileSystemManager.Instance.GetFilesFromNames(fileScrollView.GetAllItemNames());
+        var files = FileSystemManager.Instance.GetFilesFromNames(fileScrollView.CurrentlyHighlightedFileNames);
         var measurements = files.OfType<VirtualImage>().Select(x => (double) x.MeasurementValue).ToArray();
         float mean = (float) Descriptive.Mean(measurements);
         float stDev = (float) Descriptive.StDev(measurements, mean);
 
         numSamplesText.text = $"# samples: {measurements.Length}";
-        meanText.text = $"Mean: {mean:F2} µm";
-        stDevText.text = $"St. Dev: {stDev:F2} µm";
+        measuredMeanText.text = $"Mean: {mean:F2} µm";
+        measuredStDevText.text = $"St. Dev: {stDev:F2} µm";
         
         reportPlotUI.AddHistogramToPlot(measurements, 0.75f);
 
-        currentReport = new VirtualReport(titleText.text, new ReportData(measurements, mean, stDev));
+        //currentReport = new VirtualReport(titleText.text, new ReportEntry(measurements, mean, stDev));
     }
 
     void HandleSaveReportButton()
     {
         FileSystemManager.Instance.TrySaveFile("Reports", currentReport);
-        UpdateReportScrollView();    
-    }
-
-    void UpdateReportScrollView()
-    {
-        var reportDirectory = FileSystemManager.Instance.FindDirectoryInRoot("Reports");
-        if (reportDirectory == null) return;
-        
-        reportScrollView.ClearView();
-        reportScrollView.AddItemsToView(reportDirectory.DirectoryFileNames, null);
     }
 
     void SetupRenderCamera()
@@ -121,14 +125,20 @@ public class ReportGeneratorUI : BaseUI
 }
 
 [Serializable]
-public class ReportData
+public class ReportEntry
 {
+    public string WaferName;
+    public string SectionName;
+    public string FeatureName;
     public double[] Measurements { get; } 
     public float Mean { get; }
     public float StDev { get; }
 
-    public ReportData(double[] measurements, float mean, float stDev)
+    public ReportEntry(string waferName, string sectionName, string featureName, double[] measurements, float mean, float stDev)
     {
+        WaferName = waferName;
+        SectionName = sectionName;
+        FeatureName = featureName;
         Measurements = measurements;
         Mean = mean;
         StDev = stDev;

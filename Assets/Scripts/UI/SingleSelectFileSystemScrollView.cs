@@ -12,6 +12,8 @@ public class SingleSelectFileSystemScrollView : MonoBehaviour
     
     public void AddItemsToView(string[] itemNames, Action<HighlightOnClick> onItemClick)
     {
+        if (itemNames == null) return;
+        
         foreach (string itemName in itemNames)
         {
             var highlight = Instantiate(scrollViewItemPrefab, content);
