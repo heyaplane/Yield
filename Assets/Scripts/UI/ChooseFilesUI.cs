@@ -11,7 +11,7 @@ public class ChooseFilesUI : BaseUI
     [SerializeField] Button selectFilesButton;
     [SerializeField] Button cancelButton;
 
-    [SerializeField] ReportGeneratorUI reportGeneratorUI;
+    [SerializeField] ReportEditorUI reportEditorUI;
 
     [SerializeField] TextMeshProUGUI sizeText;
     [SerializeField] TextMeshProUGUI dateText;
@@ -52,7 +52,7 @@ public class ChooseFilesUI : BaseUI
 
     void HandleSelectFilesButton()
     {
-        reportGeneratorUI.HandleFilesSelected(fileNameScrollView.CurrentlyHighlightedFileNames);
+        reportEditorUI.HandleFilesSelected(fileNameScrollView.CurrentlyHighlightedFileNames);
         HandleCancelButton();
     }
 

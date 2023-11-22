@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,17 +23,16 @@ public class MicroscopeUI : BaseUI
 
     [SerializeField] float moveMultiplier;
 
-    [SerializeField] ChooseDirectoryUI chooseDirectoryUI;
-    [SerializeField] Button chooseDirectoryButton;
     [SerializeField] Button saveFileButton;
-    [SerializeField] TMP_InputField waferIDInput;
+    [SerializeField] TextMeshProUGUI waferIDText;
+    [SerializeField] TextMeshProUGUI sectionLocationText;
     [SerializeField] TMP_InputField imageNameInput;
     [SerializeField] TMP_InputField nextSuffixInput;
     [SerializeField] TextMeshProUGUI exampleText;
 
     [SerializeField] Button closeUIButton;
 
-    string currentSampleID, currentImageName, currentSuffix;
+    string currentWaferID, currentSectionName, currentImageName, currentSuffix;
 
     void OnEnable()
     {
@@ -42,13 +42,10 @@ public class MicroscopeUI : BaseUI
         measurementButton.onClick.AddListener(HandleMeasurement);
         closeUIButton.onClick.AddListener(HandleCloseUIButton);
         
-        chooseDirectoryButton.onClick.AddListener(HandleOpenFile);
         saveFileButton.onClick.AddListener(HandleSaveFile);
-        waferIDInput.onValueChanged.AddListener(HandleSampleIDChanged);
         imageNameInput.onValueChanged.AddListener(HandleImageNameChanged);
         nextSuffixInput.onValueChanged.AddListener(HandleSuffixChanged);
 
-        currentSampleID = (waferIDInput.placeholder as TextMeshProUGUI)?.text;
         currentImageName = (imageNameInput.placeholder as TextMeshProUGUI)?.text;
         currentSuffix = (nextSuffixInput.placeholder as TextMeshProUGUI)?.text;
 
@@ -63,9 +60,7 @@ public class MicroscopeUI : BaseUI
         measurementButton.onClick.RemoveAllListeners();
         closeUIButton.onClick.RemoveAllListeners();
         
-        chooseDirectoryButton.onClick.RemoveAllListeners();
         saveFileButton.onClick.RemoveAllListeners();
-        waferIDInput.onValueChanged.RemoveAllListeners();
         imageNameInput.onValueChanged.RemoveAllListeners();
         nextSuffixInput.onValueChanged.RemoveAllListeners();
     }
@@ -73,8 +68,19 @@ public class MicroscopeUI : BaseUI
     public override void EnableWindow()
     {
         base.EnableWindow();
+        currentWaferID = WaferManager.Instance.ActiveWafer.WaferName;
+        waferIDText.text = currentWaferID;
+        waferMapViewManager.CurrentWaferMapSO = WaferManager.Instance.ActiveWafer.WaferMap;
         waferMapViewManager.gameObject.SetActive(true);
         mapViewClickListener.gameObject.SetActive(true);
+        StartCoroutine(WaitForView());
+    }
+
+    IEnumerator WaitForView()
+    {
+        while (waferMapViewManager.IsSwitchingResolution)
+            yield return null;
+        UpdateSectionName();
     }
 
     void Update()
@@ -88,25 +94,30 @@ public class MicroscopeUI : BaseUI
 
         var sampleMove = ControlsManager.Instance.MapMoveVector * moveMultiplier;
         map.position -= (Vector3) sampleMove;
+        if (sampleMove != Vector2.zero)
+            UpdateSectionName();
+    }
+
+    void UpdateSectionName()
+    {
+        var coordinate = waferMapViewManager.GetCenterCoordinate();
+        currentSectionName = WaferManager.Instance.GetSectionLocationAsStringFromChunk(coordinate);
+        sectionLocationText.text = currentSectionName;
+        UpdateExampleName();
     }
 
     void HandleMeasurement() => mapViewClickListener.HandleMeasurementToggle();
-    void HandleOpenFile() => chooseDirectoryUI.EnableWindow();
 
     void HandleSaveFile()
     {
         var texture = RenderCameraManager.Instance.RenderNewTexture();
-        var newFile = new VirtualImage(Path.Combine($"{currentSampleID}", $"{currentImageName}_{currentSuffix}.png"), texture, mapViewClickListener.CurrentMeasurementValue);
-        if (!FileSystemManager.Instance.TrySaveFile(currentSampleID, newFile))
+        var newFile = new VirtualImage(Path.Combine($"{currentWaferID}", $"{currentSectionName}",$"{currentImageName}_{currentSuffix}.png"), texture, mapViewClickListener.CurrentMeasurementValue);
+        if (!FileSystemManager.Instance.TrySaveFile(currentWaferID, newFile, currentSectionName))
             Debug.LogError("Couldn't save file, duplicate name!");
     }
 
     public void HandleSampleIDChanged(string sampleID)
     {
-        currentSampleID = sampleID;
-        if (waferIDInput.text != sampleID)
-            waferIDInput.text = sampleID;
-        UpdateExampleName(sampleID: sampleID);
     }
 
     void HandleImageNameChanged(string imageName)
@@ -121,13 +132,14 @@ public class MicroscopeUI : BaseUI
         UpdateExampleName(suffix: suffix);
     }
 
-    void UpdateExampleName(string sampleID = null, string imageName = null, string suffix = null)
+    void UpdateExampleName(string waferID = null, string sectionName = null, string imageName = null, string suffix = null)
     {
-        sampleID ??= currentSampleID;
+        waferID ??= currentWaferID;
+        sectionName ??= currentSectionName;
         imageName ??= currentImageName;
         suffix ??= currentSuffix;
         
-        exampleText.text = $"{sampleID}/{imageName}_{suffix}.png";
+        exampleText.text = $@"{waferID}\{sectionName}\{imageName}_{suffix}.png";
     }
 
     void HandleCloseUIButton()

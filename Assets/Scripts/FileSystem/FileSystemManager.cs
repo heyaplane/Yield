@@ -25,18 +25,32 @@ public class FileSystemManager : SingletonMonobehaviour<FileSystemManager>
 
     public VirtualDirectory FindDirectoryInRoot(string directoryName) => RootDirectory.FindFile(directoryName) as VirtualDirectory;
 
-    public bool TrySaveFile(string sampleID, IVirtualFile newFile)
+    public bool TrySaveFile(string waferID, IVirtualFile newFile, string sectionName = null)
     {
-        if (RootDirectory.FindFile(sampleID) is not VirtualDirectory sampleDirectory)
+        VirtualDirectory saveDirectory;
+        if (RootDirectory.FindFile(waferID) is not VirtualDirectory waferDirectory)
         {
-            sampleDirectory = new VirtualDirectory(sampleID);
-            RootDirectory.AddFile(sampleDirectory);
+            waferDirectory = new VirtualDirectory(waferID);
+            RootDirectory.AddFile(waferDirectory);
+        }
+        
+        saveDirectory = waferDirectory;
+
+        if (sectionName != null)
+        {
+            if (waferDirectory.FindFile(sectionName) is not VirtualDirectory sectionDirectory)
+            {
+                sectionDirectory = new VirtualDirectory(sectionName);
+                waferDirectory.AddFile(sectionDirectory);
+            }
+        
+            saveDirectory = sectionDirectory;
         }
 
-        if (sampleDirectory.DirectoryFiles.FirstOrDefault(x => x.FileName == newFile.FileName) != null)
+        if (saveDirectory.DirectoryFiles.FirstOrDefault(x => x.FileName == newFile.FileName) != null)
             return false;
         
-        sampleDirectory.AddFile(newFile);
+        saveDirectory.AddFile(newFile);
         newFile.SavePersistentFile();
         return true;
     }

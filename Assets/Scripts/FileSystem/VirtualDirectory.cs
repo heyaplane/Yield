@@ -73,6 +73,7 @@ public class VirtualDirectory : IVirtualFile
     }
 
     public IVirtualFile FindFile(string fileName) => DirectoryFiles.FirstOrDefault(x => x.FileName == fileName);
+    public T FindFile<T>(string fileName) => (T) FindFile(fileName);
     
     public void SavePersistentFile() {}
 

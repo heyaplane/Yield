@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ScottPlot.Statistics;
 using TMPro;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 //TODO: Add ability to view and modify previous reports, add distributions to plots for comparison
 
-public class ReportGeneratorUI : BaseUI
+public class ReportEditorUI : BaseUI
 {
     [SerializeField] ChooseFilesUI chooseFilesUI;
     [SerializeField] ReportPlotUI reportPlotUI;
@@ -17,7 +18,6 @@ public class ReportGeneratorUI : BaseUI
     
     [SerializeField] MultipleSelectFileSystemScrollView fileScrollView;
     
-    [SerializeField] Button browseFilesButton;
     [SerializeField] Button closeUIButton;
     [SerializeField] Button saveAnalysisButton;
     [SerializeField] Button processDataButton;
@@ -31,15 +31,17 @@ public class ReportGeneratorUI : BaseUI
     [SerializeField] TextMeshProUGUI expectedMeanText;
     [SerializeField] TextMeshProUGUI expectedStDevText;
 
+    [SerializeField] TMP_Dropdown featureNameDropdown;
+
     [SerializeField] WaferSectionMapUI waferSectionMapUI;
 
     VirtualReport currentReport;
+    string currentWaferFeatureOption => featureNameDropdown.options[featureNameDropdown.value].text;
 
     void OnEnable()
     {
         EventManager.OnReportChosenEvent += HandleReportChosen;
         
-        browseFilesButton.onClick.AddListener(HandleBrowseFilesButton);
         closeUIButton.onClick.AddListener(HandleCloseUIButton);
         saveAnalysisButton.onClick.AddListener(HandleSaveReportButton);
         processDataButton.onClick.AddListener(FinishGeneratingReport);
@@ -51,7 +53,6 @@ public class ReportGeneratorUI : BaseUI
     {
         EventManager.OnReportChosenEvent -= HandleReportChosen;
         
-        browseFilesButton.onClick.RemoveAllListeners();
         closeUIButton.onClick.RemoveAllListeners();
         saveAnalysisButton.onClick.RemoveAllListeners();
         processDataButton.onClick.RemoveAllListeners();
@@ -68,15 +69,14 @@ public class ReportGeneratorUI : BaseUI
     {
         base.EnableWindow();
         
+        var waferMap = currentReport.WaferMap;
+        var options = waferMap.WaferFeatures.Select(x => new TMP_Dropdown.OptionData(x.FeatureName)).ToList();
+        featureNameDropdown.options = options;
+        
         UpdateWaferSectionMap();
     }
 
-    void UpdateWaferSectionMap() => waferSectionMapUI.Initialize(currentReport.WaferMap);
-
-    void HandleBrowseFilesButton()
-    {
-        chooseFilesUI.EnableWindow();
-    }
+    void UpdateWaferSectionMap() => waferSectionMapUI.Initialize(currentReport, currentWaferFeatureOption, HandleWaferSectionSelected);
 
     void HandleCloseUIButton()
     {
@@ -87,6 +87,22 @@ public class ReportGeneratorUI : BaseUI
     public void HandleFilesSelected(string[] currentlyHighlightedFileNames)
     {
         fileScrollView.AddItemsToView(currentlyHighlightedFileNames, null);
+    }
+
+    void HandleWaferSectionSelected(WaferSection section)
+    {
+        var imageFileNames = FileSystemManager.Instance.FindDirectoryInRoot(currentReport.WaferName)?.FindFile<VirtualDirectory>(section.SectionLocationAsString)?.DirectoryFileNames;
+        if (imageFileNames == null)
+        {
+            //Debug.LogError("Could not find image folder for wafer & section!");
+            print(section.SectionLocationAsString);
+            return;
+        }
+        
+        fileScrollView.ClearView();
+        fileScrollView.AddItemsToView(imageFileNames, null);
+
+        sectionNameText.text = section.SectionLocationAsString;
     }
 
     public void UpdateTitleText(string newTitle) => titleText.text = newTitle;
@@ -121,26 +137,5 @@ public class ReportGeneratorUI : BaseUI
         renderTextureScale.x = sizeInPixels.x / canvasScaler.referenceResolution.x * Screen.width;
         renderTextureScale.y = sizeInPixels.y / canvasScaler.referenceResolution.y * Screen.height;
         RenderCameraManager.Instance.SetCameraAndTextureBounds(new Bounds(reportBorders.position, renderTextureScale), orthographicSize);
-    }
-}
-
-[Serializable]
-public class ReportEntry
-{
-    public string WaferName;
-    public string SectionName;
-    public string FeatureName;
-    public double[] Measurements { get; } 
-    public float Mean { get; }
-    public float StDev { get; }
-
-    public ReportEntry(string waferName, string sectionName, string featureName, double[] measurements, float mean, float stDev)
-    {
-        WaferName = waferName;
-        SectionName = sectionName;
-        FeatureName = featureName;
-        Measurements = measurements;
-        Mean = mean;
-        StDev = stDev;
     }
 }

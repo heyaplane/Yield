@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MapSO", menuName = "Scriptable Object/Wafer/Wafer Map")]
@@ -12,6 +13,12 @@ public class WaferMapSO : ScriptableObject
     [SerializeField] List<SectionAssignment> sectionAssignments;
     public List<SectionAssignment> SectionAssignments => sectionAssignments;
     public void SetSectionAssignments(List<SectionAssignment> sectionAssignments) => this.sectionAssignments = sectionAssignments;
+
+    public List<SectionData> GetSectionDataFromLocation(Vector2Int sectionLocation) =>
+        sectionAssignments.FirstOrDefault(x => sectionLocation == new Vector2Int(x.rowNum, x.colNum)).sectionData;
+
+    [SerializeField] List<DataFeature> waferFeatures;
+    public List<DataFeature> WaferFeatures => waferFeatures;
     
     [Header("Chunk Data")]
     [SerializeField] int chunkDimSize;
@@ -63,6 +70,21 @@ public struct SectionAssignment
 {
     public int rowNum;
     public int colNum;
-    public SectionDataSO sectionData;
+    public List<SectionData> sectionData;
     [DisabledInInspector] [TextArea(1,2)] public string chunkLimits;
+}
+
+[Serializable]
+public struct SectionData
+{
+    public DataFeature Feature;
+    public float Mean;
+    public float StDev;
+}
+
+[Serializable]
+public struct DataFeature
+{
+    public string FeatureName;
+    public string Units;
 }

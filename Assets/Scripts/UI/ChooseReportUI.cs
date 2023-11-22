@@ -13,7 +13,7 @@ public class ChooseReportUI : BaseUI
     [SerializeField] SingleSelectFileSystemScrollView reportScrollView;
 
     [SerializeField] NameNewReportUI nameNewReportUI;
-    [SerializeField] ReportGeneratorUI reportGeneratorUI;
+    [SerializeField] ReportEditorUI reportEditorUI;
     
     void OnEnable()
     {
@@ -85,7 +85,7 @@ public class ChooseReportUI : BaseUI
 
     void FinishGeneratingNewReport(string waferName)
     {
-        var newReport = new VirtualReport(waferName, WaferManager.Instance.GetWaferMapFromName(waferName));
+        var newReport = new VirtualReport(waferName, WaferManager.Instance.GetWaferDataFromName(waferName));
         EventManager.OnReportChosen(newReport, null);
     }
 }

@@ -23,16 +23,16 @@ public class WaferMapViewManager : MonoBehaviour
     HashSet<ChunkCoordinate> previousFringeCoordinates;
     HashSet<ChunkCoordinate> currentFringeCoordinates;
 
-    [SerializeField] WaferMapSO currentWaferMapSo;
+    public WaferMapSO CurrentWaferMapSO { get; set; }
     [SerializeField] Transform coordinateParent;
 
     Dictionary<ChunkCoordinate, CoordinateRenderer> rendererLookup;
 
     [SerializeField] ChunkResolution startingChunkResolution;
 
-    public float CurrentScaleFactor => currentWaferMapSo.GetCurrentScaleFactor(waferMapDataManager.CurrentChunkResolution);
+    public float CurrentScaleFactor => CurrentWaferMapSO.GetCurrentScaleFactor(waferMapDataManager.CurrentChunkResolution);
 
-    bool isSwitchingResolution;
+    public bool IsSwitchingResolution { get; private set; }
     
     void Awake()
     {
@@ -57,10 +57,10 @@ public class WaferMapViewManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        waferMapDataManager.InitializeMap(currentWaferMapSo);
+        waferMapDataManager.InitializeMap(CurrentWaferMapSO);
         var startingCoord = new ChunkCoordinate(1, 1, 1, 1, spriteMask.transform.position);
         
-        waferMapDataManager.SwitchToNewResolution(startingChunkResolution, startingCoord, currentWaferMapSo);
+        waferMapDataManager.SwitchToNewResolution(startingChunkResolution, startingCoord, CurrentWaferMapSO);
 
         var waitCondition = new WaitUntil(() => waferMapDataManager.HasLoadedAllSprites());
 
@@ -77,7 +77,7 @@ public class WaferMapViewManager : MonoBehaviour
 
     void Update()
     {
-        if (isSwitchingResolution) return;
+        if (IsSwitchingResolution) return;
         
         IEnumerable<ChunkCoordinate> expiredCoordinates, newCoordinates;
         (expiredCoordinates, newCoordinates) = GetCoordinateDiff();
@@ -116,7 +116,7 @@ public class WaferMapViewManager : MonoBehaviour
         if (previousVisibleCoordinates.SequenceEqual(currentVisibleCoordinates))
             return (null, null);
 
-        waferMapDataManager.UpdateChunkData(currentVisibleCoordinates, currentWaferMapSo);
+        waferMapDataManager.UpdateChunkData(currentVisibleCoordinates, CurrentWaferMapSO);
         
         previousFringeCoordinates.Clear();
         currentFringeCoordinates.Clear();
@@ -124,14 +124,14 @@ public class WaferMapViewManager : MonoBehaviour
         foreach (var coordinate in previousVisibleCoordinates)
         {
             var currentLocation = rendererLookup[coordinate].transform.position;
-            previousFringeCoordinates.UnionWith(coordinate.GetNeighboringCoordinates(currentWaferMapSo, 
+            previousFringeCoordinates.UnionWith(coordinate.GetNeighboringCoordinates(CurrentWaferMapSO, 
                 waferMapDataManager.GetChunkFromCoordinate(coordinate), currentLocation));
         }
 
         foreach (var coordinate in currentVisibleCoordinates)
         {
             var currentLocation = rendererLookup[coordinate].transform.position;
-            currentFringeCoordinates.UnionWith(coordinate.GetNeighboringCoordinates(currentWaferMapSo, 
+            currentFringeCoordinates.UnionWith(coordinate.GetNeighboringCoordinates(CurrentWaferMapSO, 
                 waferMapDataManager.GetChunkFromCoordinate(coordinate), currentLocation));
         }
 
@@ -167,7 +167,7 @@ public class WaferMapViewManager : MonoBehaviour
         }
         
         Vector2 currentOffset = coordinateRenderer.transform.position - spriteMask.transform.position;
-        float scaleFactor = (float) currentWaferMapSo.GetGroupSpriteSize(newResolution) / currentWaferMapSo.GetGroupSpriteSize(waferMapDataManager.CurrentChunkResolution);
+        float scaleFactor = (float) CurrentWaferMapSO.GetGroupSpriteSize(newResolution) / CurrentWaferMapSO.GetGroupSpriteSize(waferMapDataManager.CurrentChunkResolution);
         var newOffset = new Vector2(currentOffset.x * scaleFactor, currentOffset.y * scaleFactor);
         var centerCoordinate = coordinateRenderer.CurrentCoordinate;
         centerCoordinate.startingWorldSpacePos = (Vector2) spriteMask.transform.position + newOffset;
@@ -179,10 +179,10 @@ public class WaferMapViewManager : MonoBehaviour
 
         Update();
 
-        waferMapDataManager.SwitchToNewResolution(newResolution, centerCoordinate, currentWaferMapSo);
+        waferMapDataManager.SwitchToNewResolution(newResolution, centerCoordinate, CurrentWaferMapSO);
         
         // We dont want update to run while we are loading assets for the new resolution
-        isSwitchingResolution = true;
+        IsSwitchingResolution = true;
         
         var waitCondition = new WaitUntil(() => waferMapDataManager.HasLoadedAllSprites());
         yield return waitCondition;
@@ -192,10 +192,20 @@ public class WaferMapViewManager : MonoBehaviour
         var sprite = waferMapDataManager.GetCoordinateSprite(centerCoordinate);
         rendererLookup[centerCoordinate].Initialize(centerCoordinate, sprite);
 
-        isSwitchingResolution = false;
+        IsSwitchingResolution = false;
         
         Update();
         coordinateRendererPool.Release(initRenderer);
+    }
+
+    public ChunkCoordinate GetCenterCoordinate()
+    {
+        var results = new Collider2D[1]; 
+        Physics2D.OverlapPoint(spriteMask.transform.position, coordinateFilter, results);
+        if (results[0] != null && results[0].TryGetComponent(out CoordinateRenderer coordinateRenderer))
+            return coordinateRenderer.CurrentCoordinate;
+        
+        return default;
     }
 
     void OnDestroy()

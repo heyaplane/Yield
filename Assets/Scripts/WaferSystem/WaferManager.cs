@@ -7,11 +7,17 @@ public class WaferManager : SingletonMonobehaviour<WaferManager>
 {
     [SerializeField] List<WaferDataSO> wafers;
 
-    Dictionary<string, WaferMapSO> waferLookup;
+    Dictionary<string, WaferDataSO> waferLookup;
+    
+    public WaferDataSO ActiveWafer { get; set; }
+    WaferLayout waferLayout;
 
     void OnEnable()
     {
-        waferLookup = wafers.ToDictionary(x => x.WaferName, x => x.WaferMap);
+        waferLookup = wafers.ToDictionary(x => x.WaferName, x => x);
+        ActiveWafer = wafers[0];
+        
+        waferLayout = new WaferLayout(ActiveWafer.WaferMap.ChunkDimSize, ActiveWafer.WaferMap.SectionDimSize);
     }
 
     public List<WaferDataSO> GetSamplesWithoutReports()
@@ -22,11 +28,17 @@ public class WaferManager : SingletonMonobehaviour<WaferManager>
         return wafers.Where(x => !reports.Contains(x.WaferMap)).ToList();
     }
 
-    public WaferMapSO GetWaferMapFromName(string waferName)
+    public WaferDataSO GetWaferDataFromName(string waferName)
     {
-        if (waferLookup.TryGetValue(waferName, out var waferMapSO)) return waferMapSO;
+        if (waferLookup.TryGetValue(waferName, out var waferDataSO)) return waferDataSO;
         
         Debug.LogError("Cannot find wafer name!");
         return null;
+    }
+
+    public string GetSectionLocationAsStringFromChunk(ChunkCoordinate chunkCoordinate)
+    {
+        var location = waferLayout.GetWaferSectionLocationFromChunk(chunkCoordinate);
+        return $"{location.x},{location.y}";
     }
 }

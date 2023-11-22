@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class WaferLayout
 {
-    int chunkDimensionSize;
+    int chunkDimensionSize, gridDimensionSize, numChunksPerSectionLength;
+    float normalizedSectionSize;
 
-    public WaferLayout(int chunkDimensionSize)
+    public WaferLayout(int chunkDimensionSize, int gridDimensionSize)
     {
         this.chunkDimensionSize = chunkDimensionSize;
-    }
-    
-    public List<WaferSection> DivideSampleIntoSections(int gridDimensionSize, float normalizedSampleRadius)
-    {
-        var waferSections = new List<WaferSection>();
-
+        this.gridDimensionSize = gridDimensionSize;
+        numChunksPerSectionLength = chunkDimensionSize / gridDimensionSize;
+        normalizedSectionSize = 1.0f / gridDimensionSize;
+        
         if (chunkDimensionSize % gridDimensionSize != 0)
         {
             Debug.LogError("No even division of 1536x1536 chunks into the provided grid size!");
-            return null;
         }
-        int numChunksPerSectionLength = chunkDimensionSize / gridDimensionSize;
-        float normalizedSectionSize = 1.0f / gridDimensionSize;
+    }
+    
+    public List<WaferSection> DivideWaferIntoSections(float normalizedSampleRadius)
+    {
+        var waferSections = new List<WaferSection>();
         
         for (int i = 0; i < gridDimensionSize; i++)
         {
@@ -33,7 +34,7 @@ public class WaferLayout
                 Vector2 sectionCoordinates = new Vector2(centerX, centerY);
                 Vector2Int sectionIndices = new Vector2Int(i, j);
 
-                if (IsCompletelyInsideSample(normalizedSectionSize, sectionCoordinates, normalizedSampleRadius))
+                if (IsCompletelyInsideSample(sectionCoordinates, normalizedSampleRadius))
                 {
                     waferSections.Add(new WaferSection(numChunksPerSectionLength, sectionIndices, sectionCoordinates));
                 }
@@ -43,52 +44,18 @@ public class WaferLayout
         return waferSections;
     }
 
-    bool IsCompletelyInsideSample(float normalizedSectionSize, Vector2 center, float sampleRadius)
+    bool IsCompletelyInsideSample(Vector2 center, float sampleRadius)
     {
         return Mathf.Sqrt(Mathf.Pow(0.5f - center.x - normalizedSectionSize / 2, 2) + Mathf.Pow(0.5f - center.y + normalizedSectionSize / 2, 2)) <= sampleRadius &&
                Mathf.Sqrt(Mathf.Pow(0.5f - center.x + normalizedSectionSize / 2, 2) + Mathf.Pow(0.5f - center.y + normalizedSectionSize / 2, 2)) <= sampleRadius &&
                Mathf.Sqrt(Mathf.Pow(0.5f - center.x + normalizedSectionSize / 2, 2) + Mathf.Pow(0.5f - center.y - normalizedSectionSize / 2, 2)) <= sampleRadius &&
                Mathf.Sqrt(Mathf.Pow(0.5f - center.x - normalizedSectionSize / 2, 2) + Mathf.Pow(0.5f - center.y - normalizedSectionSize / 2, 2)) <= sampleRadius;
     }
-}
 
-public class WaferSection
-{
-    readonly int numChunksPerSectionLength;
-    public Vector2Int SectionIndices { get; }
-    public Vector2 NormalizedSectionCoordinate { get; }
-
-    public WaferSection(int numChunksPerSectionLength, Vector2Int sectionIndices, Vector2 normalizedSectionCoordinate)
+    public Vector2Int GetWaferSectionLocationFromChunk(ChunkCoordinate chunkCoordinate)
     {
-        this.numChunksPerSectionLength = numChunksPerSectionLength;
-        SectionIndices = sectionIndices;
-        NormalizedSectionCoordinate = normalizedSectionCoordinate;
+        var sectionRow = chunkCoordinate.chunkRow % numChunksPerSectionLength;
+        var sectionCol = chunkCoordinate.chunkCol % numChunksPerSectionLength;
+        return new Vector2Int(sectionRow, sectionCol);
     }
-
-    public (int, int)[] GetChunkCoordinates()
-    {
-        (int, int)[] chunkIndices = new (int, int)[numChunksPerSectionLength * numChunksPerSectionLength];
-        
-        for (int k = 0; k < numChunksPerSectionLength; k++)
-        {
-            for (int l = 0; l < numChunksPerSectionLength; l++)
-            {
-                int row = SectionIndices.x * numChunksPerSectionLength + k;
-                int col = SectionIndices.y * numChunksPerSectionLength + l;
-                chunkIndices[k * numChunksPerSectionLength + l] = (row, col);
-            }
-        }
-
-        return chunkIndices;
-    }
-
-    public bool IsChunkInsideSection(ChunkCoordinate chunkCoordinate)
-    {
-        return chunkCoordinate.chunkRow >= MinChunkRow && chunkCoordinate.chunkRow <= MaxChunkRow && chunkCoordinate.chunkCol >= MinChunkCol && chunkCoordinate.chunkCol <= MaxChunkCol;
-    }
-    
-    public int MinChunkRow => SectionIndices.x * numChunksPerSectionLength;
-    public int MaxChunkRow => SectionIndices.x * numChunksPerSectionLength + numChunksPerSectionLength - 1;
-    public int MinChunkCol => SectionIndices.y * numChunksPerSectionLength;
-    public int MaxChunkCol => SectionIndices.y * numChunksPerSectionLength + numChunksPerSectionLength - 1;
 }
