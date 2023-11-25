@@ -2082,17 +2082,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4589909990593719576, guid: 389d7556ba946804990d8389fcae0fbf, type: 3}
   m_PrefabInstance: {fileID: 286690279}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &286690281 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6322026364648571433, guid: 389d7556ba946804990d8389fcae0fbf, type: 3}
-  m_PrefabInstance: {fileID: 286690279}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &353780738
 GameObject:
   m_ObjectHideFlags: 0
@@ -9991,7 +9980,7 @@ MonoBehaviour:
   titleText: {fileID: 432017362}
   sectionNameText: {fileID: 399872077}
   dataSummaryParent: {fileID: 865502467}
-  numSamplesText: {fileID: 286690281}
+  numSamplesText: {fileID: 1588773873}
   measuredMeanText: {fileID: 1106840452}
   measuredStDevText: {fileID: 1404479084}
   expectedMeanText: {fileID: 1203261004}
@@ -12264,6 +12253,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3050881953495668683, guid: 05e95b8b6ab8d4a40b73c72b913c045e, type: 3}
   m_PrefabInstance: {fileID: 1569416391}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1588773873 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6322026364648571433, guid: 389d7556ba946804990d8389fcae0fbf, type: 3}
+  m_PrefabInstance: {fileID: 461763368}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1589648942
 PrefabInstance:
   m_ObjectHideFlags: 0
