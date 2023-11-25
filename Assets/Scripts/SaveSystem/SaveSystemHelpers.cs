@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -26,5 +27,17 @@ public static class SaveSystemHelpers
         }
 
         return true;
+    }
+
+    public static object UnpackJObject(JObject itemObject)
+    {
+        string typeString = itemObject["Type"]?.ToObject<string>();
+        if (typeString == null) return null;
+        
+        Type valueType = Type.GetType(typeString);
+        JToken valueToken = itemObject["Value"];
+        if (valueToken == null || valueType == null) return null;
+        
+        return valueToken.ToObject(valueType);
     }
 }

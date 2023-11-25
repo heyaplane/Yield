@@ -16,6 +16,7 @@ public class WaferSectionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     Dictionary<ReportEntryState, Sprite> spriteLookup;
     
     bool sectionSelected;
+    public ReportEntryState PersistentState { get; set; } = ReportEntryState.Default;
     public event Action<WaferSectionUI> OnWaferSectionSelected;
 
     void OnEnable()
@@ -29,7 +30,7 @@ public class WaferSectionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             {ReportEntryState.Fail, failSprite}
         };
         
-        sectionImage.sprite = defaultSprite;
+        ChangeSprite(PersistentState);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -43,7 +44,7 @@ public class WaferSectionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if (sectionSelected) return;
         
-        ChangeSprite(defaultSprite);
+        ChangeSprite(PersistentState);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -56,7 +57,7 @@ public class WaferSectionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void ResetSectionSelected()
     {
         sectionSelected = false;
-        ChangeSprite(defaultSprite);
+        ChangeSprite(PersistentState);
     }
 
     public void ChangeSprite(ReportEntryState sectionUIState) => ChangeSprite(spriteLookup[sectionUIState]);

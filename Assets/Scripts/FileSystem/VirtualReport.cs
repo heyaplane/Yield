@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public class VirtualReport : IVirtualFile
@@ -14,18 +15,7 @@ public class VirtualReport : IVirtualFile
     public string WaferName => WaferData.WaferName;
 
     Dictionary<string, List<ReportEntry>> reportEntriesLookup;
-    public bool TryGetReportEntry(string sectionLocation, string featureName, out ReportEntry reportEntry)
-    {
-        if (reportEntriesLookup.TryGetValue(sectionLocation, out var reportEntries))
-        {
-            reportEntry = reportEntries.FirstOrDefault(x => x.FeatureName == featureName);
-            return true;
-        }
-
-        reportEntry = null;
-        return false;
-    }
-
+    
     public VirtualReport(string fileName, WaferDataSO waferData)
     {
         reportEntriesLookup = new Dictionary<string, List<ReportEntry>>();
@@ -45,8 +35,44 @@ public class VirtualReport : IVirtualFile
         CreationDateTime = serializedFile.CreationDateTime;
         LastModifiedDateTime = serializedFile.LastModifiedDateTime;
         FileSize = FileSize;
-        reportEntriesLookup = (Dictionary<string, List<ReportEntry>>) serializedFile.AdditionalData;
+        var additionalData = (serializedFile.AdditionalData as JObject)?.ToObject<SaveData>();
+        reportEntriesLookup = SaveSystemHelpers.UnpackJObject(additionalData["Entries"] as JObject) as Dictionary<string, List<ReportEntry>>;
+        WaferData = WaferManager.Instance.GetWaferDataFromName((string) SaveSystemHelpers.UnpackJObject(additionalData["WaferData"] as JObject));
     }
+
+    public bool TryGetReportEntry(string sectionLocation, string featureName, out ReportEntry reportEntry)
+    {
+        reportEntry = null;
+        
+        if (reportEntriesLookup.TryGetValue(sectionLocation, out var reportEntries))
+        {
+            reportEntry = reportEntries.FirstOrDefault(x => x.FeatureName == featureName);
+        }
+
+        return reportEntry != null;
+    }
+    
+    public void AddReportEntry(string sectionName, ReportEntry reportEntry) => reportEntriesLookup[sectionName].Add(reportEntry);
+
+    public void ReplaceReportEntry(string sectionName, ReportEntry reportEntry)
+    {
+        if (reportEntriesLookup.TryGetValue(sectionName, out var reportEntries))
+        {
+            var existingReport = reportEntries.FirstOrDefault(x => x.FeatureName == reportEntry.FeatureName);
+            if (existingReport != null)
+            {
+                reportEntries[reportEntries.IndexOf(existingReport)] = reportEntry;
+                return;
+            }
+            
+            Debug.LogWarning($"Problem replacing existing report. Adding new report entry for {sectionName}");
+            reportEntries.Add(reportEntry);
+            return;
+        }
+        
+        Debug.LogError("Couldn't find section in report lookup.");
+    }
+    
 
     // Mean and StDev both take 4 bytes (floats), and each double is 8 bytes
     
@@ -61,7 +87,11 @@ public class VirtualReport : IVirtualFile
             LastModifiedDateTime = LastModifiedDateTime,
             FileSize = FileSize,
             FileType = TypeOfFile.Report,
-            AdditionalData = reportEntriesLookup
+            AdditionalData = new SaveData
+            {
+                {"Entries", reportEntriesLookup},
+                {"WaferData", WaferData.WaferName}
+            }
         };
     }
 
@@ -77,11 +107,12 @@ public class VirtualReport : IVirtualFile
             reportEntriesLookup[directory.FileName] = new List<ReportEntry>();
             foreach (var data in sectionData)
             {
-                reportEntriesLookup[directory.FileName].Add(new ReportEntry(WaferName, directory.FileName, data.Feature.FeatureName, ReportEntryState.DataExist));
+                var reportEntry = new ReportEntry(WaferName, directory.FileName, data.Feature.FeatureName, ReportEntryState.DataExist);
+                AddReportEntry(directory.FileName, reportEntry);
             }
         }
     }
-    
+
     public void SavePersistentFile() { }
     public void DestroyUnsavedPersistentFiles() { }
 }
@@ -95,7 +126,7 @@ public class ReportEntry
     public double[] Measurements { get; set; } 
     public float Mean { get; set; }
     public float StDev { get; set; }
-    public ReportEntryState State { get; }
+    public ReportEntryState State { get; set; }
 
     public ReportEntry(string waferName, string sectionName, string featureName, ReportEntryState startingState)
     {

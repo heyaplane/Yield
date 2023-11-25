@@ -1439,6 +1439,9 @@ RectTransform:
   m_Children:
   - {fileID: 1160594543}
   - {fileID: 1896211926}
+  - {fileID: 2015970378}
+  - {fileID: 904760164}
+  - {fileID: 1850449841}
   m_Father: {fileID: 826918378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4253,7 +4256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollViewItemPrefab: {fileID: 353780740}
   content: {fileID: 617150979}
-  itemHighlightColor: {r: 0.11372549, g: 0.14901961, b: 0.62352943, a: 0}
+  itemHighlightColor: {r: 0.11372549, g: 0.14901961, b: 0.62352943, a: 1}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -6240,7 +6243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &865502468
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6627,7 +6630,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1896211926}
+  m_Father: {fileID: 168354436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6687,9 +6690,9 @@ MonoBehaviour:
   sectionImage: {fileID: 904760165}
   defaultSprite: {fileID: 21300000, guid: 67e9e8ad72d5b214d814acff23278c16, type: 3}
   selectedSprite: {fileID: 21300000, guid: 54f55a92833cc5046ba717cef548288b, type: 3}
-  dataExistSprite: {fileID: 0}
-  passSprite: {fileID: 0}
-  failSprite: {fileID: 0}
+  dataExistSprite: {fileID: 21300000, guid: 026f550ee83896645b272205c6fddc31, type: 3}
+  passSprite: {fileID: 21300000, guid: a0ead0c62aa0c5e4b94e8b00b5ee5593, type: 3}
+  failSprite: {fileID: 21300000, guid: a2a0f2215eefa8b4ca34af192614036c, type: 3}
 --- !u!1001 &909573248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8676,7 +8679,7 @@ PrefabInstance:
     - target: {fileID: 6522898227034660588, guid: a2d9634ca6b1ff34aad40e4ec5791123, type: 3}
       propertyPath: pairs.Array.data[0].DataSO
       value: 
-      objectReference: {fileID: 11400000, guid: fa11b83e762b266449de9fcd21de8119, type: 2}
+      objectReference: {fileID: 11400000, guid: 3347dbfcbc8f3714fb683bf759dd1e55, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9044,7 +9047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e891617da628479d9dfe054a1429df62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waferMapViewManager: {fileID: 0}
+  waferMapViewManager: {fileID: 422307614}
   measurementLinePrefab: {fileID: 220669056000234567, guid: a73fa0f4e8c4173439d5889264057bec, type: 3}
 --- !u!61 &1259629477
 BoxCollider2D:
@@ -9993,7 +9996,9 @@ MonoBehaviour:
   measuredStDevText: {fileID: 1404479084}
   expectedMeanText: {fileID: 1203261004}
   expectedStDevText: {fileID: 2085932613}
+  dataSummaryToggle: {fileID: 1239786381}
   featureNameDropdown: {fileID: 1231236113}
+  analysisDropdown: {fileID: 1877534898}
   waferSectionMapUI: {fileID: 168354437}
 --- !u!1001 &1382638051
 PrefabInstance:
@@ -15673,7 +15678,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1896211926}
+  m_Father: {fileID: 168354436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16073,6 +16078,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5283451770733225873, guid: a60bae0e3cd309d429976e2a258000ac, type: 3}
   m_PrefabInstance: {fileID: 1877534896}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1877534898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5130002243617150581, guid: a60bae0e3cd309d429976e2a258000ac, type: 3}
+  m_PrefabInstance: {fileID: 1877534896}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1882482178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16462,10 +16478,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2015970378}
-  - {fileID: 904760164}
-  - {fileID: 1850449841}
+  m_Children: []
   m_Father: {fileID: 168354436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -17293,7 +17306,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1896211926}
+  m_Father: {fileID: 168354436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17353,7 +17366,7 @@ MonoBehaviour:
   sectionImage: {fileID: 2015970379}
   defaultSprite: {fileID: 21300000, guid: dba85eb427a3b9d4691c672ed19b9680, type: 3}
   selectedSprite: {fileID: 21300000, guid: 8ff8bee09383a5d4dadf8b9c9ef9e589, type: 3}
-  dataExistSprite: {fileID: 0}
+  dataExistSprite: {fileID: 21300000, guid: cb8aa482eaf516944a6b01a63e41af4c, type: 3}
   passSprite: {fileID: 0}
   failSprite: {fileID: 0}
 --- !u!1001 &2018970556

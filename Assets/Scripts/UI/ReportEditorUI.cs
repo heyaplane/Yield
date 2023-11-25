@@ -31,22 +31,36 @@ public class ReportEditorUI : BaseUI
     [SerializeField] TextMeshProUGUI expectedMeanText;
     [SerializeField] TextMeshProUGUI expectedStDevText;
 
+    [SerializeField] Toggle dataSummaryToggle;
+
     [SerializeField] TMP_Dropdown featureNameDropdown;
+    [SerializeField] TMP_Dropdown analysisDropdown;
 
     [SerializeField] WaferSectionMapUI waferSectionMapUI;
 
     VirtualReport currentReport;
     string currentWaferFeatureOption => featureNameDropdown.options[featureNameDropdown.value].text;
+    WaferSection currentSelectedWaferSection;
 
     void OnEnable()
     {
         EventManager.OnReportChosenEvent += HandleReportChosen;
         
         closeUIButton.onClick.AddListener(HandleCloseUIButton);
-        saveAnalysisButton.onClick.AddListener(HandleSaveReportButton);
-        processDataButton.onClick.AddListener(FinishGeneratingReport);
+        saveAnalysisButton.onClick.AddListener(HandleSaveAnalysisButton);
+        processDataButton.onClick.AddListener(HandleProcessDataButton);
+        
+        dataSummaryToggle.onValueChanged.AddListener(HandleDataSummaryToggled);
+        featureNameDropdown.onValueChanged.AddListener(HandleFeatureNameChanged);
 
         SetupRenderCamera();
+        
+        var options = new List<TMP_Dropdown.OptionData>
+        {
+            new TMP_Dropdown.OptionData("Pass"),
+            new TMP_Dropdown.OptionData("Fail")
+        };
+        analysisDropdown.options = options;
     }
 
     void OnDisable()
@@ -56,6 +70,9 @@ public class ReportEditorUI : BaseUI
         closeUIButton.onClick.RemoveAllListeners();
         saveAnalysisButton.onClick.RemoveAllListeners();
         processDataButton.onClick.RemoveAllListeners();
+        
+        dataSummaryToggle.onValueChanged.RemoveAllListeners();
+        featureNameDropdown.onValueChanged.RemoveAllListeners();
     }
 
     void HandleReportChosen(VirtualReport virtualReport, MessageData messageData)
@@ -76,6 +93,13 @@ public class ReportEditorUI : BaseUI
         UpdateWaferSectionMap();
     }
 
+    void HandleFeatureNameChanged(int featureNameIndex)
+    {
+        UpdateWaferSectionMap();
+        reportPlotUI.ClearPlot();
+        currentSelectedWaferSection = null;
+    }
+
     void UpdateWaferSectionMap() => waferSectionMapUI.Initialize(currentReport, currentWaferFeatureOption, HandleWaferSectionSelected);
 
     void HandleCloseUIButton()
@@ -91,40 +115,87 @@ public class ReportEditorUI : BaseUI
 
     void HandleWaferSectionSelected(WaferSection section)
     {
-        var imageFileNames = FileSystemManager.Instance.FindDirectoryInRoot(currentReport.WaferName)?.FindFile<VirtualDirectory>(section.SectionLocationAsString)?.DirectoryFileNames;
-        if (imageFileNames == null)
-        {
-            //Debug.LogError("Could not find image folder for wafer & section!");
-            print(section.SectionLocationAsString);
-            return;
-        }
+        sectionNameText.text = $"Section: {section.SectionLocationAsString}";
+        currentSelectedWaferSection = section;
         
         fileScrollView.ClearView();
-        fileScrollView.AddItemsToView(imageFileNames, null);
-
-        sectionNameText.text = section.SectionLocationAsString;
+        reportPlotUI.ClearPlot();
+        
+        var imageFileNames = FileSystemManager.Instance.FindDirectoryInRoot(currentReport.WaferName)?.FindFile<VirtualDirectory>(section.SectionLocationAsString)?.DirectoryFileNames;
+        if (imageFileNames != null)
+            fileScrollView.AddItemsToView(imageFileNames, null);
+        
+        var sectionDataList = currentReport.WaferMap.GetSectionDataFromLocation(section.SectionIndices);
+        var currentSectionData = sectionDataList.FirstOrDefault(x => x.Feature.FeatureName == currentWaferFeatureOption);
+        AddExpectedDistributionToPlot(currentSectionData);
+        
+        if (currentReport.TryGetReportEntry(currentSelectedWaferSection.SectionLocationAsString, currentWaferFeatureOption, out var reportEntry) && reportEntry.Measurements != null)
+            UpdateMeasuredData(reportEntry);
+            
     }
 
     public void UpdateTitleText(string newTitle) => titleText.text = newTitle;
 
-    void FinishGeneratingReport()
+    void AddExpectedDistributionToPlot(SectionData sectionData)
+    {
+        expectedMeanText.text = $"{sectionData.Mean:F2} {sectionData.Feature.Units}";
+        expectedStDevText.text = $"{sectionData.StDev:F2} {sectionData.Feature.Units}";
+        
+        if (sectionData.Mean != 0)
+            reportPlotUI.AddGaussianToPlot(sectionData.Mean, sectionData.StDev, stDevRange:5);
+    }
+
+    void HandleProcessDataButton()
     {
         var files = FileSystemManager.Instance.GetFilesFromNames(fileScrollView.CurrentlyHighlightedFileNames);
         var measurements = files.OfType<VirtualImage>().Select(x => (double) x.MeasurementValue).ToArray();
+        
         float mean = (float) Descriptive.Mean(measurements);
         float stDev = (float) Descriptive.StDev(measurements, mean);
-
-        numSamplesText.text = $"# samples: {measurements.Length}";
-        measuredMeanText.text = $"Mean: {mean:F2} µm";
-        measuredStDevText.text = $"St. Dev: {stDev:F2} µm";
         
-        reportPlotUI.AddHistogramToPlot(measurements, 0.75f);
+        if (currentReport.TryGetReportEntry(currentSelectedWaferSection.SectionLocationAsString, currentWaferFeatureOption, out var reportEntry))
+        {
+            reportEntry.Measurements = measurements;
+            reportEntry.Mean = mean;
+            reportEntry.StDev = stDev;
+        }
 
-        //currentReport = new VirtualReport(titleText.text, new ReportEntry(measurements, mean, stDev));
+        else
+        {
+            reportEntry = new ReportEntry(currentReport.WaferName, currentSelectedWaferSection.SectionLocationAsString, currentWaferFeatureOption, ReportEntryState.DataExist);
+            currentReport.AddReportEntry(currentSelectedWaferSection.SectionLocationAsString, reportEntry);
+        }
+        
+        UpdateMeasuredData(reportEntry);
     }
 
-    void HandleSaveReportButton()
+    void UpdateMeasuredData(ReportEntry reportEntry)
     {
+        reportPlotUI.AddKDEToPlot(reportEntry.Measurements, reportEntry.StDev);
+
+        numSamplesText.text = $"{reportEntry.Measurements.Length}";
+        measuredMeanText.text = $"{reportEntry.Mean:F2} µm";
+        measuredStDevText.text = $"{reportEntry.StDev:F2} µm";
+    }
+
+    void HandleSaveAnalysisButton()
+    {
+        if (!currentReport.TryGetReportEntry(currentSelectedWaferSection.SectionLocationAsString, currentWaferFeatureOption, out var reportEntry)) return;
+
+        switch (analysisDropdown.value)
+        {
+            case 0:
+                reportEntry.State = ReportEntryState.Pass;
+                break;
+            case 1:
+                reportEntry.State = ReportEntryState.Fail;
+                break;
+            default:
+                Debug.LogError("Couldn't identify analysis option.");
+                break;
+        }
+        
+        UpdateWaferSectionMap();
         FileSystemManager.Instance.TrySaveFile("Reports", currentReport);
     }
 
@@ -138,4 +209,6 @@ public class ReportEditorUI : BaseUI
         renderTextureScale.y = sizeInPixels.y / canvasScaler.referenceResolution.y * Screen.height;
         RenderCameraManager.Instance.SetCameraAndTextureBounds(new Bounds(reportBorders.position, renderTextureScale), orthographicSize);
     }
+
+    void HandleDataSummaryToggled(bool toggleOn) => dataSummaryParent.SetActive(toggleOn);
 }

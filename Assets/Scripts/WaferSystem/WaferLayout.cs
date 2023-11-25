@@ -6,6 +6,8 @@ public class WaferLayout
 {
     int chunkDimensionSize, gridDimensionSize, numChunksPerSectionLength;
     float normalizedSectionSize;
+    
+    public List<WaferSection> WaferSections { get; private set; }
 
     public WaferLayout(int chunkDimensionSize, int gridDimensionSize)
     {
@@ -41,6 +43,7 @@ public class WaferLayout
             }
         }
 
+        WaferSections = waferSections;
         return waferSections;
     }
 

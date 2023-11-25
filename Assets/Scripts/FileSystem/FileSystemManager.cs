@@ -69,7 +69,19 @@ public class FileSystemManager : SingletonMonobehaviour<FileSystemManager>
     public IVirtualFile GetFileFromName(string fileName)
     {
         var fileParts = fileName.Split('\\');
-        return FindDirectoryInRoot(fileParts[0]).FindFile(fileName);
+        var directory = FindDirectoryInRoot(fileParts[0]);
+        for (int i = 1; i < fileParts.Length-1; i++)
+        {
+            if (directory == null)
+            {
+                Debug.LogError("File path is invalid.");
+                return null;
+            }
+            
+            directory = directory.FindFile<VirtualDirectory>(fileParts[i]);
+        }
+        
+        return directory.FindFile(fileName);
     }
 
     public void AddTextureToCache(string key, Texture2D texture)

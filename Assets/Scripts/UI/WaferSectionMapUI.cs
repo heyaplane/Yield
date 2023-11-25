@@ -27,6 +27,11 @@ public class WaferSectionMapUI : MonoBehaviour
 
     public void Initialize(VirtualReport virtualReport, string featureName, Action<WaferSection> OnWaferSectionSelected)
     {
+        foreach (Transform child in sectionParent)
+        {
+            Destroy(child.gameObject);
+        }
+        
         var waferMap = virtualReport.WaferMap;
         
         if (!sectionImageLookup.TryGetValue(waferMap.SectionDimSize, out var sectionImage))
@@ -47,7 +52,10 @@ public class WaferSectionMapUI : MonoBehaviour
             newSection.gameObject.SetActive(true);
 
             if (virtualReport.TryGetReportEntry(section.SectionLocationAsString, featureName, out var reportEntry))
+            {
                 newSection.ChangeSprite(reportEntry.State);
+                newSection.PersistentState = reportEntry.State;
+            }
             else
                 newSection.ChangeSprite(ReportEntryState.Default);
         }

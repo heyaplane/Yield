@@ -100,13 +100,13 @@ MonoBehaviour:
     - Feature:
         FeatureName: 50 um lines
         Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 50
+      StDev: 1
     - Feature:
         FeatureName: 60 um lines
         Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 63
+      StDev: 3
     chunkLimits: 'Row Limits: 64, 95
 
       Col Limits: 64, 95'
