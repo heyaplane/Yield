@@ -12,6 +12,9 @@ public class WaferDataSO : ScriptableObject
     [SerializeField] WaferMapSO waferMap;
     public WaferMapSO WaferMap => waferMap;
 
+    [SerializeField] ErrorType errorType;
+    public ErrorType ErrorType => errorType;
+
     string GetRandomWaferName() => GUID.Generate().ToString();
 
 }

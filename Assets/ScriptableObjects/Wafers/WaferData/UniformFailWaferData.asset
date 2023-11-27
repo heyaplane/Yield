@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a415730aa5748648b58e0ce750d2d89, type: 3}
-  m_Name: TestWaferData
+  m_Name: UniformFailWaferData
   m_EditorClassIdentifier: 
   shouldRandomGenerateName: 0
-  waferName: TestWafer
-  waferMap: {fileID: 11400000, guid: c753b9d5cc0ecbe439f7f3fe143087f4, type: 2}
+  waferName: UniformFailWafer
+  waferMap: {fileID: 11400000, guid: 6d4971ed2137e5c4483004afdcd4b433, type: 2}
+  errorType: 3

@@ -13,6 +13,7 @@ public class VirtualReport : IVirtualFile
     public WaferDataSO WaferData { get; }
     public WaferMapSO WaferMap => WaferData.WaferMap;
     public string WaferName => WaferData.WaferName;
+    public ErrorType ProcessRecommendation { get; set; }
 
     Dictionary<string, List<ReportEntry>> reportEntriesLookup;
     
@@ -38,6 +39,7 @@ public class VirtualReport : IVirtualFile
         var additionalData = (serializedFile.AdditionalData as JObject)?.ToObject<SaveData>();
         reportEntriesLookup = SaveSystemHelpers.UnpackJObject(additionalData["Entries"] as JObject) as Dictionary<string, List<ReportEntry>>;
         WaferData = WaferManager.Instance.GetWaferDataFromName((string) SaveSystemHelpers.UnpackJObject(additionalData["WaferData"] as JObject));
+        ProcessRecommendation = (ErrorType) SaveSystemHelpers.UnpackJObject(additionalData["ProcessRec"] as JObject);
     }
 
     public bool TryGetReportEntry(string sectionLocation, string featureName, out ReportEntry reportEntry)
@@ -90,7 +92,8 @@ public class VirtualReport : IVirtualFile
             AdditionalData = new SaveData
             {
                 {"Entries", reportEntriesLookup},
-                {"WaferData", WaferData.WaferName}
+                {"WaferData", WaferData.WaferName},
+                {"ProcessRec", ProcessRecommendation}
             }
         };
     }

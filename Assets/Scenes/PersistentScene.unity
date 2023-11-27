@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 74773442}
   - component: {fileID: 74773443}
+  - component: {fileID: 74773444}
   m_Layer: 0
   m_Name: QuestManager
   m_TagString: Untagged
@@ -165,6 +166,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d42899eb36f84402a0100d8e03bcff5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  errorEvolver: {fileID: 74773444}
+  startingQuest: {fileID: 11400000, guid: 895b3594782ec4149b05d9590256800a, type: 2}
+--- !u!114 &74773444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74773441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341a38ffe0b74c6199b34ec2533b61d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &343643082
@@ -929,6 +944,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wafers:
   - {fileID: 11400000, guid: 752d9b6c6bfe8a642807a175e53997d1, type: 2}
+  - {fileID: 11400000, guid: 402196b8465b57e4ea2fd2c869e1f99a, type: 2}
+  - {fileID: 11400000, guid: 8403015d0dc549348b02785742598e19, type: 2}
+  - {fileID: 11400000, guid: 30dc0190079dbff4f8d1efce95484af4, type: 2}
 --- !u!1 &2058997955
 GameObject:
   m_ObjectHideFlags: 0

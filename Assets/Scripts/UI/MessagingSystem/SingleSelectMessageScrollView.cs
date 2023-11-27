@@ -31,7 +31,8 @@ public class SingleSelectMessageScrollView : MonoBehaviour
         yield return null;
         yield return null;
         
-        highlight.GetComponent<CanvasGroup>().alpha = 1;
+        if (highlight != null)
+            highlight.GetComponent<CanvasGroup>().alpha = 1;
     }
 
     public void ClearView()

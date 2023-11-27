@@ -6,6 +6,9 @@ public class QuestManager : SingletonMonobehaviour<QuestManager>
     ThreadData thread;
     MessageSender outsideSender;
 
+    [SerializeField] ErrorEvolver errorEvolver;
+    [SerializeField] QuestSO startingQuest;
+
     void OnEnable()
     {
         outsideSender = new MessageSender("Outside", "Circle");
@@ -16,6 +19,11 @@ public class QuestManager : SingletonMonobehaviour<QuestManager>
     void OnDisable()
     {
         EventManager.OnReportChosenEvent -= HandleReportSubmitted;
+    }
+
+    void Start()
+    {
+        WaferManager.Instance.ActiveWafer = startingQuest.StartingWafer;
     }
 
     void Update()
@@ -55,5 +63,9 @@ public class QuestManager : SingletonMonobehaviour<QuestManager>
     {
         if (reportFile == null || messageData == null) return;
         SendReportMessage(new MessageSender("Player", "Square"), reportFile);
+
+        var nextWaferEvolution = errorEvolver.GetNextWaferEvolution(startingQuest, reportFile.WaferData, reportFile.ProcessRecommendation);
+        WaferManager.Instance.ActiveWafer = nextWaferEvolution;
+        thread.AddMessage(new MessageData(outsideSender, TimeSystem.Instance.GetCurrentTimestamp, "Check out your next sample."));
     }
 }

@@ -1,0 +1,547 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e44aaf09054a6bad0917e42bef767f, type: 3}
+  m_Name: RadialFailOutsideWaferMap
+  m_EditorClassIdentifier: 
+  sectionDimSize: 8
+  sectionAssignments:
+  - rowNum: 1
+    colNum: 2
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 32, 63
+
+      Col Limits: 64, 95'
+  - rowNum: 1
+    colNum: 3
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 32, 63
+
+      Col Limits: 96, 127'
+  - rowNum: 1
+    colNum: 4
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 32, 63
+
+      Col Limits: 128, 159'
+  - rowNum: 1
+    colNum: 5
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 32, 63
+
+      Col Limits: 160, 191'
+  - rowNum: 2
+    colNum: 1
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 64, 95
+
+      Col Limits: 32, 63'
+  - rowNum: 2
+    colNum: 2
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 50
+      StDev: 1
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 63
+      StDev: 3
+    chunkLimits: 'Row Limits: 64, 95
+
+      Col Limits: 64, 95'
+  - rowNum: 2
+    colNum: 3
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 64, 95
+
+      Col Limits: 96, 127'
+  - rowNum: 2
+    colNum: 4
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 64, 95
+
+      Col Limits: 128, 159'
+  - rowNum: 2
+    colNum: 5
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 64, 95
+
+      Col Limits: 160, 191'
+  - rowNum: 2
+    colNum: 6
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 64, 95
+
+      Col Limits: 192, 223'
+  - rowNum: 3
+    colNum: 1
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 96, 127
+
+      Col Limits: 32, 63'
+  - rowNum: 3
+    colNum: 2
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 96, 127
+
+      Col Limits: 64, 95'
+  - rowNum: 3
+    colNum: 3
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 96, 127
+
+      Col Limits: 96, 127'
+  - rowNum: 3
+    colNum: 4
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 96, 127
+
+      Col Limits: 128, 159'
+  - rowNum: 3
+    colNum: 5
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 96, 127
+
+      Col Limits: 160, 191'
+  - rowNum: 3
+    colNum: 6
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 96, 127
+
+      Col Limits: 192, 223'
+  - rowNum: 4
+    colNum: 1
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 128, 159
+
+      Col Limits: 32, 63'
+  - rowNum: 4
+    colNum: 2
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 128, 159
+
+      Col Limits: 64, 95'
+  - rowNum: 4
+    colNum: 3
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 128, 159
+
+      Col Limits: 96, 127'
+  - rowNum: 4
+    colNum: 4
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 128, 159
+
+      Col Limits: 128, 159'
+  - rowNum: 4
+    colNum: 5
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 128, 159
+
+      Col Limits: 160, 191'
+  - rowNum: 4
+    colNum: 6
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 128, 159
+
+      Col Limits: 192, 223'
+  - rowNum: 5
+    colNum: 1
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 160, 191
+
+      Col Limits: 32, 63'
+  - rowNum: 5
+    colNum: 2
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 160, 191
+
+      Col Limits: 64, 95'
+  - rowNum: 5
+    colNum: 3
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 160, 191
+
+      Col Limits: 96, 127'
+  - rowNum: 5
+    colNum: 4
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 160, 191
+
+      Col Limits: 128, 159'
+  - rowNum: 5
+    colNum: 5
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 160, 191
+
+      Col Limits: 160, 191'
+  - rowNum: 5
+    colNum: 6
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 160, 191
+
+      Col Limits: 192, 223'
+  - rowNum: 6
+    colNum: 2
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 192, 223
+
+      Col Limits: 64, 95'
+  - rowNum: 6
+    colNum: 3
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 192, 223
+
+      Col Limits: 96, 127'
+  - rowNum: 6
+    colNum: 4
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 192, 223
+
+      Col Limits: 128, 159'
+  - rowNum: 6
+    colNum: 5
+    sectionData:
+    - Feature:
+        FeatureName: 50 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    - Feature:
+        FeatureName: 60 um lines
+        Units: um
+      Mean: 0
+      StDev: 0
+    chunkLimits: 'Row Limits: 192, 223
+
+      Col Limits: 160, 191'
+  waferFeatures:
+  - FeatureName: 50 um lines
+    Units: um
+  - FeatureName: 60 um lines
+    Units: um
+  chunkDimSize: 256
+  chunkGroupAssignments:
+  - rowNum: 1
+    colNum: 2
+    chunkData: {fileID: 11400000, guid: 622e361f2a8a07943983f6446dc51e0d, type: 2}
+  - rowNum: 2
+    colNum: 1
+    chunkData: {fileID: 11400000, guid: e906ea6206d654c49aa85c3eed5e8b18, type: 2}
+  randomChunkPool:
+  - {fileID: 11400000, guid: f445d5cea35fc754f88b9191eda62ac4, type: 2}
+  lowResSpriteSize: 16
+  medResSpriteSize: 64
+  highResSpriteSize: 256
+  pixelsPerUnit: 4

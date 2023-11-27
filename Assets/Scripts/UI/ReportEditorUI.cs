@@ -35,6 +35,7 @@ public class ReportEditorUI : BaseUI
 
     [SerializeField] TMP_Dropdown featureNameDropdown;
     [SerializeField] TMP_Dropdown analysisDropdown;
+    [SerializeField] TMP_Dropdown processRecommendationDropdown;
 
     [SerializeField] WaferSectionMapUI waferSectionMapUI;
 
@@ -61,6 +62,11 @@ public class ReportEditorUI : BaseUI
             new TMP_Dropdown.OptionData("Fail")
         };
         analysisDropdown.options = options;
+        
+        processRecommendationDropdown.ClearOptions();
+        List<string> processRecommendationOptions = new List<string>(Enum.GetNames(typeof(ErrorType)));
+        processRecommendationDropdown.AddOptions(processRecommendationOptions);
+        processRecommendationDropdown.onValueChanged.AddListener(HandleProcessRecommendationChanged);
     }
 
     void OnDisable()
@@ -73,6 +79,7 @@ public class ReportEditorUI : BaseUI
         
         dataSummaryToggle.onValueChanged.RemoveAllListeners();
         featureNameDropdown.onValueChanged.RemoveAllListeners();
+        processRecommendationDropdown.onValueChanged.RemoveAllListeners();
     }
 
     void HandleReportChosen(VirtualReport virtualReport, MessageData messageData)
@@ -91,6 +98,9 @@ public class ReportEditorUI : BaseUI
         featureNameDropdown.options = options;
         
         UpdateWaferSectionMap();
+        
+        if (currentReport != null)
+            processRecommendationDropdown.value = (int) currentReport.ProcessRecommendation;
     }
 
     void HandleFeatureNameChanged(int featureNameIndex)
@@ -211,4 +221,6 @@ public class ReportEditorUI : BaseUI
     }
 
     void HandleDataSummaryToggled(bool toggleOn) => dataSummaryParent.SetActive(toggleOn);
+
+    void HandleProcessRecommendationChanged(int newValue) => currentReport.ProcessRecommendation = (ErrorType) newValue;
 }

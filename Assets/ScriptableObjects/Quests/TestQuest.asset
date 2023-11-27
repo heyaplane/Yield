@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e6a6f0dd594cd5a4591942b4124f5e, type: 3}
+  m_Name: TestQuest
+  m_EditorClassIdentifier: 
+  passingWafer: {fileID: 11400000, guid: 752d9b6c6bfe8a642807a175e53997d1, type: 2}
+  uniformFailWafer: {fileID: 11400000, guid: 402196b8465b57e4ea2fd2c869e1f99a, type: 2}
+  radialFailInsideWafer: {fileID: 11400000, guid: 8403015d0dc549348b02785742598e19, type: 2}
+  radialFailOutsideWafer: {fileID: 11400000, guid: 30dc0190079dbff4f8d1efce95484af4, type: 2}

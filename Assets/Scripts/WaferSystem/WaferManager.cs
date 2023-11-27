@@ -15,8 +15,10 @@ public class WaferManager : SingletonMonobehaviour<WaferManager>
     void OnEnable()
     {
         waferLookup = wafers.ToDictionary(x => x.WaferName, x => x);
-        ActiveWafer = wafers[0];
-        
+    }
+
+    void Start()
+    {
         waferLayout = new WaferLayout(ActiveWafer.WaferMap.ChunkDimSize, ActiveWafer.WaferMap.SectionDimSize);
     }
 
