@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: MEMS_base_256
+  m_EditorClassIdentifier: 
+  m_GroupName: MEMS_base_256
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c89e0583fe3d31d4786cca95f76d4e4b
+  m_SerializeEntries:
+  - m_GUID: 0985aee9724850d4c84aa0b4b3dab70a
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_1,3-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7be834d5c33352446845913dcda67526
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_3,3-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43a4ec08ce0636647855a059056119bc
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_blank-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96c9194d2fddfbe4f883bfa8ed0bf283
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_2,1-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1755b2b4ecfd9bd43897d9c0fd344636
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_4,3-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8f39f6344ad34b4cba1e8db2bc34282
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_1,2-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cadc9ce6af06d6a47ba5997ca72c6a81
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_3,2-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0077590e646d25d48b348dfb8f555b72
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_4,2-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9e3ffc2f629c5e48bc76697ce050df3
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_3,4-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebbc0de4dec42924f88cd01f13c3c979
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_2,4-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e76cc58f5a769164db5c47805192da2b
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_2,2-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 063a40f4c771be04eab84f1972d06d3e
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_2,3-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8361efa4ba6bca14f862213e27ff5020
+    m_Address: Assets/Art/WaferSprites/MEMSv2/256/base/scriptingexamplememsv2_halffins_3,1-256.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6b1dcc01619583945b047432fa28d21c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b5f69003c58545441b11a07b8842fdcb, type: 2}
+    - {fileID: 11400000, guid: 6fa3612f2234ae0469b7ce6a9fe1cb66, type: 2}

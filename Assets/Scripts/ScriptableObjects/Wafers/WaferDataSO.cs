@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "WaferDataSO", menuName = "Scriptable Object/Wafer/Wafer Data")]
 public class WaferDataSO : ScriptableObject
@@ -15,6 +14,5 @@ public class WaferDataSO : ScriptableObject
     [SerializeField] ErrorType errorType;
     public ErrorType ErrorType => errorType;
 
-    string GetRandomWaferName() => GUID.Generate().ToString();
-
+    string GetRandomWaferName() => System.Guid.NewGuid().ToString();
 }

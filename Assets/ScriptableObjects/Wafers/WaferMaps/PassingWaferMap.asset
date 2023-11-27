@@ -535,10 +535,10 @@ MonoBehaviour:
   chunkGroupAssignments:
   - rowNum: 1
     colNum: 1
-    chunkData: {fileID: 11400000, guid: 622e361f2a8a07943983f6446dc51e0d, type: 2}
+    chunkData: {fileID: 11400000, guid: 49d85918af23b8840a2e912ee51694b9, type: 2}
   - rowNum: 2
     colNum: 2
-    chunkData: {fileID: 11400000, guid: e906ea6206d654c49aa85c3eed5e8b18, type: 2}
+    chunkData: {fileID: 11400000, guid: 49d85918af23b8840a2e912ee51694b9, type: 2}
   randomChunkPool:
   - {fileID: 11400000, guid: f445d5cea35fc754f88b9191eda62ac4, type: 2}
   lowResSpriteSize: 16

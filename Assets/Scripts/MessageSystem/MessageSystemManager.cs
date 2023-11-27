@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MessageSystemManager : SingletonMonobehaviour<MessageSystemManager>
@@ -40,5 +41,21 @@ public class MessageSystemManager : SingletonMonobehaviour<MessageSystemManager>
         Threads.Add(newThread);
         EventManager.OnNewThreadAdded(newThread);
         return newThread;
+    }
+
+    public object CaptureSaveData()
+    {
+        return Threads.Select(x => x.GetSerializeableThread()).ToList();
+    }
+
+    public void RestoreSaveData(object saveData)
+    {
+        if (saveData is List<SerializableThread> serializableThreads)
+        {
+            foreach (var thread in serializableThreads)
+            {
+                Threads.Add(new ThreadData(thread));
+            }
+        }
     }
 }

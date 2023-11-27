@@ -58,7 +58,7 @@ public class WaferMapViewManager : MonoBehaviour
     IEnumerator Start()
     {
         waferMapDataManager.InitializeMap(CurrentWaferMapSO);
-        var startingCoord = new ChunkCoordinate(1, 1, 1, 1, spriteMask.transform.position);
+        var startingCoord = new ChunkCoordinate(127, 127, 1, 1, spriteMask.transform.position);
         
         waferMapDataManager.SwitchToNewResolution(startingChunkResolution, startingCoord, CurrentWaferMapSO);
 

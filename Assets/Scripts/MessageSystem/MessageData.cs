@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 [Serializable]
 public class MessageData : IChatData
@@ -7,7 +8,7 @@ public class MessageData : IChatData
     public Timestamp Timestamp { get; }
     public string MessageText { get; }
     public bool HasReply { get; set; }
-    public HighlightOnClick MessaageUIPrefab => MessageSystemManager.Instance.GetMessageUIPrefab(this);
+    [JsonIgnore] public HighlightOnClick MessaageUIPrefab => MessageSystemManager.Instance.GetMessageUIPrefab(this);
 
     public MessageData(MessageSender messageSender, Timestamp timestamp, string messageText)
     {

@@ -18,6 +18,14 @@ public class ChatUI : BaseUI
         EventManager.OnNewThreadAddedEvent += HandleNewThreadAdded;
         
         closeUIButton.onClick.AddListener(HandleCloseUIButton);
+
+        if (MessageSystemManager.Instance == null) return;
+        
+        inboxScrollView.ClearView();
+        foreach (var thread in MessageSystemManager.Instance.Threads)
+        {
+            StartCoroutine(inboxScrollView.AddItemToView(thread, PopulateMessageScrollView));
+        }
     }
 
     void OnDisable()

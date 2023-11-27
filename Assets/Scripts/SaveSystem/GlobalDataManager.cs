@@ -7,11 +7,13 @@ public class GlobalDataManager : SingletonMonobehaviour<GlobalDataManager>
         var globalData = new SaveData
         {
             {"Time", null},
-            {"Files", null}
+            {"Files", null},
+            {"Chat", null}
         };
 
         globalData["Time"] = TimeSystem.Instance.GetCurrentTimestamp;
         globalData["Files"] = FileSystemManager.Instance.CaptureSaveData();
+        globalData["Chat"] = MessageSystemManager.Instance.CaptureSaveData();
         return globalData;
     }
 
@@ -24,6 +26,9 @@ public class GlobalDataManager : SingletonMonobehaviour<GlobalDataManager>
             
             if (saveData.TryGetValue("Time", out var timeData))
                 TimeSystem.Instance.RestoreCurrentTime(timeData);
+
+            if (saveData.TryGetValue("Chat", out var chatData))
+                MessageSystemManager.Instance.RestoreSaveData(chatData);
         }
     }
 }

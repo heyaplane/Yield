@@ -57,8 +57,8 @@ public class WaferLayout
 
     public Vector2Int GetWaferSectionLocationFromChunk(ChunkCoordinate chunkCoordinate)
     {
-        var sectionRow = chunkCoordinate.chunkRow % numChunksPerSectionLength;
-        var sectionCol = chunkCoordinate.chunkCol % numChunksPerSectionLength;
+        var sectionRow = chunkCoordinate.chunkRow / numChunksPerSectionLength;
+        var sectionCol = chunkCoordinate.chunkCol / numChunksPerSectionLength;
         return new Vector2Int(sectionRow, sectionCol);
     }
 }

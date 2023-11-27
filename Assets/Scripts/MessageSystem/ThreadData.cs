@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-[Serializable]
 public class ThreadData : IChatData
 {
     public List<MessageData> Messages { get; private set; }
@@ -22,10 +21,38 @@ public class ThreadData : IChatData
         Timestamp = TimeSystem.Instance.GetCurrentTimestamp;
     }
 
+    public ThreadData(SerializableThread serializableThread)
+    {
+        Name = serializableThread.Name;
+        Timestamp = serializableThread.Timestamp;
+        HasNewMessage = serializableThread.HasNewMessage;
+        Messages = serializableThread.Messages;
+    }
+
     public void AddMessage(MessageData newMessage)
     {
         Messages.Add(newMessage);
         OnMessageAdded?.Invoke(this, newMessage);
         HasNewMessage = true;
     }
+
+    public SerializableThread GetSerializeableThread()
+    {
+        return new SerializableThread
+        {
+            Name = Name,
+            Timestamp = Timestamp,
+            HasNewMessage = HasNewMessage,
+            Messages = Messages
+        };
+    }
+}
+
+[Serializable]
+public class SerializableThread
+{
+    public string Name;
+    public Timestamp Timestamp;
+    public bool HasNewMessage;
+    public List<MessageData> Messages;
 }
