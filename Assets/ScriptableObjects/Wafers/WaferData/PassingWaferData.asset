@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PassingWaferData
   m_EditorClassIdentifier: 
   shouldRandomGenerateName: 0
-  waferName: PassWafer
+  waferName: WaferA
   waferMap: {fileID: 11400000, guid: c753b9d5cc0ecbe439f7f3fe143087f4, type: 2}
   errorType: 0
+  deviceYield: 100

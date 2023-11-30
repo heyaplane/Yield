@@ -6,6 +6,7 @@ public class EventManager
     #region Controls
 
     public static event Action<InputAction.CallbackContext> OnQuitKeyPressedEvent;
+
     public static void OnQuitKeyPressed(InputAction.CallbackContext context)
     {
         OnQuitKeyPressedEvent?.Invoke(context);
@@ -42,6 +43,12 @@ public class EventManager
     public static void OnGameStateChanged(GameState state)
     {
         OnGameStateChangedEvent?.Invoke(state);
+    }
+
+    public static event Action<GameOverState, int> OnGameOverEvent;
+    public static void OnGameOver(GameOverState gameOverState, int deviceYield)
+    {
+        OnGameOverEvent?.Invoke(gameOverState, deviceYield);
     }
 
     #endregion
@@ -114,6 +121,12 @@ public class EventManager
     public static void OnDaysIncremented(int currentMinute)
     {
         OnDaysIncrementedEvent?.Invoke(currentMinute);   
+    }
+
+    public static event Action OnTimeOutEvent;
+    public static void OnTimeOut()
+    {
+        OnTimeOutEvent?.Invoke();
     }
     
     #endregion

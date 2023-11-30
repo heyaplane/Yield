@@ -15,7 +15,6 @@ public class MessageSystemManager : SingletonMonobehaviour<MessageSystemManager>
     [SerializeField] HighlightOnClick outsideMessagePrefab;
     [SerializeField] HighlightOnClick playerMessagePrefab;
 
-
     public HighlightOnClick GetMessageUIPrefab(IChatData chatData)
     {
         if (chatData is not MessageData messageData) return threadSummaryPrefab;
@@ -41,6 +40,11 @@ public class MessageSystemManager : SingletonMonobehaviour<MessageSystemManager>
         Threads.Add(newThread);
         EventManager.OnNewThreadAdded(newThread);
         return newThread;
+    }
+
+    public void DeleteThread(ThreadData threadData)
+    {
+        Threads.Remove(threadData);
     }
 
     public object CaptureSaveData()

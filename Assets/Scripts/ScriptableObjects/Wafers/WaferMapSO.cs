@@ -24,8 +24,10 @@ public class WaferMapSO : ScriptableObject
     [SerializeField] int chunkDimSize;
     public int ChunkDimSize => chunkDimSize;
 
-    [SerializeField] ChunkAssignment[] chunkGroupAssignments;
-    public ChunkAssignment[] ChunkGroupAssignments => chunkGroupAssignments;
+    [SerializeField] ChunkGroupSO passingChunkGroup;
+    [SerializeField] ChunkGroupSO failingChunkGroup;
+    [SerializeField] ErrorType errorType;
+    public ChunkAssignment[] ChunkGroupAssignments => GetChunkGroupAssignments();
 
     [SerializeField] ChunkGroupSO[] randomChunkPool;
     public ChunkGroupSO[] RandomChunkPool => randomChunkPool;
@@ -55,6 +57,81 @@ public class WaferMapSO : ScriptableObject
     }
 
     public float GetCurrentScaleFactor(ChunkResolution chunkResolution) => 0.008f * (8192.0f / GetGroupSpriteSize(chunkResolution) * pixelsPerUnit);
+
+    public ChunkAssignment[] GetChunkGroupAssignments()
+    {
+        var chunkAssignments = new List<ChunkAssignment>();
+        for (int i = 34; i < 223; i += 2)
+        {
+            for (int j = 0; j < 18; j++)
+            {
+                if ((i < 64 && j < 4) || (i > 192 && j < 4) || (i < 64 && j > 14) || (i > 192 && j > 14)) continue;
+                switch (errorType)
+                {
+                    case ErrorType.Passing:
+                        chunkAssignments.Add(new ChunkAssignment
+                        {
+                            rowNum = i + j,
+                            colNum = (j * 10) + 36,
+                            chunkData = passingChunkGroup
+                        });
+                        break;
+                    case ErrorType.RadialFailOutside:
+                        if (i < 96 || i > 160 || j < 6 || j > 12)
+                        {
+                            chunkAssignments.Add(new ChunkAssignment
+                            {
+                                rowNum = i + j,
+                                colNum = (j * 10) + 36,
+                                chunkData = failingChunkGroup
+                            });
+                        }
+                        else
+                        {
+                            chunkAssignments.Add(new ChunkAssignment
+                            {
+                                rowNum = i + j,
+                                colNum = (j * 10) + 36,
+                                chunkData = passingChunkGroup
+                            });
+                        }
+                        break;
+                    case ErrorType.RadialFailInside:
+                        if (i > 96 && i < 160 && j > 6 && j < 12)
+                        {
+                            chunkAssignments.Add(new ChunkAssignment
+                            {
+                                rowNum = i + j,
+                                colNum = (j * 10) + 36,
+                                chunkData = failingChunkGroup
+                            });
+                        }
+                        else
+                        {
+                            chunkAssignments.Add(new ChunkAssignment
+                            {
+                                rowNum = i + j,
+                                colNum = (j * 10) + 36,
+                                chunkData = passingChunkGroup
+                            });
+                        }
+                        break;
+                    case ErrorType.UniformFail:
+                        chunkAssignments.Add(new ChunkAssignment
+                        {
+                            rowNum = i + j,
+                            colNum = (j * 10) + 36,
+                            chunkData = failingChunkGroup
+                        });
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
+        return chunkAssignments.ToArray();
+    }
 }
 
 [Serializable]

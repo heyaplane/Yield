@@ -8,12 +8,25 @@ public class WaferManager : SingletonMonobehaviour<WaferManager>
     [SerializeField] List<WaferDataSO> wafers;
 
     Dictionary<string, WaferDataSO> waferLookup;
-    
-    public WaferDataSO ActiveWafer { get; set; }
+
+    WaferDataSO activeWafer;
+
+    public WaferDataSO ActiveWafer
+    {
+        get => activeWafer;
+        set
+        {
+            activeWafer = value;
+            wafersGivenToPlayer.Add(value);
+        }
+    }
+
+    HashSet<WaferDataSO> wafersGivenToPlayer;
     WaferLayout waferLayout;
 
     void OnEnable()
     {
+        wafersGivenToPlayer = new HashSet<WaferDataSO>();
         waferLookup = wafers.ToDictionary(x => x.WaferName, x => x);
     }
 
@@ -25,9 +38,9 @@ public class WaferManager : SingletonMonobehaviour<WaferManager>
     public List<WaferDataSO> GetSamplesWithoutReports()
     {
         var reports = FileSystemManager.Instance.FindDirectoryInRoot("Reports")?.DirectoryFiles.OfType<VirtualReport>().Select(x => x.WaferMap).ToList();
-        if (reports == null || reports.Count == 0) return wafers;
+        if (reports == null || reports.Count == 0) return wafersGivenToPlayer.ToList();
         
-        return wafers.Where(x => !reports.Contains(x.WaferMap)).ToList();
+        return wafersGivenToPlayer.Where(x => !reports.Contains(x.WaferMap)).ToList();
     }
 
     public WaferDataSO GetWaferDataFromName(string waferName)
@@ -43,4 +56,6 @@ public class WaferManager : SingletonMonobehaviour<WaferManager>
         var location = waferLayout.GetWaferSectionLocationFromChunk(chunkCoordinate);
         return $"{location.x},{location.y}";
     }
+
+    public int GetDeviceYield() => activeWafer.DeviceYield;
 }

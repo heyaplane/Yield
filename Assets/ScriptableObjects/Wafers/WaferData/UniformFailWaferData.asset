@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: UniformFailWaferData
   m_EditorClassIdentifier: 
   shouldRandomGenerateName: 0
-  waferName: UniformFailWafer
-  waferMap: {fileID: 11400000, guid: 6d4971ed2137e5c4483004afdcd4b433, type: 2}
+  waferName: WaferD
+  waferMap: {fileID: 11400000, guid: b2e2d30845c967c49aa7596d09b85e87, type: 2}
   errorType: 3

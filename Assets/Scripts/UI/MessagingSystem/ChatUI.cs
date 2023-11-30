@@ -15,29 +15,26 @@ public class ChatUI : BaseUI
 
     void OnEnable()
     {
-        EventManager.OnNewThreadAddedEvent += HandleNewThreadAdded;
-        
         closeUIButton.onClick.AddListener(HandleCloseUIButton);
 
         if (MessageSystemManager.Instance == null) return;
+        
+    }
+
+    void OnDisable()
+    {
+        closeUIButton.onClick.RemoveAllListeners();
+    }
+
+    public override void EnableWindow()
+    {
+        base.EnableWindow();
         
         inboxScrollView.ClearView();
         foreach (var thread in MessageSystemManager.Instance.Threads)
         {
             StartCoroutine(inboxScrollView.AddItemToView(thread, PopulateMessageScrollView));
         }
-    }
-
-    void OnDisable()
-    {
-        EventManager.OnNewThreadAddedEvent -= HandleNewThreadAdded;
-        
-        closeUIButton.onClick.RemoveAllListeners();
-    }
-
-    void HandleNewThreadAdded(ThreadData newThread)
-    {
-        StartCoroutine(inboxScrollView.AddItemToView(newThread, PopulateMessageScrollView));
     }
 
     void PopulateMessageScrollView(HighlightOnClick highlightOnClick)

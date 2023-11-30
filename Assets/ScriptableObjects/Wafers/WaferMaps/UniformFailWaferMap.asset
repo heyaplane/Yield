@@ -18,15 +18,10 @@ MonoBehaviour:
     colNum: 2
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 32, 63
 
       Col Limits: 64, 95'
@@ -34,15 +29,10 @@ MonoBehaviour:
     colNum: 3
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 32, 63
 
       Col Limits: 96, 127'
@@ -50,15 +40,10 @@ MonoBehaviour:
     colNum: 4
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 32, 63
 
       Col Limits: 128, 159'
@@ -66,15 +51,10 @@ MonoBehaviour:
     colNum: 5
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 32, 63
 
       Col Limits: 160, 191'
@@ -82,15 +62,10 @@ MonoBehaviour:
     colNum: 1
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 64, 95
 
       Col Limits: 32, 63'
@@ -98,15 +73,10 @@ MonoBehaviour:
     colNum: 2
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 50
-      StDev: 1
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 63
-      StDev: 3
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 64, 95
 
       Col Limits: 64, 95'
@@ -114,15 +84,10 @@ MonoBehaviour:
     colNum: 3
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 64, 95
 
       Col Limits: 96, 127'
@@ -130,15 +95,10 @@ MonoBehaviour:
     colNum: 4
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 64, 95
 
       Col Limits: 128, 159'
@@ -146,15 +106,10 @@ MonoBehaviour:
     colNum: 5
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 64, 95
 
       Col Limits: 160, 191'
@@ -162,15 +117,10 @@ MonoBehaviour:
     colNum: 6
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 64, 95
 
       Col Limits: 192, 223'
@@ -178,15 +128,10 @@ MonoBehaviour:
     colNum: 1
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 96, 127
 
       Col Limits: 32, 63'
@@ -194,15 +139,10 @@ MonoBehaviour:
     colNum: 2
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 96, 127
 
       Col Limits: 64, 95'
@@ -210,15 +150,10 @@ MonoBehaviour:
     colNum: 3
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 96, 127
 
       Col Limits: 96, 127'
@@ -226,15 +161,10 @@ MonoBehaviour:
     colNum: 4
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 96, 127
 
       Col Limits: 128, 159'
@@ -242,15 +172,10 @@ MonoBehaviour:
     colNum: 5
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 96, 127
 
       Col Limits: 160, 191'
@@ -258,15 +183,10 @@ MonoBehaviour:
     colNum: 6
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 96, 127
 
       Col Limits: 192, 223'
@@ -274,15 +194,10 @@ MonoBehaviour:
     colNum: 1
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 128, 159
 
       Col Limits: 32, 63'
@@ -290,15 +205,10 @@ MonoBehaviour:
     colNum: 2
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 128, 159
 
       Col Limits: 64, 95'
@@ -306,15 +216,10 @@ MonoBehaviour:
     colNum: 3
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 128, 159
 
       Col Limits: 96, 127'
@@ -322,15 +227,10 @@ MonoBehaviour:
     colNum: 4
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 128, 159
 
       Col Limits: 128, 159'
@@ -338,15 +238,10 @@ MonoBehaviour:
     colNum: 5
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 128, 159
 
       Col Limits: 160, 191'
@@ -354,15 +249,10 @@ MonoBehaviour:
     colNum: 6
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 128, 159
 
       Col Limits: 192, 223'
@@ -370,15 +260,10 @@ MonoBehaviour:
     colNum: 1
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 160, 191
 
       Col Limits: 32, 63'
@@ -386,15 +271,10 @@ MonoBehaviour:
     colNum: 2
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 160, 191
 
       Col Limits: 64, 95'
@@ -402,15 +282,10 @@ MonoBehaviour:
     colNum: 3
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 160, 191
 
       Col Limits: 96, 127'
@@ -418,15 +293,10 @@ MonoBehaviour:
     colNum: 4
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 160, 191
 
       Col Limits: 128, 159'
@@ -434,15 +304,10 @@ MonoBehaviour:
     colNum: 5
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 160, 191
 
       Col Limits: 160, 191'
@@ -450,15 +315,10 @@ MonoBehaviour:
     colNum: 6
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 160, 191
 
       Col Limits: 192, 223'
@@ -466,15 +326,10 @@ MonoBehaviour:
     colNum: 2
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 192, 223
 
       Col Limits: 64, 95'
@@ -482,15 +337,10 @@ MonoBehaviour:
     colNum: 3
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 192, 223
 
       Col Limits: 96, 127'
@@ -498,15 +348,10 @@ MonoBehaviour:
     colNum: 4
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 192, 223
 
       Col Limits: 128, 159'
@@ -514,31 +359,20 @@ MonoBehaviour:
     colNum: 5
     sectionData:
     - Feature:
-        FeatureName: 50 um lines
+        FeatureName: 2.2 um lines
         Units: um
-      Mean: 0
-      StDev: 0
-    - Feature:
-        FeatureName: 60 um lines
-        Units: um
-      Mean: 0
-      StDev: 0
+      Mean: 2.2
+      StDev: 0.2
     chunkLimits: 'Row Limits: 192, 223
 
       Col Limits: 160, 191'
   waferFeatures:
-  - FeatureName: 50 um lines
-    Units: um
-  - FeatureName: 60 um lines
+  - FeatureName: 2.2 um lines
     Units: um
   chunkDimSize: 256
-  chunkGroupAssignments:
-  - rowNum: 127
-    colNum: 127
-    chunkData: {fileID: 11400000, guid: 49d85918af23b8840a2e912ee51694b9, type: 2}
-  - rowNum: 128
-    colNum: 128
-    chunkData: {fileID: 11400000, guid: 49d85918af23b8840a2e912ee51694b9, type: 2}
+  passingChunkGroup: {fileID: 11400000, guid: 49d85918af23b8840a2e912ee51694b9, type: 2}
+  failingChunkGroup: {fileID: 11400000, guid: 1e4f3de41790b604fb87feee2483504c, type: 2}
+  errorType: 3
   randomChunkPool:
   - {fileID: 11400000, guid: f445d5cea35fc754f88b9191eda62ac4, type: 2}
   lowResSpriteSize: 16

@@ -67,3 +67,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public void RequestUnpause() => gameStateMachine.ActOnState(state => state.OnUnpauseRequested());
     public void RequestInputStatusUpdate(InputSystemProvider inputSystemProvider) => gameStateMachine?.ActOnState(state => state.UpdateAllowedInput(inputSystemProvider));
 }
+
+public enum GameOverState
+{
+    Win, Failed, TimeOut
+}

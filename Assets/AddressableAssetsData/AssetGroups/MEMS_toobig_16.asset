@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: MEMS_toobig_16
+  m_EditorClassIdentifier: 
+  m_GroupName: MEMS_toobig_16
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c46817467ba86b84896953b6836a0001
+  m_SerializeEntries:
+  - m_GUID: e4d47017abd5a444e995a108f87febd6
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_3,1-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55a18f550fa3f16489d551787e976692
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_4,3-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9971a8d000d994c42ada122cf33f66fd
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_1,2-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c4a2f626ee36e94397354d8073e4410
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_2,1-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7fef4fd0a3530d46bfd3e3686720d1f
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_4,2-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7f4dd5f2c1536e499828c5eb887ec0c
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_3,2-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b389314db65c6764ebfc5ff5c7fa54df
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_2,2-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 489d022c9b5e9a149b4cd39331a35ee7
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_3,4-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20ca71ba184fa354180a7c6f0b447c14
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_3,3-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4fddce672da3e941ac5377d7e0216ed
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_2,3-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efbe643c06112b643addfb5e91470913
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_1,3-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ae4f441aab92844aa653f50bdcc4b2a
+    m_Address: Assets/Art/WaferSprites/MEMSv2/16/toobig/scriptingexamplememsv2_halffins_toobig_2,4-16.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6b1dcc01619583945b047432fa28d21c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 36031425996814a4ab18c2b266f86ecd, type: 2}
+    - {fileID: 11400000, guid: 32b000b245ac10c4cb8cce445575dfed, type: 2}

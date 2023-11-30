@@ -14,5 +14,8 @@ public class WaferDataSO : ScriptableObject
     [SerializeField] ErrorType errorType;
     public ErrorType ErrorType => errorType;
 
+    [SerializeField] int deviceYield;
+    public int DeviceYield => deviceYield;
+
     string GetRandomWaferName() => System.Guid.NewGuid().ToString();
 }

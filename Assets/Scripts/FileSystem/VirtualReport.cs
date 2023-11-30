@@ -100,7 +100,10 @@ public class VirtualReport : IVirtualFile
 
     void GenerateReportEntries()
     {
-        var sectionDirectories = FileSystemManager.Instance.FindDirectoryInRoot(WaferData.WaferName).DirectoryFiles;
+        var waferDirectory = FileSystemManager.Instance.FindDirectoryInRoot(WaferData.WaferName);
+        if (waferDirectory == null) return;
+        
+        var sectionDirectories = waferDirectory.DirectoryFiles;
 
         foreach (var virtualFile in sectionDirectories)
         {

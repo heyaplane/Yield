@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RadialFailOutsideWaferData
   m_EditorClassIdentifier: 
   shouldRandomGenerateName: 0
-  waferName: RadialFailOutsideWafer
-  waferMap: {fileID: 11400000, guid: 5266e64dd53e9c54382537c932c80a2b, type: 2}
+  waferName: WaferC
+  waferMap: {fileID: 11400000, guid: 0e68137559bdfe84ba2b01b4e842547e, type: 2}
   errorType: 1
+  deviceYield: 50

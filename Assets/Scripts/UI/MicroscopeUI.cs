@@ -32,6 +32,8 @@ public class MicroscopeUI : BaseUI
 
     [SerializeField] Button closeUIButton;
 
+    [SerializeField] WaferSectionMicroscopeMapUI waferSectionMap;
+
     string currentWaferID, currentSectionName, currentImageName, currentSuffix;
 
     void OnEnable()
@@ -74,13 +76,17 @@ public class MicroscopeUI : BaseUI
         waferMapViewManager.gameObject.SetActive(true);
         mapViewClickListener.gameObject.SetActive(true);
         StartCoroutine(WaitForView());
+        
+        waferSectionMap.Initialize();
     }
 
     IEnumerator WaitForView()
     {
         while (waferMapViewManager.IsSwitchingResolution)
             yield return null;
-        UpdateSectionName();
+        
+        var coordinate = waferMapViewManager.GetCenterCoordinate();
+        UpdateSectionName(coordinate);
     }
 
     void Update()
@@ -95,15 +101,23 @@ public class MicroscopeUI : BaseUI
         var sampleMove = ControlsManager.Instance.MapMoveVector * moveMultiplier;
         map.position -= (Vector3) sampleMove;
         if (sampleMove != Vector2.zero)
-            UpdateSectionName();
+        {
+            var coordinate = waferMapViewManager.GetCenterCoordinate();
+            UpdateSectionName(coordinate);
+            UpdateWaferMap(coordinate);
+        }
     }
 
-    void UpdateSectionName()
+    void UpdateSectionName(ChunkCoordinate coordinate)
     {
-        var coordinate = waferMapViewManager.GetCenterCoordinate();
         currentSectionName = WaferManager.Instance.GetSectionLocationAsStringFromChunk(coordinate);
         sectionLocationText.text = currentSectionName;
         UpdateExampleName();
+    }
+
+    void UpdateWaferMap(ChunkCoordinate coordinate)
+    {
+        waferSectionMap.UpdateMarkerImage(new Vector2((float) coordinate.chunkCol / 256, (float) coordinate.chunkRow / 256));
     }
 
     void HandleMeasurement() => mapViewClickListener.HandleMeasurementToggle();
