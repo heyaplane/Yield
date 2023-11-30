@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: MEMS_defect_64
+  m_EditorClassIdentifier: 
+  m_GroupName: MEMS_defect_64
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 04c2c9c292641aa439a0c14bb1205f50
+  m_SerializeEntries:
+  - m_GUID: cbdcafdcc4bd41d4db6141e91cac8c53
+    m_Address: Assets/Art/WaferSprites/MEMSv2/64/defects/defects5-25604.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aadc7ff78bbcc194886a4e44861310d1
+    m_Address: Assets/Art/WaferSprites/MEMSv2/64/defects/defects8-25607.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be47ff80e09f4c445afef4c8bf0059f4
+    m_Address: Assets/Art/WaferSprites/MEMSv2/64/defects/defects2-25601.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 531b53fe3f7e291469bad762fbbb2b07
+    m_Address: Assets/Art/WaferSprites/MEMSv2/64/defects/defects4-25603.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4cfad32418797d44e97253c2f6249a59
+    m_Address: Assets/Art/WaferSprites/MEMSv2/64/defects/defects3-25602.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e038366d9aa2a314ca7bc4abbac2f965
+    m_Address: Assets/Art/WaferSprites/MEMSv2/64/defects/defects7-25606.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2233012eb35db3f43b31c3d4bf32b4f8
+    m_Address: Assets/Art/WaferSprites/MEMSv2/64/defects/defects1-25600.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac524f687bfccfa478c8606ff2fd6de3
+    m_Address: Assets/Art/WaferSprites/MEMSv2/64/defects/defects6-25605.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 593a136defd25754e9825b00fca22f89
+    m_Address: Assets/Art/WaferSprites/MEMSv2/64/defects/defectsblank-64.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6b1dcc01619583945b047432fa28d21c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3368ea24df8bbb24f8657e5acfb35da6, type: 2}
+    - {fileID: 11400000, guid: 359c11b3ac5d48d43af2df0d3381aa5e, type: 2}

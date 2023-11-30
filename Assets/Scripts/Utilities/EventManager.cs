@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class EventManager
@@ -146,4 +147,10 @@ public class EventManager
         OnReportChosenEvent?.Invoke(chosenReport, respondentMessage);
 
     #endregion
+
+    public static event Action<AudioClip> OnAudioClipTriggeredEvent;
+    public static void OnAudioClipTriggered(AudioClip clip)
+    {
+        OnAudioClipTriggeredEvent?.Invoke(clip);
+    }
 }

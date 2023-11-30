@@ -52,12 +52,14 @@ public class ChatUI : BaseUI
         newThread.OnMessageAdded += UpdateMessageScrollView;
         currentMessagesThread = newThread;
         messagesScrollView.AddItemsToView(currentMessagesThread.MessagesAsChatData, null);
+        messagesScrollView.ScrollToBottom();
     }
 
     void UpdateMessageScrollView(ThreadData thread, MessageData messageData)
     {
         messagesScrollView.ClearView();
         messagesScrollView.AddItemsToView(thread.MessagesAsChatData, null);
+        messagesScrollView.ScrollToBottom();
     }
 
     void HandleCloseUIButton()

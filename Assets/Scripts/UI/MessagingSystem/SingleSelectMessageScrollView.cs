@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SingleSelectMessageScrollView : MonoBehaviour
 {
@@ -53,6 +54,11 @@ public class SingleSelectMessageScrollView : MonoBehaviour
         
         highlight.MarkAsSelected(itemHighlightColor);
         CurrentlyHighlightedItem = highlight;
+    }
+
+    public void ScrollToBottom()
+    {
+        GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
     }
 
     public void ResetCurrentlySelected()

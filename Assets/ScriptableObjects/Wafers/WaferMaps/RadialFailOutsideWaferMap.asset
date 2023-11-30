@@ -374,7 +374,8 @@ MonoBehaviour:
   failingChunkGroup: {fileID: 11400000, guid: 1e4f3de41790b604fb87feee2483504c, type: 2}
   errorType: 1
   randomChunkPool:
-  - {fileID: 11400000, guid: f445d5cea35fc754f88b9191eda62ac4, type: 2}
+  - {fileID: 11400000, guid: e627604b7a6c3894f851f1107670b2e3, type: 2}
+  - {fileID: 11400000, guid: 541a9adf4a787f447b7d368f170ff0c7, type: 2}
   lowResSpriteSize: 16
   medResSpriteSize: 64
   highResSpriteSize: 256

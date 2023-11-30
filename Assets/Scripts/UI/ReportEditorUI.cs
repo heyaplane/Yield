@@ -98,9 +98,12 @@ public class ReportEditorUI : BaseUI
         featureNameDropdown.options = options;
         
         UpdateWaferSectionMap();
-        
+
         if (currentReport != null)
+        {
             processRecommendationDropdown.value = (int) currentReport.ProcessRecommendation;
+            UpdateTitleText($"{currentReport.WaferName} Report");
+        }
     }
 
     void HandleFeatureNameChanged(int featureNameIndex)

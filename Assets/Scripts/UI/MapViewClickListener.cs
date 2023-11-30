@@ -58,4 +58,10 @@ public class MapViewClickListener : MonoBehaviour
         endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         currentMeasurement.DrawLine(startPoint, endPoint);
     }
+
+    public void DeleteCurrentMeasurement()
+    {
+        if (currentMeasurement != null)
+            Destroy(currentMeasurement.gameObject);
+    }
 }

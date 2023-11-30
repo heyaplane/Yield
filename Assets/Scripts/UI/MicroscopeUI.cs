@@ -160,6 +160,7 @@ public class MicroscopeUI : BaseUI
     {
         waferMapViewManager.gameObject.SetActive(false);
         mapViewClickListener.gameObject.SetActive(false);
+        mapViewClickListener.DeleteCurrentMeasurement();
         OnCancelAction?.Invoke();
         CloseWindow();
     }

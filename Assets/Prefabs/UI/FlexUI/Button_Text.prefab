@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 6566886711567582845}
   - component: {fileID: 6644541836281945218}
   - component: {fileID: 7550167405285207698}
+  - component: {fileID: 133342765285103643}
   m_Layer: 5
   m_Name: Button_Text
   m_TagString: Untagged
@@ -272,7 +273,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6566886711567582845}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 133342765285103643}
+        m_TargetAssemblyTypeName: PlaySound, Scripts
+        m_MethodName: TriggerSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7550167405285207698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,3 +304,16 @@ MonoBehaviour:
     DataSO: {fileID: 11400000, guid: fc7f8a94c96a2344db8b8af1493ae68a, type: 2}
   - Component: {fileID: 6566886711567582845}
     DataSO: {fileID: 11400000, guid: 3cd3ac3851664f340a73aed7a2f47400, type: 2}
+--- !u!114 &133342765285103643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5738471113643264605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0721bc074849b3a2bd313f8108400f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 2ae2eaf13ed1e8044b6029c0a52c3717, type: 3}
