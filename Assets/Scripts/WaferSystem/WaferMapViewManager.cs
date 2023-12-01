@@ -10,6 +10,8 @@ public class WaferMapViewManager : MonoBehaviour
     [SerializeField] int randomSeed;
     WaferMapDataManager waferMapDataManager;
 
+    [SerializeField] MicroscopeUI microscopeUI;
+
     [SerializeField] CoordinateRenderer CoordinateRendererPrefab;
     ObjectPool<CoordinateRenderer> coordinateRendererPool;
 
@@ -196,6 +198,8 @@ public class WaferMapViewManager : MonoBehaviour
         
         Update();
         coordinateRendererPool.Release(initRenderer);
+
+        microscopeUI.SetRandomFocus();
     }
 
     public ChunkCoordinate GetCenterCoordinate()

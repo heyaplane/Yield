@@ -2965,6 +2965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomSeed: 1
+  microscopeUI: {fileID: 1636900529}
   CoordinateRendererPrefab: {fileID: 813236886201511604, guid: c5020c1e7cb6b48468a4dc3853f28ef0, type: 3}
   coordinateFilter:
     useTriggers: 0
@@ -13462,8 +13463,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1904354416}
   m_HandleRect: {fileID: 1825271717}
   m_Direction: 2
-  m_MinValue: -1
-  m_MaxValue: 1
+  m_MinValue: -30
+  m_MaxValue: 30
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

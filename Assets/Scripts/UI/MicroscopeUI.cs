@@ -164,4 +164,9 @@ public class MicroscopeUI : BaseUI
         OnCancelAction?.Invoke();
         CloseWindow();
     }
+
+    public void SetRandomFocus()
+    {
+        focusSlider.value += Random.Range(-10, 10);
+    }
 }
